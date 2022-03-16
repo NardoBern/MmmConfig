@@ -38,6 +38,19 @@
             this.tWdTimer = new System.Windows.Forms.Timer(this.components);
             this.lblTest = new System.Windows.Forms.Label();
             this.tUpdateData = new System.Windows.Forms.Timer(this.components);
+            this.btnEnableMot1 = new System.Windows.Forms.Button();
+            this.grpBoxMot1 = new System.Windows.Forms.GroupBox();
+            this.grpBoxMot2 = new System.Windows.Forms.GroupBox();
+            this.btnEnableMot2 = new System.Windows.Forms.Button();
+            this.grpBoxMot3 = new System.Windows.Forms.GroupBox();
+            this.btnEnableMot3 = new System.Windows.Forms.Button();
+            this.grpBoxMot4 = new System.Windows.Forms.GroupBox();
+            this.btnEnableMot4 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.grpBoxMot1.SuspendLayout();
+            this.grpBoxMot2.SuspendLayout();
+            this.grpBoxMot3.SuspendLayout();
+            this.grpBoxMot4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnect
@@ -110,14 +123,118 @@
             // 
             // tUpdateData
             // 
-            this.tUpdateData.Interval = 250;
+            this.tUpdateData.Interval = 300;
             this.tUpdateData.Tick += new System.EventHandler(this.tUpdateData_Tick);
+            // 
+            // btnEnableMot1
+            // 
+            this.btnEnableMot1.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnEnableMot1.Location = new System.Drawing.Point(6, 30);
+            this.btnEnableMot1.Name = "btnEnableMot1";
+            this.btnEnableMot1.Size = new System.Drawing.Size(58, 23);
+            this.btnEnableMot1.TabIndex = 7;
+            this.btnEnableMot1.Text = "Enable";
+            this.btnEnableMot1.UseVisualStyleBackColor = false;
+            this.btnEnableMot1.Click += new System.EventHandler(this.btnEnableMot1_Click);
+            // 
+            // grpBoxMot1
+            // 
+            this.grpBoxMot1.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot1.Controls.Add(this.btnEnableMot1);
+            this.grpBoxMot1.ForeColor = System.Drawing.Color.Black;
+            this.grpBoxMot1.Location = new System.Drawing.Point(15, 97);
+            this.grpBoxMot1.Name = "grpBoxMot1";
+            this.grpBoxMot1.Size = new System.Drawing.Size(310, 263);
+            this.grpBoxMot1.TabIndex = 8;
+            this.grpBoxMot1.TabStop = false;
+            this.grpBoxMot1.Text = "Motor #1";
+            // 
+            // grpBoxMot2
+            // 
+            this.grpBoxMot2.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot2.Controls.Add(this.btnEnableMot2);
+            this.grpBoxMot2.ForeColor = System.Drawing.Color.Black;
+            this.grpBoxMot2.Location = new System.Drawing.Point(331, 97);
+            this.grpBoxMot2.Name = "grpBoxMot2";
+            this.grpBoxMot2.Size = new System.Drawing.Size(310, 263);
+            this.grpBoxMot2.TabIndex = 9;
+            this.grpBoxMot2.TabStop = false;
+            this.grpBoxMot2.Text = "Motor #2";
+            // 
+            // btnEnableMot2
+            // 
+            this.btnEnableMot2.Location = new System.Drawing.Point(6, 30);
+            this.btnEnableMot2.Name = "btnEnableMot2";
+            this.btnEnableMot2.Size = new System.Drawing.Size(58, 23);
+            this.btnEnableMot2.TabIndex = 7;
+            this.btnEnableMot2.Text = "Enable";
+            this.btnEnableMot2.UseVisualStyleBackColor = true;
+            this.btnEnableMot2.Click += new System.EventHandler(this.btnEnableMot2_Click);
+            // 
+            // grpBoxMot3
+            // 
+            this.grpBoxMot3.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot3.Controls.Add(this.btnEnableMot3);
+            this.grpBoxMot3.ForeColor = System.Drawing.Color.Black;
+            this.grpBoxMot3.Location = new System.Drawing.Point(15, 366);
+            this.grpBoxMot3.Name = "grpBoxMot3";
+            this.grpBoxMot3.Size = new System.Drawing.Size(310, 263);
+            this.grpBoxMot3.TabIndex = 10;
+            this.grpBoxMot3.TabStop = false;
+            this.grpBoxMot3.Text = "Motor #3";
+            // 
+            // btnEnableMot3
+            // 
+            this.btnEnableMot3.Location = new System.Drawing.Point(6, 30);
+            this.btnEnableMot3.Name = "btnEnableMot3";
+            this.btnEnableMot3.Size = new System.Drawing.Size(58, 23);
+            this.btnEnableMot3.TabIndex = 7;
+            this.btnEnableMot3.Text = "Enable";
+            this.btnEnableMot3.UseVisualStyleBackColor = true;
+            this.btnEnableMot3.Click += new System.EventHandler(this.btnEnableMot3_Click);
+            // 
+            // grpBoxMot4
+            // 
+            this.grpBoxMot4.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot4.Controls.Add(this.btnEnableMot4);
+            this.grpBoxMot4.ForeColor = System.Drawing.Color.Black;
+            this.grpBoxMot4.Location = new System.Drawing.Point(331, 366);
+            this.grpBoxMot4.Name = "grpBoxMot4";
+            this.grpBoxMot4.Size = new System.Drawing.Size(310, 263);
+            this.grpBoxMot4.TabIndex = 9;
+            this.grpBoxMot4.TabStop = false;
+            this.grpBoxMot4.Text = "Motor #4";
+            // 
+            // btnEnableMot4
+            // 
+            this.btnEnableMot4.Location = new System.Drawing.Point(6, 30);
+            this.btnEnableMot4.Name = "btnEnableMot4";
+            this.btnEnableMot4.Size = new System.Drawing.Size(58, 23);
+            this.btnEnableMot4.TabIndex = 7;
+            this.btnEnableMot4.Text = "Enable";
+            this.btnEnableMot4.UseVisualStyleBackColor = true;
+            this.btnEnableMot4.Click += new System.EventHandler(this.btnEnableMot4_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(275, 18);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(653, 646);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.grpBoxMot4);
+            this.Controls.Add(this.grpBoxMot3);
+            this.Controls.Add(this.grpBoxMot2);
+            this.Controls.Add(this.grpBoxMot1);
             this.Controls.Add(this.lblTest);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.lblPort);
@@ -128,6 +245,10 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.grpBoxMot1.ResumeLayout(false);
+            this.grpBoxMot2.ResumeLayout(false);
+            this.grpBoxMot3.ResumeLayout(false);
+            this.grpBoxMot4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,6 +265,15 @@
         private System.Windows.Forms.Timer tWdTimer;
         private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.Timer tUpdateData;
+        private System.Windows.Forms.Button btnEnableMot1;
+        private System.Windows.Forms.GroupBox grpBoxMot1;
+        private System.Windows.Forms.GroupBox grpBoxMot2;
+        private System.Windows.Forms.Button btnEnableMot2;
+        private System.Windows.Forms.GroupBox grpBoxMot3;
+        private System.Windows.Forms.Button btnEnableMot3;
+        private System.Windows.Forms.GroupBox grpBoxMot4;
+        private System.Windows.Forms.Button btnEnableMot4;
+        private System.Windows.Forms.Button button1;
     }
 }
 
