@@ -91,39 +91,60 @@ namespace MmmConfig
             if (e.Handle == motor[0].motorStatus.uiVarHandle[0]) {motor[0].motorStatus.xError       = BitConverter.ToBoolean(memory.ToArray(), 0);}
             if (e.Handle == motor[0].motorStatus.uiVarHandle[1]) {motor[0].motorStatus.xMoving      = BitConverter.ToBoolean(memory.ToArray(), 0);}
             if (e.Handle == motor[0].motorStatus.uiVarHandle[2]) {motor[0].motorStatus.xSync        = BitConverter.ToBoolean(memory.ToArray(), 0);}
-            if (e.Handle == motor[0].motorStatus.uiVarHandle[3]) {motor[0].motorStatus.xSetPosOk    = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[0].motorStatus.uiVarHandle[3]) {motor[0].motorStatus.xSetPosOk    = BitConverter.ToBoolean(memory.ToArray(), 0);}
             if (e.Handle == motor[0].motorStatus.uiVarHandle[4]) {motor[0].motorStatus.iSpeedRpm    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
             if (e.Handle == motor[0].motorStatus.uiVarHandle[5]) {motor[0].motorStatus.iPosition    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
             if (e.Handle == motor[0].motorStatus.uiVarHandle[6]) {motor[0].motorStatus.iCurrLoad    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
 
-            if (e.Handle == motor[1].motorStatus.uiVarHandle[0]) { motor[1].motorStatus.xError      = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[1].motorStatus.uiVarHandle[1]) { motor[1].motorStatus.xMoving     = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[1].motorStatus.uiVarHandle[2]) { motor[1].motorStatus.xSync       = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[1].motorStatus.uiVarHandle[3]) { motor[1].motorStatus.xSetPosOk   = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[1].motorStatus.uiVarHandle[4]) { motor[1].motorStatus.iSpeedRpm   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
-            if (e.Handle == motor[1].motorStatus.uiVarHandle[5]) { motor[1].motorStatus.iPosition   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
-            if (e.Handle == motor[1].motorStatus.uiVarHandle[6]) { motor[1].motorStatus.iCurrLoad   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[0]) {motor[1].motorStatus.xError       = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[1]) {motor[1].motorStatus.xMoving      = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[2]) {motor[1].motorStatus.xSync        = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[3]) {motor[1].motorStatus.xSetPosOk    = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[4]) {motor[1].motorStatus.iSpeedRpm    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[5]) {motor[1].motorStatus.iPosition    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[6]) {motor[1].motorStatus.iCurrLoad    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
 
-            if (e.Handle == motor[2].motorStatus.uiVarHandle[0]) { motor[2].motorStatus.xError      = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[2].motorStatus.uiVarHandle[1]) { motor[2].motorStatus.xMoving     = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[2].motorStatus.uiVarHandle[2]) { motor[2].motorStatus.xSync       = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[2].motorStatus.uiVarHandle[3]) { motor[2].motorStatus.xSetPosOk   = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[2].motorStatus.uiVarHandle[4]) { motor[2].motorStatus.iSpeedRpm   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
-            if (e.Handle == motor[2].motorStatus.uiVarHandle[5]) { motor[2].motorStatus.iPosition   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
-            if (e.Handle == motor[2].motorStatus.uiVarHandle[6]) { motor[2].motorStatus.iCurrLoad   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[0]) {motor[2].motorStatus.xError       = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[1]) {motor[2].motorStatus.xMoving      = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[2]) {motor[2].motorStatus.xSync        = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[3]) {motor[2].motorStatus.xSetPosOk    = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[4]) {motor[2].motorStatus.iSpeedRpm    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[5]) {motor[2].motorStatus.iPosition    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[6]) {motor[2].motorStatus.iCurrLoad    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
 
-            if (e.Handle == motor[3].motorStatus.uiVarHandle[0]) { motor[3].motorStatus.xError      = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[3].motorStatus.uiVarHandle[1]) { motor[3].motorStatus.xMoving     = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[3].motorStatus.uiVarHandle[2]) { motor[3].motorStatus.xSync       = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[3].motorStatus.uiVarHandle[3]) { motor[3].motorStatus.xSetPosOk   = BitConverter.ToBoolean(memory.ToArray(), 0); }
-            if (e.Handle == motor[3].motorStatus.uiVarHandle[4]) { motor[3].motorStatus.iSpeedRpm   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
-            if (e.Handle == motor[3].motorStatus.uiVarHandle[5]) { motor[3].motorStatus.iPosition   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
-            if (e.Handle == motor[3].motorStatus.uiVarHandle[6]) { motor[3].motorStatus.iCurrLoad   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[0]) {motor[3].motorStatus.xError       = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[1]) {motor[3].motorStatus.xMoving      = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[2]) {motor[3].motorStatus.xSync        = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[3]) {motor[3].motorStatus.xSetPosOk    = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[4]) {motor[3].motorStatus.iSpeedRpm    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[5]) {motor[3].motorStatus.iPosition    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[6]) {motor[3].motorStatus.iCurrLoad    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+
+            updateLabelStatus();
         }
 
+        private void updateLabelStatus()
+        {
+            if (motor[0].motorStatus.xError)    { lblErrorStsMot1.BackColor         = Color.Red; }          else { lblErrorStsMot1.BackColor    = Color.LightGray; }
+            if (motor[0].motorStatus.xMoving)   { lblMovingStsMot1.BackColor        = Color.LightGreen; }   else { lblMovingStsMot1.BackColor   = Color.LightGray; }
+            if (motor[0].motorStatus.xSync)     { lblInSyncStsMot1.BackColor        = Color.LightGreen; }   else { lblInSyncStsMot1.BackColor   = Color.LightGray; }
+            if (motor[0].motorStatus.xSetPosOk) { lblSetPosOkStsMot1.BackColor      = Color.LightGreen; }   else { lblSetPosOkStsMot1.BackColor = Color.LightGray; }
+            if (motor[1].motorStatus.xError)    { lblErrorStsMot2.BackColor         = Color.Red; }          else { lblErrorStsMot2.BackColor    = Color.LightGray; }
+            if (motor[1].motorStatus.xMoving)   { lblMovingStsMot2.BackColor        = Color.LightGreen; }   else { lblMovingStsMot2.BackColor   = Color.LightGray; }
+            if (motor[1].motorStatus.xSync)     { lblInSyncStsMot2.BackColor        = Color.LightGreen; }   else { lblInSyncStsMot2.BackColor   = Color.LightGray; }
+            if (motor[1].motorStatus.xSetPosOk) { lblSetPosOkStsMot2.BackColor      = Color.LightGreen; }   else { lblSetPosOkStsMot2.BackColor = Color.LightGray; }
+            if (motor[2].motorStatus.xError)    { lblErrorStsMot3.BackColor         = Color.Red; }          else { lblErrorStsMot3.BackColor    = Color.LightGray; }
+            if (motor[2].motorStatus.xMoving)   { lblMovingStsMot3.BackColor        = Color.LightGreen; }   else { lblMovingStsMot3.BackColor   = Color.LightGray; }
+            if (motor[2].motorStatus.xSync)     { lblInSyncStsMot3.BackColor        = Color.LightGreen; }   else { lblInSyncStsMot3.BackColor   = Color.LightGray; }
+            if (motor[2].motorStatus.xSetPosOk) { lblSetPosOkStsMot3.BackColor      = Color.LightGreen; }   else { lblSetPosOkStsMot3.BackColor = Color.LightGray; }
+            if (motor[3].motorStatus.xError)    { lblErrorStsMot4.BackColor         = Color.Red; }          else { lblErrorStsMot4.BackColor    = Color.LightGray; }
+            if (motor[3].motorStatus.xMoving)   { lblMovingStsMot4.BackColor        = Color.LightGreen; }   else { lblMovingStsMot4.BackColor   = Color.LightGray; }
+            if (motor[3].motorStatus.xSync)     { lblInSyncStsMot4.BackColor        = Color.LightGreen; }   else { lblInSyncStsMot4.BackColor   = Color.LightGray; }
+            if (motor[3].motorStatus.xSetPosOk) { lblSetPosOkStsMot4.BackColor      = Color.LightGreen; }   else { lblSetPosOkStsMot4.BackColor = Color.LightGray; }
+        }
         private void label1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void tWdTimer_Tick(object sender, EventArgs e)
@@ -152,6 +173,7 @@ namespace MmmConfig
             lblConnStatus.Text = "Connected";
             btnConnect.Text = "Disconnect";
             tWdTimer.Enabled = true;
+            if (!(motor[0].motorStatus.xEventEnabled)){ReadMotorSts();}
             vAddMotorStsNotification(motor[0], CpuConnection, 1, "LOC_AdsIO.stOutput.MotorSts");
             vAddMotorStsNotification(motor[1], CpuConnection, 2, "LOC_AdsIO.stOutput.MotorSts");
             vAddMotorStsNotification(motor[2], CpuConnection, 3, "LOC_AdsIO.stOutput.MotorSts");
@@ -165,6 +187,34 @@ namespace MmmConfig
             btnConnect.Text = "Connect";
             tWdTimer.Enabled = false;
             //tUpdateData.Enabled = false;
+        }
+
+        private void ReadMotorSts()
+        {
+            Console.WriteLine("Lettura stati motori");
+            bool[] tempBool;
+            tempBool = new bool[4];
+            tempBool = motor[0].ReadMotorSts(1, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+            motor[0].motorStatus.xError     = tempBool[0];
+            motor[0].motorStatus.xMoving    = tempBool[1];
+            motor[0].motorStatus.xSync      = tempBool[2];
+            motor[0].motorStatus.xSetPosOk  = tempBool[3];
+            tempBool = motor[1].ReadMotorSts(2, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+            motor[1].motorStatus.xError     = tempBool[0];
+            motor[1].motorStatus.xMoving    = tempBool[1];
+            motor[1].motorStatus.xSync      = tempBool[2];
+            motor[1].motorStatus.xSetPosOk  = tempBool[3];
+            tempBool = motor[2].ReadMotorSts(3, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+            motor[2].motorStatus.xError     = tempBool[0];
+            motor[2].motorStatus.xMoving    = tempBool[1];
+            motor[2].motorStatus.xSync      = tempBool[2];
+            motor[2].motorStatus.xSetPosOk  = tempBool[3];
+            tempBool = motor[3].ReadMotorSts(4, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+            motor[3].motorStatus.xError     = tempBool[0];
+            motor[3].motorStatus.xMoving    = tempBool[1];
+            motor[3].motorStatus.xSync      = tempBool[2];
+            motor[3].motorStatus.xSetPosOk  = tempBool[3];
+            updateLabelStatus();
         }
 
         private void btnEnableMot1_Click(object sender, EventArgs e)

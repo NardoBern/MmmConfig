@@ -61,6 +61,22 @@
             this.btnSetPosMot2 = new System.Windows.Forms.Button();
             this.btnSetPosMot3 = new System.Windows.Forms.Button();
             this.btnSetPosMot4 = new System.Windows.Forms.Button();
+            this.lblErrorStsMot1 = new System.Windows.Forms.Label();
+            this.lblMovingStsMot1 = new System.Windows.Forms.Label();
+            this.lblInSyncStsMot1 = new System.Windows.Forms.Label();
+            this.lblSetPosOkStsMot1 = new System.Windows.Forms.Label();
+            this.lblSetPosOkStsMot2 = new System.Windows.Forms.Label();
+            this.lblInSyncStsMot2 = new System.Windows.Forms.Label();
+            this.lblMovingStsMot2 = new System.Windows.Forms.Label();
+            this.lblErrorStsMot2 = new System.Windows.Forms.Label();
+            this.lblSetPosOkStsMot3 = new System.Windows.Forms.Label();
+            this.lblInSyncStsMot3 = new System.Windows.Forms.Label();
+            this.lblMovingStsMot3 = new System.Windows.Forms.Label();
+            this.lblErrorStsMot3 = new System.Windows.Forms.Label();
+            this.lblSetPosOkStsMot4 = new System.Windows.Forms.Label();
+            this.lblInSyncStsMot4 = new System.Windows.Forms.Label();
+            this.lblMovingStsMot4 = new System.Windows.Forms.Label();
+            this.lblErrorStsMot4 = new System.Windows.Forms.Label();
             this.grpBoxMot1.SuspendLayout();
             this.grpBoxMot2.SuspendLayout();
             this.grpBoxMot3.SuspendLayout();
@@ -149,6 +165,10 @@
             // grpBoxMot1
             // 
             this.grpBoxMot1.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot1.Controls.Add(this.lblSetPosOkStsMot1);
+            this.grpBoxMot1.Controls.Add(this.lblInSyncStsMot1);
+            this.grpBoxMot1.Controls.Add(this.lblMovingStsMot1);
+            this.grpBoxMot1.Controls.Add(this.lblErrorStsMot1);
             this.grpBoxMot1.Controls.Add(this.btnSetPosMot1);
             this.grpBoxMot1.Controls.Add(this.btnSyncOnMot1);
             this.grpBoxMot1.Controls.Add(this.btnMoveBwMot1);
@@ -165,6 +185,10 @@
             // grpBoxMot2
             // 
             this.grpBoxMot2.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot2.Controls.Add(this.lblSetPosOkStsMot2);
+            this.grpBoxMot2.Controls.Add(this.lblInSyncStsMot2);
+            this.grpBoxMot2.Controls.Add(this.lblMovingStsMot2);
+            this.grpBoxMot2.Controls.Add(this.lblErrorStsMot2);
             this.grpBoxMot2.Controls.Add(this.btnSetPosMot2);
             this.grpBoxMot2.Controls.Add(this.btnSyncOnMot2);
             this.grpBoxMot2.Controls.Add(this.btnMoveBwMot2);
@@ -191,6 +215,10 @@
             // grpBoxMot3
             // 
             this.grpBoxMot3.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot3.Controls.Add(this.lblSetPosOkStsMot3);
+            this.grpBoxMot3.Controls.Add(this.lblInSyncStsMot3);
+            this.grpBoxMot3.Controls.Add(this.lblMovingStsMot3);
+            this.grpBoxMot3.Controls.Add(this.lblErrorStsMot3);
             this.grpBoxMot3.Controls.Add(this.btnSetPosMot3);
             this.grpBoxMot3.Controls.Add(this.btnSyncOnMot3);
             this.grpBoxMot3.Controls.Add(this.btnMoveBwMot3);
@@ -217,6 +245,10 @@
             // grpBoxMot4
             // 
             this.grpBoxMot4.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot4.Controls.Add(this.lblSetPosOkStsMot4);
+            this.grpBoxMot4.Controls.Add(this.lblInSyncStsMot4);
+            this.grpBoxMot4.Controls.Add(this.lblMovingStsMot4);
+            this.grpBoxMot4.Controls.Add(this.lblErrorStsMot4);
             this.grpBoxMot4.Controls.Add(this.btnSetPosMot4);
             this.grpBoxMot4.Controls.Add(this.btnSyncOnMot4);
             this.grpBoxMot4.Controls.Add(this.btnMoveBwMot4);
@@ -416,6 +448,198 @@
             this.btnSetPosMot4.UseVisualStyleBackColor = false;
             this.btnSetPosMot4.Click += new System.EventHandler(this.btnSetPosMot4_Click);
             // 
+            // lblErrorStsMot1
+            // 
+            this.lblErrorStsMot1.BackColor = System.Drawing.Color.LightGray;
+            this.lblErrorStsMot1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblErrorStsMot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorStsMot1.Location = new System.Drawing.Point(237, 30);
+            this.lblErrorStsMot1.Name = "lblErrorStsMot1";
+            this.lblErrorStsMot1.Size = new System.Drawing.Size(67, 23);
+            this.lblErrorStsMot1.TabIndex = 12;
+            this.lblErrorStsMot1.Text = "Error";
+            this.lblErrorStsMot1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMovingStsMot1
+            // 
+            this.lblMovingStsMot1.BackColor = System.Drawing.Color.LightGray;
+            this.lblMovingStsMot1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMovingStsMot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMovingStsMot1.Location = new System.Drawing.Point(237, 59);
+            this.lblMovingStsMot1.Name = "lblMovingStsMot1";
+            this.lblMovingStsMot1.Size = new System.Drawing.Size(67, 23);
+            this.lblMovingStsMot1.TabIndex = 13;
+            this.lblMovingStsMot1.Text = "Moving";
+            this.lblMovingStsMot1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblInSyncStsMot1
+            // 
+            this.lblInSyncStsMot1.BackColor = System.Drawing.Color.LightGray;
+            this.lblInSyncStsMot1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblInSyncStsMot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInSyncStsMot1.Location = new System.Drawing.Point(237, 88);
+            this.lblInSyncStsMot1.Name = "lblInSyncStsMot1";
+            this.lblInSyncStsMot1.Size = new System.Drawing.Size(67, 23);
+            this.lblInSyncStsMot1.TabIndex = 14;
+            this.lblInSyncStsMot1.Text = "In Sync";
+            this.lblInSyncStsMot1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSetPosOkStsMot1
+            // 
+            this.lblSetPosOkStsMot1.BackColor = System.Drawing.Color.LightGray;
+            this.lblSetPosOkStsMot1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSetPosOkStsMot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSetPosOkStsMot1.Location = new System.Drawing.Point(237, 117);
+            this.lblSetPosOkStsMot1.Name = "lblSetPosOkStsMot1";
+            this.lblSetPosOkStsMot1.Size = new System.Drawing.Size(67, 23);
+            this.lblSetPosOkStsMot1.TabIndex = 15;
+            this.lblSetPosOkStsMot1.Text = "Set Pos Ok";
+            this.lblSetPosOkStsMot1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSetPosOkStsMot2
+            // 
+            this.lblSetPosOkStsMot2.BackColor = System.Drawing.Color.LightGray;
+            this.lblSetPosOkStsMot2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSetPosOkStsMot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSetPosOkStsMot2.Location = new System.Drawing.Point(237, 117);
+            this.lblSetPosOkStsMot2.Name = "lblSetPosOkStsMot2";
+            this.lblSetPosOkStsMot2.Size = new System.Drawing.Size(67, 23);
+            this.lblSetPosOkStsMot2.TabIndex = 19;
+            this.lblSetPosOkStsMot2.Text = "Set Pos Ok";
+            this.lblSetPosOkStsMot2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblInSyncStsMot2
+            // 
+            this.lblInSyncStsMot2.BackColor = System.Drawing.Color.LightGray;
+            this.lblInSyncStsMot2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblInSyncStsMot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInSyncStsMot2.Location = new System.Drawing.Point(237, 88);
+            this.lblInSyncStsMot2.Name = "lblInSyncStsMot2";
+            this.lblInSyncStsMot2.Size = new System.Drawing.Size(67, 23);
+            this.lblInSyncStsMot2.TabIndex = 18;
+            this.lblInSyncStsMot2.Text = "In Sync";
+            this.lblInSyncStsMot2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMovingStsMot2
+            // 
+            this.lblMovingStsMot2.BackColor = System.Drawing.Color.LightGray;
+            this.lblMovingStsMot2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMovingStsMot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMovingStsMot2.Location = new System.Drawing.Point(237, 59);
+            this.lblMovingStsMot2.Name = "lblMovingStsMot2";
+            this.lblMovingStsMot2.Size = new System.Drawing.Size(67, 23);
+            this.lblMovingStsMot2.TabIndex = 17;
+            this.lblMovingStsMot2.Text = "Moving";
+            this.lblMovingStsMot2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblErrorStsMot2
+            // 
+            this.lblErrorStsMot2.BackColor = System.Drawing.Color.LightGray;
+            this.lblErrorStsMot2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblErrorStsMot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorStsMot2.Location = new System.Drawing.Point(237, 30);
+            this.lblErrorStsMot2.Name = "lblErrorStsMot2";
+            this.lblErrorStsMot2.Size = new System.Drawing.Size(67, 23);
+            this.lblErrorStsMot2.TabIndex = 16;
+            this.lblErrorStsMot2.Text = "Error";
+            this.lblErrorStsMot2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSetPosOkStsMot3
+            // 
+            this.lblSetPosOkStsMot3.BackColor = System.Drawing.Color.LightGray;
+            this.lblSetPosOkStsMot3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSetPosOkStsMot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSetPosOkStsMot3.Location = new System.Drawing.Point(237, 117);
+            this.lblSetPosOkStsMot3.Name = "lblSetPosOkStsMot3";
+            this.lblSetPosOkStsMot3.Size = new System.Drawing.Size(67, 23);
+            this.lblSetPosOkStsMot3.TabIndex = 19;
+            this.lblSetPosOkStsMot3.Text = "Set Pos Ok";
+            this.lblSetPosOkStsMot3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblInSyncStsMot3
+            // 
+            this.lblInSyncStsMot3.BackColor = System.Drawing.Color.LightGray;
+            this.lblInSyncStsMot3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblInSyncStsMot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInSyncStsMot3.Location = new System.Drawing.Point(237, 88);
+            this.lblInSyncStsMot3.Name = "lblInSyncStsMot3";
+            this.lblInSyncStsMot3.Size = new System.Drawing.Size(67, 23);
+            this.lblInSyncStsMot3.TabIndex = 18;
+            this.lblInSyncStsMot3.Text = "In Sync";
+            this.lblInSyncStsMot3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMovingStsMot3
+            // 
+            this.lblMovingStsMot3.BackColor = System.Drawing.Color.LightGray;
+            this.lblMovingStsMot3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMovingStsMot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMovingStsMot3.Location = new System.Drawing.Point(237, 59);
+            this.lblMovingStsMot3.Name = "lblMovingStsMot3";
+            this.lblMovingStsMot3.Size = new System.Drawing.Size(67, 23);
+            this.lblMovingStsMot3.TabIndex = 17;
+            this.lblMovingStsMot3.Text = "Moving";
+            this.lblMovingStsMot3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblErrorStsMot3
+            // 
+            this.lblErrorStsMot3.BackColor = System.Drawing.Color.LightGray;
+            this.lblErrorStsMot3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblErrorStsMot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorStsMot3.Location = new System.Drawing.Point(237, 30);
+            this.lblErrorStsMot3.Name = "lblErrorStsMot3";
+            this.lblErrorStsMot3.Size = new System.Drawing.Size(67, 23);
+            this.lblErrorStsMot3.TabIndex = 16;
+            this.lblErrorStsMot3.Text = "Error";
+            this.lblErrorStsMot3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSetPosOkStsMot4
+            // 
+            this.lblSetPosOkStsMot4.BackColor = System.Drawing.Color.LightGray;
+            this.lblSetPosOkStsMot4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSetPosOkStsMot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSetPosOkStsMot4.Location = new System.Drawing.Point(237, 117);
+            this.lblSetPosOkStsMot4.Name = "lblSetPosOkStsMot4";
+            this.lblSetPosOkStsMot4.Size = new System.Drawing.Size(67, 23);
+            this.lblSetPosOkStsMot4.TabIndex = 19;
+            this.lblSetPosOkStsMot4.Text = "Set Pos Ok";
+            this.lblSetPosOkStsMot4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblInSyncStsMot4
+            // 
+            this.lblInSyncStsMot4.BackColor = System.Drawing.Color.LightGray;
+            this.lblInSyncStsMot4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblInSyncStsMot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInSyncStsMot4.Location = new System.Drawing.Point(237, 88);
+            this.lblInSyncStsMot4.Name = "lblInSyncStsMot4";
+            this.lblInSyncStsMot4.Size = new System.Drawing.Size(67, 23);
+            this.lblInSyncStsMot4.TabIndex = 18;
+            this.lblInSyncStsMot4.Text = "In Sync";
+            this.lblInSyncStsMot4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMovingStsMot4
+            // 
+            this.lblMovingStsMot4.BackColor = System.Drawing.Color.LightGray;
+            this.lblMovingStsMot4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMovingStsMot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMovingStsMot4.Location = new System.Drawing.Point(237, 59);
+            this.lblMovingStsMot4.Name = "lblMovingStsMot4";
+            this.lblMovingStsMot4.Size = new System.Drawing.Size(67, 23);
+            this.lblMovingStsMot4.TabIndex = 17;
+            this.lblMovingStsMot4.Text = "Moving";
+            this.lblMovingStsMot4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblErrorStsMot4
+            // 
+            this.lblErrorStsMot4.BackColor = System.Drawing.Color.LightGray;
+            this.lblErrorStsMot4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblErrorStsMot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorStsMot4.Location = new System.Drawing.Point(237, 30);
+            this.lblErrorStsMot4.Name = "lblErrorStsMot4";
+            this.lblErrorStsMot4.Size = new System.Drawing.Size(67, 23);
+            this.lblErrorStsMot4.TabIndex = 16;
+            this.lblErrorStsMot4.Text = "Error";
+            this.lblErrorStsMot4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -478,6 +702,22 @@
         private System.Windows.Forms.Button btnSetPosMot2;
         private System.Windows.Forms.Button btnSetPosMot3;
         private System.Windows.Forms.Button btnSetPosMot4;
+        private System.Windows.Forms.Label lblSetPosOkStsMot1;
+        private System.Windows.Forms.Label lblInSyncStsMot1;
+        private System.Windows.Forms.Label lblMovingStsMot1;
+        private System.Windows.Forms.Label lblErrorStsMot1;
+        private System.Windows.Forms.Label lblSetPosOkStsMot2;
+        private System.Windows.Forms.Label lblInSyncStsMot2;
+        private System.Windows.Forms.Label lblMovingStsMot2;
+        private System.Windows.Forms.Label lblErrorStsMot2;
+        private System.Windows.Forms.Label lblSetPosOkStsMot3;
+        private System.Windows.Forms.Label lblInSyncStsMot3;
+        private System.Windows.Forms.Label lblMovingStsMot3;
+        private System.Windows.Forms.Label lblErrorStsMot3;
+        private System.Windows.Forms.Label lblSetPosOkStsMot4;
+        private System.Windows.Forms.Label lblInSyncStsMot4;
+        private System.Windows.Forms.Label lblMovingStsMot4;
+        private System.Windows.Forms.Label lblErrorStsMot4;
     }
 }
 

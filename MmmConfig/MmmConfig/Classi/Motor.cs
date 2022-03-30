@@ -5,12 +5,13 @@ using System.Text;
 using TwinCAT.Ads;
 using System.Windows.Forms;
 
+
 namespace MmmConfig
 {
     public class Motor
     {
-                /* Motor status structure */
-        
+        /* Motor status structure */
+
         public MotorStatus motorStatus = new MotorStatus();
         /*public Motor() {
             motorStatus.xEventEnabled = false;
@@ -29,7 +30,7 @@ namespace MmmConfig
                     value = _Connection.readBool("LOC_AdsIO.stInput.MotorCmd[" + iMotorIndex + "].xEnable", _Connection.tcClient);
                     _Connection.writeBool("LOC_AdsIO.stInput.MotorCmd[" + iMotorIndex + "].xEnable", !(value));
                     return !(value);
-                    
+
                 case 1:
                     value = _Connection.readBool("LOC_AdsIO.stInput.MotorCmd[" + iMotorIndex + "].xMoveFw", _Connection.tcClient);
                     _Connection.writeBool("LOC_AdsIO.stInput.MotorCmd[" + iMotorIndex + "].xMoveFw", !(value));
@@ -48,6 +49,16 @@ namespace MmmConfig
                     return !(value);
             }
             return true;
+        }
+        public bool[] ReadMotorSts(int iMotorIndex, CPU_Connection _Connection, string partialStatusPath)
+        {
+            bool[] status;
+            status = new bool[4];
+            status[0] = _Connection.readBool(partialStatusPath + "[" + iMotorIndex.ToString() + "].xError", _Connection.tcClient);
+            status[1] = _Connection.readBool(partialStatusPath + "[" + iMotorIndex.ToString() + "].xMoving", _Connection.tcClient);
+            status[2] = _Connection.readBool(partialStatusPath + "[" + iMotorIndex.ToString() + "].xInSync", _Connection.tcClient);
+            status[3] = _Connection.readBool(partialStatusPath + "[" + iMotorIndex.ToString() + "].xSetPosOk", _Connection.tcClient);
+            return status;
         }
     }
 }
