@@ -121,6 +121,7 @@ namespace MmmConfig
             if (e.Handle == motor[3].motorStatus.uiVarHandle[6]) {motor[3].motorStatus.iCurrLoad    = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
 
             updateLabelStatus();
+            updateLabelsPosRpmLoad();
         }
 
         private void updateLabelStatus()
@@ -142,6 +143,23 @@ namespace MmmConfig
             if (motor[3].motorStatus.xSync)     { lblInSyncStsMot4.BackColor        = Color.LightGreen; }   else { lblInSyncStsMot4.BackColor   = Color.LightGray; }
             if (motor[3].motorStatus.xSetPosOk) { lblSetPosOkStsMot4.BackColor      = Color.LightGreen; }   else { lblSetPosOkStsMot4.BackColor = Color.LightGray; }
         }
+
+        private void updateLabelsPosRpmLoad()
+        {
+            lblPosMot1.Text = "Position: " + motor[0].motorStatus.iPosition.ToString() + "°";
+            lblPosMot2.Text = "Position: " + motor[1].motorStatus.iPosition.ToString() + "°";
+            lblPosMot3.Text = "Position: " + motor[2].motorStatus.iPosition.ToString() + "°";
+            lblPosMot4.Text = "Position: " + motor[3].motorStatus.iPosition.ToString() + "°";
+            lblRpmMot1.Text = "Speed: " + motor[0].motorStatus.iSpeedRpm.ToString() + " rpm";
+            lblRpmMot2.Text = "Speed: " + motor[1].motorStatus.iSpeedRpm.ToString() + " rpm";
+            lblRpmMot3.Text = "Speed: " + motor[2].motorStatus.iSpeedRpm.ToString() + " rpm";
+            lblRpmMot4.Text = "Speed: " + motor[3].motorStatus.iSpeedRpm.ToString() + " rpm";
+            lblLoadMot1.Text = "Load: " + motor[0].motorStatus.iCurrLoad.ToString() + " %";
+            lblLoadMot2.Text = "Load: " + motor[1].motorStatus.iCurrLoad.ToString() + " %";
+            lblLoadMot3.Text = "Load: " + motor[2].motorStatus.iCurrLoad.ToString() + " %";
+            lblLoadMot4.Text = "Load: " + motor[3].motorStatus.iCurrLoad.ToString() + " %";
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
             
@@ -215,6 +233,26 @@ namespace MmmConfig
             motor[3].motorStatus.xSync      = tempBool[2];
             motor[3].motorStatus.xSetPosOk  = tempBool[3];
             updateLabelStatus();
+
+            int[] tempInt;
+            tempInt = new int[3];
+            tempInt = motor[0].ReadMotorValFdbk(1, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+            motor[0].motorStatus.iSpeedRpm = tempInt[0];
+            motor[0].motorStatus.iPosition = tempInt[1];
+            motor[0].motorStatus.iCurrLoad = tempInt[2];
+            tempInt = motor[1].ReadMotorValFdbk(2, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+            motor[1].motorStatus.iSpeedRpm = tempInt[0];
+            motor[1].motorStatus.iPosition = tempInt[1];
+            motor[1].motorStatus.iCurrLoad = tempInt[2];
+            tempInt = motor[2].ReadMotorValFdbk(3, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+            motor[2].motorStatus.iSpeedRpm = tempInt[0];
+            motor[2].motorStatus.iPosition = tempInt[1];
+            motor[2].motorStatus.iCurrLoad = tempInt[2];
+            tempInt = motor[3].ReadMotorValFdbk(4, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+            motor[3].motorStatus.iSpeedRpm = tempInt[0];
+            motor[3].motorStatus.iPosition = tempInt[1];
+            motor[3].motorStatus.iCurrLoad = tempInt[2];
+            updateLabelsPosRpmLoad();
         }
 
         private void btnEnableMot1_Click(object sender, EventArgs e)

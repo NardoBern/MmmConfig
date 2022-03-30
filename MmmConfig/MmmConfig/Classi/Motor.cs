@@ -60,5 +60,15 @@ namespace MmmConfig
             status[3] = _Connection.readBool(partialStatusPath + "[" + iMotorIndex.ToString() + "].xSetPosOk", _Connection.tcClient);
             return status;
         }
+
+        public int[] ReadMotorValFdbk(int iMotorIndex, CPU_Connection _Connection, string partialStatusPath)
+        {
+            int[] values;
+            values = new int[3];
+            values[0] = _Connection.readInt(partialStatusPath + "[" + iMotorIndex.ToString() + "].iSpeedRpm", _Connection.tcClient);
+            values[1] = _Connection.readInt(partialStatusPath + "[" + iMotorIndex.ToString() + "].iPosition", _Connection.tcClient);
+            values[2] = _Connection.readInt(partialStatusPath + "[" + iMotorIndex.ToString() + "].iCurrLoad", _Connection.tcClient);
+            return values;
+        }
     }
 }

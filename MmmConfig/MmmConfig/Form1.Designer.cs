@@ -77,6 +77,18 @@
             this.lblInSyncStsMot4 = new System.Windows.Forms.Label();
             this.lblMovingStsMot4 = new System.Windows.Forms.Label();
             this.lblErrorStsMot4 = new System.Windows.Forms.Label();
+            this.lblPosMot1 = new System.Windows.Forms.Label();
+            this.lblRpmMot1 = new System.Windows.Forms.Label();
+            this.lblLoadMot1 = new System.Windows.Forms.Label();
+            this.lblLoadMot2 = new System.Windows.Forms.Label();
+            this.lblRpmMot2 = new System.Windows.Forms.Label();
+            this.lblPosMot2 = new System.Windows.Forms.Label();
+            this.lblLoadMot3 = new System.Windows.Forms.Label();
+            this.lblRpmMot3 = new System.Windows.Forms.Label();
+            this.lblPosMot3 = new System.Windows.Forms.Label();
+            this.lblLoadMot4 = new System.Windows.Forms.Label();
+            this.lblRpmMot4 = new System.Windows.Forms.Label();
+            this.lblPosMot4 = new System.Windows.Forms.Label();
             this.grpBoxMot1.SuspendLayout();
             this.grpBoxMot2.SuspendLayout();
             this.grpBoxMot3.SuspendLayout();
@@ -165,6 +177,9 @@
             // grpBoxMot1
             // 
             this.grpBoxMot1.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot1.Controls.Add(this.lblLoadMot1);
+            this.grpBoxMot1.Controls.Add(this.lblRpmMot1);
+            this.grpBoxMot1.Controls.Add(this.lblPosMot1);
             this.grpBoxMot1.Controls.Add(this.lblSetPosOkStsMot1);
             this.grpBoxMot1.Controls.Add(this.lblInSyncStsMot1);
             this.grpBoxMot1.Controls.Add(this.lblMovingStsMot1);
@@ -185,8 +200,11 @@
             // grpBoxMot2
             // 
             this.grpBoxMot2.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot2.Controls.Add(this.lblLoadMot2);
             this.grpBoxMot2.Controls.Add(this.lblSetPosOkStsMot2);
+            this.grpBoxMot2.Controls.Add(this.lblRpmMot2);
             this.grpBoxMot2.Controls.Add(this.lblInSyncStsMot2);
+            this.grpBoxMot2.Controls.Add(this.lblPosMot2);
             this.grpBoxMot2.Controls.Add(this.lblMovingStsMot2);
             this.grpBoxMot2.Controls.Add(this.lblErrorStsMot2);
             this.grpBoxMot2.Controls.Add(this.btnSetPosMot2);
@@ -215,6 +233,9 @@
             // grpBoxMot3
             // 
             this.grpBoxMot3.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot3.Controls.Add(this.lblLoadMot3);
+            this.grpBoxMot3.Controls.Add(this.lblRpmMot3);
+            this.grpBoxMot3.Controls.Add(this.lblPosMot3);
             this.grpBoxMot3.Controls.Add(this.lblSetPosOkStsMot3);
             this.grpBoxMot3.Controls.Add(this.lblInSyncStsMot3);
             this.grpBoxMot3.Controls.Add(this.lblMovingStsMot3);
@@ -245,8 +266,11 @@
             // grpBoxMot4
             // 
             this.grpBoxMot4.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot4.Controls.Add(this.lblLoadMot4);
             this.grpBoxMot4.Controls.Add(this.lblSetPosOkStsMot4);
+            this.grpBoxMot4.Controls.Add(this.lblRpmMot4);
             this.grpBoxMot4.Controls.Add(this.lblInSyncStsMot4);
+            this.grpBoxMot4.Controls.Add(this.lblPosMot4);
             this.grpBoxMot4.Controls.Add(this.lblMovingStsMot4);
             this.grpBoxMot4.Controls.Add(this.lblErrorStsMot4);
             this.grpBoxMot4.Controls.Add(this.btnSetPosMot4);
@@ -640,6 +664,150 @@
             this.lblErrorStsMot4.Text = "Error";
             this.lblErrorStsMot4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblPosMot1
+            // 
+            this.lblPosMot1.BackColor = System.Drawing.Color.LightGray;
+            this.lblPosMot1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPosMot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosMot1.Location = new System.Drawing.Point(88, 145);
+            this.lblPosMot1.Name = "lblPosMot1";
+            this.lblPosMot1.Size = new System.Drawing.Size(133, 23);
+            this.lblPosMot1.TabIndex = 16;
+            this.lblPosMot1.Text = "Position: ---°";
+            this.lblPosMot1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblRpmMot1
+            // 
+            this.lblRpmMot1.BackColor = System.Drawing.Color.LightGray;
+            this.lblRpmMot1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblRpmMot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRpmMot1.Location = new System.Drawing.Point(88, 168);
+            this.lblRpmMot1.Name = "lblRpmMot1";
+            this.lblRpmMot1.Size = new System.Drawing.Size(133, 23);
+            this.lblRpmMot1.TabIndex = 17;
+            this.lblRpmMot1.Text = "Speed: ---- rpm";
+            this.lblRpmMot1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLoadMot1
+            // 
+            this.lblLoadMot1.BackColor = System.Drawing.Color.LightGray;
+            this.lblLoadMot1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblLoadMot1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoadMot1.Location = new System.Drawing.Point(88, 191);
+            this.lblLoadMot1.Name = "lblLoadMot1";
+            this.lblLoadMot1.Size = new System.Drawing.Size(133, 23);
+            this.lblLoadMot1.TabIndex = 18;
+            this.lblLoadMot1.Text = "Load: --- %";
+            this.lblLoadMot1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLoadMot2
+            // 
+            this.lblLoadMot2.BackColor = System.Drawing.Color.LightGray;
+            this.lblLoadMot2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblLoadMot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoadMot2.Location = new System.Drawing.Point(92, 191);
+            this.lblLoadMot2.Name = "lblLoadMot2";
+            this.lblLoadMot2.Size = new System.Drawing.Size(133, 23);
+            this.lblLoadMot2.TabIndex = 21;
+            this.lblLoadMot2.Text = "Load: --- %";
+            this.lblLoadMot2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblRpmMot2
+            // 
+            this.lblRpmMot2.BackColor = System.Drawing.Color.LightGray;
+            this.lblRpmMot2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblRpmMot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRpmMot2.Location = new System.Drawing.Point(92, 168);
+            this.lblRpmMot2.Name = "lblRpmMot2";
+            this.lblRpmMot2.Size = new System.Drawing.Size(133, 23);
+            this.lblRpmMot2.TabIndex = 20;
+            this.lblRpmMot2.Text = "Speed: ---- rpm";
+            this.lblRpmMot2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPosMot2
+            // 
+            this.lblPosMot2.BackColor = System.Drawing.Color.LightGray;
+            this.lblPosMot2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPosMot2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosMot2.Location = new System.Drawing.Point(92, 145);
+            this.lblPosMot2.Name = "lblPosMot2";
+            this.lblPosMot2.Size = new System.Drawing.Size(133, 23);
+            this.lblPosMot2.TabIndex = 19;
+            this.lblPosMot2.Text = "Position: ---°";
+            this.lblPosMot2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLoadMot3
+            // 
+            this.lblLoadMot3.BackColor = System.Drawing.Color.LightGray;
+            this.lblLoadMot3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblLoadMot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoadMot3.Location = new System.Drawing.Point(88, 192);
+            this.lblLoadMot3.Name = "lblLoadMot3";
+            this.lblLoadMot3.Size = new System.Drawing.Size(133, 23);
+            this.lblLoadMot3.TabIndex = 22;
+            this.lblLoadMot3.Text = "Load: --- %";
+            this.lblLoadMot3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblRpmMot3
+            // 
+            this.lblRpmMot3.BackColor = System.Drawing.Color.LightGray;
+            this.lblRpmMot3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblRpmMot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRpmMot3.Location = new System.Drawing.Point(88, 169);
+            this.lblRpmMot3.Name = "lblRpmMot3";
+            this.lblRpmMot3.Size = new System.Drawing.Size(133, 23);
+            this.lblRpmMot3.TabIndex = 21;
+            this.lblRpmMot3.Text = "Speed: ---- rpm";
+            this.lblRpmMot3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPosMot3
+            // 
+            this.lblPosMot3.BackColor = System.Drawing.Color.LightGray;
+            this.lblPosMot3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPosMot3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosMot3.Location = new System.Drawing.Point(88, 146);
+            this.lblPosMot3.Name = "lblPosMot3";
+            this.lblPosMot3.Size = new System.Drawing.Size(133, 23);
+            this.lblPosMot3.TabIndex = 20;
+            this.lblPosMot3.Text = "Position: ---°";
+            this.lblPosMot3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblLoadMot4
+            // 
+            this.lblLoadMot4.BackColor = System.Drawing.Color.LightGray;
+            this.lblLoadMot4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblLoadMot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLoadMot4.Location = new System.Drawing.Point(92, 192);
+            this.lblLoadMot4.Name = "lblLoadMot4";
+            this.lblLoadMot4.Size = new System.Drawing.Size(133, 23);
+            this.lblLoadMot4.TabIndex = 25;
+            this.lblLoadMot4.Text = "Load: --- %";
+            this.lblLoadMot4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblRpmMot4
+            // 
+            this.lblRpmMot4.BackColor = System.Drawing.Color.LightGray;
+            this.lblRpmMot4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblRpmMot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRpmMot4.Location = new System.Drawing.Point(92, 169);
+            this.lblRpmMot4.Name = "lblRpmMot4";
+            this.lblRpmMot4.Size = new System.Drawing.Size(133, 23);
+            this.lblRpmMot4.TabIndex = 24;
+            this.lblRpmMot4.Text = "Speed: ---- rpm";
+            this.lblRpmMot4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPosMot4
+            // 
+            this.lblPosMot4.BackColor = System.Drawing.Color.LightGray;
+            this.lblPosMot4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPosMot4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPosMot4.Location = new System.Drawing.Point(92, 146);
+            this.lblPosMot4.Name = "lblPosMot4";
+            this.lblPosMot4.Size = new System.Drawing.Size(133, 23);
+            this.lblPosMot4.TabIndex = 23;
+            this.lblPosMot4.Text = "Position: ---°";
+            this.lblPosMot4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -718,6 +886,18 @@
         private System.Windows.Forms.Label lblInSyncStsMot4;
         private System.Windows.Forms.Label lblMovingStsMot4;
         private System.Windows.Forms.Label lblErrorStsMot4;
+        private System.Windows.Forms.Label lblLoadMot1;
+        private System.Windows.Forms.Label lblRpmMot1;
+        private System.Windows.Forms.Label lblPosMot1;
+        private System.Windows.Forms.Label lblLoadMot2;
+        private System.Windows.Forms.Label lblRpmMot2;
+        private System.Windows.Forms.Label lblPosMot2;
+        private System.Windows.Forms.Label lblLoadMot3;
+        private System.Windows.Forms.Label lblRpmMot3;
+        private System.Windows.Forms.Label lblPosMot3;
+        private System.Windows.Forms.Label lblLoadMot4;
+        private System.Windows.Forms.Label lblRpmMot4;
+        private System.Windows.Forms.Label lblPosMot4;
     }
 }
 
