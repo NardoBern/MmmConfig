@@ -123,15 +123,21 @@ namespace MmmConfig
 
              
         /* Read boolean value */
-        public bool readBool(string strVarName)
+        public bool readBool(string strVarName, AdsClient adsClient)
         {
             try
             {
-                uint iHandle = tcClient.CreateVariableHandle(strVarName);
+                uint uiHandle = adsClient.CreateVariableHandle(strVarName);
+                bool readValue;
+                readValue = (bool)adsClient.ReadAny(uiHandle, typeof(bool));
+                adsClient.DeleteVariableHandle(uiHandle);
+                return readValue;
+
+                /*uint iHandle = tcClient.CreateVariableHandle(strVarName);
                 MemoryStream datastream = new MemoryStream(1);
                 BinaryReader binReader = new BinaryReader(datastream);
                 tcClient.Read(iHandle, datastream.GetBuffer().AsMemory());
-                return binReader.ReadBoolean();
+                return binReader.ReadBoolean();*/
             }
             catch (TwinCAT.Ads.AdsErrorException e)
             {

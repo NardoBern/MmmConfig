@@ -20,6 +20,6 @@ namespace MmmConfig
         /* Management variable */
         public bool xEventEnabled;
         public int iNumOfVar = 7;
-        public uint[] uiVarHandle;
+        public uint[] uiVarHandle = new uint[7];
     }
 }

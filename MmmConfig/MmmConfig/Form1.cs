@@ -33,15 +33,15 @@ namespace MmmConfig
         public Motor[] motor;
         //private Motor.stMotorsts[] MotorSts;
         private int iWdCheck = 0;
-        
-        
-        
+
+
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -61,10 +61,10 @@ namespace MmmConfig
             {
                 vUpdateDisconnectedStatus();
             }
-            
-            
+
+
         }
-  
+
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
@@ -75,27 +75,50 @@ namespace MmmConfig
             }
             else
             {
-                               
+
                 CpuConnection.tcClient = CpuConnection.connect(txtNetId.Text, int.Parse(txtPort.Text));
-                //addNotification();
+
                 tWdTimer.Enabled = true;
             }
+
+        }
+
+        public void MotStsNotification(object sender, AdsNotificationEventArgs e)
+        {
             
-        }
+            ReadOnlyMemory<byte> memory = e.Data;
 
-        private void addNotification()
-        {
-            uint hTest;
+            if (e.Handle == motor[0].motorStatus.uiVarHandle[0]) {motor[0].motorStatus.xError      = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[0].motorStatus.uiVarHandle[1]) {motor[0].motorStatus.xMoving     = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[0].motorStatus.uiVarHandle[2]) {motor[0].motorStatus.xSync       = BitConverter.ToBoolean(memory.ToArray(), 0);}
+            if (e.Handle == motor[0].motorStatus.uiVarHandle[3]) {motor[0].motorStatus.xSetPosOk   = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[0].motorStatus.uiVarHandle[4]) {motor[0].motorStatus.iSpeedRpm   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[0].motorStatus.uiVarHandle[5]) {motor[0].motorStatus.iPosition   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[0].motorStatus.uiVarHandle[6]) {motor[0].motorStatus.iCurrLoad   = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
 
-            hTest = CpuConnection.tcClient.AddDeviceNotification("LOC_AdsIO.stOutput._Reserve[7]", 2,
-                    new NotificationSettings(AdsTransMode.OnChange, 100, 0), null);
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[0]) { motor[1].motorStatus.xError = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[1]) { motor[1].motorStatus.xMoving = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[2]) { motor[1].motorStatus.xSync = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[3]) { motor[1].motorStatus.xSetPosOk = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[4]) { motor[1].motorStatus.iSpeedRpm = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[5]) { motor[1].motorStatus.iPosition = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[1].motorStatus.uiVarHandle[6]) { motor[1].motorStatus.iCurrLoad = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
 
-            CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(OnNotification);
-        }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[0]) { motor[2].motorStatus.xError = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[1]) { motor[2].motorStatus.xMoving = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[2]) { motor[2].motorStatus.xSync = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[3]) { motor[2].motorStatus.xSetPosOk = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[4]) { motor[2].motorStatus.iSpeedRpm = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[5]) { motor[2].motorStatus.iPosition = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[2].motorStatus.uiVarHandle[6]) { motor[2].motorStatus.iCurrLoad = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
 
-        public void OnNotification(object sender, AdsNotificationEventArgs e)
-        {
-            Console.WriteLine("Figa!!");
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[0]) { motor[3].motorStatus.xError = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[1]) { motor[3].motorStatus.xMoving = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[2]) { motor[3].motorStatus.xSync = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[3]) { motor[3].motorStatus.xSetPosOk = BitConverter.ToBoolean(memory.ToArray(), 0); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[4]) { motor[3].motorStatus.iSpeedRpm = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[5]) { motor[3].motorStatus.iPosition = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
+            if (e.Handle == motor[3].motorStatus.uiVarHandle[6]) { motor[3].motorStatus.iCurrLoad = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span); }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -123,31 +146,17 @@ namespace MmmConfig
                 iWdCheck = 0;
             }
         }
-
-        private void tUpdateData_Tick(object sender, EventArgs e)
-        {
-            /* Read motor status 
-            for (int _i = 0; _i < 4; _i++)
-            {
-                MotorSts[_i] = CpuConnection.readMotSts(_i + 1);
-                Console.WriteLine("Errore motore #" + _i + " : " + MotorSts[_i].xError.ToString());
-            }*/
-            
-            
-        }
-
+                
         private void vUpdateConnectedStatus()
         {
             lblConnStatus.Text = "Connected";
             btnConnect.Text = "Disconnect";
             tWdTimer.Enabled = true;
-            tUpdateData.Enabled = true;
-            if (!motor[0].motorStatus.xEventEnabled)
-            {
-                motor[0].motorStatus.uiVarHandle[0] = CpuConnection.AddNotification(CpuConnection.tcClient, "LOC_AdsIO.stOutput.MotorSts[1].xError");
-                CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(OnNotification);
-                motor[0].motorStatus.xEventEnabled = true;
-            }
+            vAddMotorStsNotification(motor[0], CpuConnection, 1, "LOC_AdsIO.stOutput.MotorSts");
+            vAddMotorStsNotification(motor[1], CpuConnection, 2, "LOC_AdsIO.stOutput.MotorSts");
+            vAddMotorStsNotification(motor[2], CpuConnection, 3, "LOC_AdsIO.stOutput.MotorSts");
+            vAddMotorStsNotification(motor[3], CpuConnection, 4, "LOC_AdsIO.stOutput.MotorSts");
+            CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
         }
         private void vUpdateDisconnectedStatus()
         {
@@ -155,7 +164,7 @@ namespace MmmConfig
             lblConnStatus.Text = "No connection";
             btnConnect.Text = "Connect";
             tWdTimer.Enabled = false;
-            tUpdateData.Enabled = false;
+            //tUpdateData.Enabled = false;
         }
 
         private void btnEnableMot1_Click(object sender, EventArgs e)
@@ -163,7 +172,7 @@ namespace MmmConfig
             Motor Motor = new Motor();
             bool xTemp = new bool();
             xTemp = Motor.WriteMotorCmd(1, 0, CpuConnection);
-            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen;}
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
             else { btnEnableMot1.BackColor = Color.AliceBlue; }
         }
 
@@ -194,13 +203,6 @@ namespace MmmConfig
             else { btnEnableMot4.BackColor = Color.AliceBlue; }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            uint uiTestHandle = CpuConnection.AddNotification(CpuConnection.tcClient, "LOC_AdsIO.stOutput.WdCount");
-            CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(OnNotification);
-        }
-
-
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             try
@@ -208,7 +210,7 @@ namespace MmmConfig
                 if (CpuConnection.tcClient != null)
                 {
                     // Removing Notifications
-                    CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(OnNotification);
+                    CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
                     // Disposing the Client.
                     CpuConnection.tcClient.Dispose();
                     CpuConnection.tcClient = null;
@@ -218,6 +220,94 @@ namespace MmmConfig
             {
                 MessageBox.Show(err.Message);
             }
+        }
+
+        private void vAddMotorStsNotification(MmmConfig.Motor motor, MmmConfig.CPU_Connection cPU_Connection, int motorIndex, string partialVarPath)
+        {
+            if (!motor.motorStatus.xEventEnabled)
+            {
+                motor.motorStatus.uiVarHandle[0] = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialVarPath + "[" + motorIndex.ToString() + "].xError");
+                motor.motorStatus.uiVarHandle[1] = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialVarPath + "[" + motorIndex.ToString() + "].xMoving");
+                motor.motorStatus.uiVarHandle[2] = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialVarPath + "[" + motorIndex.ToString() + "].xInSync");
+                motor.motorStatus.uiVarHandle[3] = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialVarPath + "[" + motorIndex.ToString() + "].xSetPosOk");
+                motor.motorStatus.uiVarHandle[4] = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialVarPath + "[" + motorIndex.ToString() + "].iSpeedRpm");
+                motor.motorStatus.uiVarHandle[5] = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialVarPath + "[" + motorIndex.ToString() + "].iPosition");
+                motor.motorStatus.uiVarHandle[6] = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialVarPath + "[" + motorIndex.ToString() + "].iCurrLoad");
+                motor.motorStatus.xEventEnabled = true;
+                Console.WriteLine("Added status notification to Motor #" + motorIndex.ToString());
+            }
+        }
+
+        private void btnMoveFwMot1_Click(object sender, EventArgs e)
+        {
+            Motor Motor = new Motor();
+            bool xTemp = new bool();
+            xTemp = Motor.WriteMotorCmd(1, 1, CpuConnection);
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
+            else { btnEnableMot1.BackColor = Color.AliceBlue; }
+        }
+
+        private void btnMoveFwMot2_Click(object sender, EventArgs e)
+        {
+            Motor Motor = new Motor();
+            bool xTemp = new bool();
+            xTemp = Motor.WriteMotorCmd(2, 1, CpuConnection);
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
+            else { btnEnableMot1.BackColor = Color.AliceBlue; }
+        }
+
+        private void btnMoveFwMot3_Click(object sender, EventArgs e)
+        {
+            Motor Motor = new Motor();
+            bool xTemp = new bool();
+            xTemp = Motor.WriteMotorCmd(3, 1, CpuConnection);
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
+            else { btnEnableMot1.BackColor = Color.AliceBlue; }
+        }
+
+        private void btnMoveFwMot4_Click(object sender, EventArgs e)
+        {
+            Motor Motor = new Motor();
+            bool xTemp = new bool();
+            xTemp = Motor.WriteMotorCmd(4, 1, CpuConnection);
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
+            else { btnEnableMot1.BackColor = Color.AliceBlue; }
+        }
+
+        private void btnMoveBwMot1_Click(object sender, EventArgs e)
+        {
+            Motor Motor = new Motor();
+            bool xTemp = new bool();
+            xTemp = Motor.WriteMotorCmd(1, 2, CpuConnection);
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
+            else { btnEnableMot1.BackColor = Color.AliceBlue; }
+        }
+
+        private void btnMoveBwMot2_Click(object sender, EventArgs e)
+        {
+            Motor Motor = new Motor();
+            bool xTemp = new bool();
+            xTemp = Motor.WriteMotorCmd(2, 2, CpuConnection);
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
+            else { btnEnableMot1.BackColor = Color.AliceBlue; }
+        }
+
+        private void btnMoveBwMot3_Click(object sender, EventArgs e)
+        {
+            Motor Motor = new Motor();
+            bool xTemp = new bool();
+            xTemp = Motor.WriteMotorCmd(3, 2, CpuConnection);
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
+            else { btnEnableMot1.BackColor = Color.AliceBlue; }
+        }
+
+        private void btnMoveBwMot4_Click(object sender, EventArgs e)
+        {
+            Motor Motor = new Motor();
+            bool xTemp = new bool();
+            xTemp = Motor.WriteMotorCmd(4, 2, CpuConnection);
+            if (xTemp) { btnEnableMot1.BackColor = Color.LightGreen; }
+            else { btnEnableMot1.BackColor = Color.AliceBlue; }
         }
     }
 }
