@@ -53,6 +53,14 @@
             this.btnMoveBwMot2 = new System.Windows.Forms.Button();
             this.btnMoveBwMot3 = new System.Windows.Forms.Button();
             this.btnMoveBwMot4 = new System.Windows.Forms.Button();
+            this.btnSyncOnMot1 = new System.Windows.Forms.Button();
+            this.btnSyncOnMot2 = new System.Windows.Forms.Button();
+            this.btnSyncOnMot3 = new System.Windows.Forms.Button();
+            this.btnSyncOnMot4 = new System.Windows.Forms.Button();
+            this.btnSetPosMot1 = new System.Windows.Forms.Button();
+            this.btnSetPosMot2 = new System.Windows.Forms.Button();
+            this.btnSetPosMot3 = new System.Windows.Forms.Button();
+            this.btnSetPosMot4 = new System.Windows.Forms.Button();
             this.grpBoxMot1.SuspendLayout();
             this.grpBoxMot2.SuspendLayout();
             this.grpBoxMot3.SuspendLayout();
@@ -141,6 +149,8 @@
             // grpBoxMot1
             // 
             this.grpBoxMot1.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot1.Controls.Add(this.btnSetPosMot1);
+            this.grpBoxMot1.Controls.Add(this.btnSyncOnMot1);
             this.grpBoxMot1.Controls.Add(this.btnMoveBwMot1);
             this.grpBoxMot1.Controls.Add(this.btnMoveFwMot1);
             this.grpBoxMot1.Controls.Add(this.btnEnableMot1);
@@ -155,6 +165,8 @@
             // grpBoxMot2
             // 
             this.grpBoxMot2.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot2.Controls.Add(this.btnSetPosMot2);
+            this.grpBoxMot2.Controls.Add(this.btnSyncOnMot2);
             this.grpBoxMot2.Controls.Add(this.btnMoveBwMot2);
             this.grpBoxMot2.Controls.Add(this.btnMoveFwMot2);
             this.grpBoxMot2.Controls.Add(this.btnEnableMot2);
@@ -179,6 +191,8 @@
             // grpBoxMot3
             // 
             this.grpBoxMot3.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot3.Controls.Add(this.btnSetPosMot3);
+            this.grpBoxMot3.Controls.Add(this.btnSyncOnMot3);
             this.grpBoxMot3.Controls.Add(this.btnMoveBwMot3);
             this.grpBoxMot3.Controls.Add(this.btnMoveFwMot3);
             this.grpBoxMot3.Controls.Add(this.btnEnableMot3);
@@ -203,6 +217,8 @@
             // grpBoxMot4
             // 
             this.grpBoxMot4.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpBoxMot4.Controls.Add(this.btnSetPosMot4);
+            this.grpBoxMot4.Controls.Add(this.btnSyncOnMot4);
             this.grpBoxMot4.Controls.Add(this.btnMoveBwMot4);
             this.grpBoxMot4.Controls.Add(this.btnMoveFwMot4);
             this.grpBoxMot4.Controls.Add(this.btnEnableMot4);
@@ -312,6 +328,94 @@
             this.btnMoveBwMot4.UseVisualStyleBackColor = false;
             this.btnMoveBwMot4.Click += new System.EventHandler(this.btnMoveBwMot4_Click);
             // 
+            // btnSyncOnMot1
+            // 
+            this.btnSyncOnMot1.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnSyncOnMot1.Location = new System.Drawing.Point(6, 117);
+            this.btnSyncOnMot1.Name = "btnSyncOnMot1";
+            this.btnSyncOnMot1.Size = new System.Drawing.Size(67, 23);
+            this.btnSyncOnMot1.TabIndex = 10;
+            this.btnSyncOnMot1.Text = "Sync On";
+            this.btnSyncOnMot1.UseVisualStyleBackColor = false;
+            this.btnSyncOnMot1.Click += new System.EventHandler(this.btnSyncOnMot1_Click);
+            // 
+            // btnSyncOnMot2
+            // 
+            this.btnSyncOnMot2.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnSyncOnMot2.Location = new System.Drawing.Point(6, 117);
+            this.btnSyncOnMot2.Name = "btnSyncOnMot2";
+            this.btnSyncOnMot2.Size = new System.Drawing.Size(67, 23);
+            this.btnSyncOnMot2.TabIndex = 11;
+            this.btnSyncOnMot2.Text = "Sync On";
+            this.btnSyncOnMot2.UseVisualStyleBackColor = false;
+            this.btnSyncOnMot2.Click += new System.EventHandler(this.btnSyncOnMot2_Click);
+            // 
+            // btnSyncOnMot3
+            // 
+            this.btnSyncOnMot3.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnSyncOnMot3.Location = new System.Drawing.Point(6, 117);
+            this.btnSyncOnMot3.Name = "btnSyncOnMot3";
+            this.btnSyncOnMot3.Size = new System.Drawing.Size(67, 23);
+            this.btnSyncOnMot3.TabIndex = 12;
+            this.btnSyncOnMot3.Text = "Sync On";
+            this.btnSyncOnMot3.UseVisualStyleBackColor = false;
+            this.btnSyncOnMot3.Click += new System.EventHandler(this.btnSyncOnMot3_Click);
+            // 
+            // btnSyncOnMot4
+            // 
+            this.btnSyncOnMot4.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnSyncOnMot4.Location = new System.Drawing.Point(6, 117);
+            this.btnSyncOnMot4.Name = "btnSyncOnMot4";
+            this.btnSyncOnMot4.Size = new System.Drawing.Size(67, 23);
+            this.btnSyncOnMot4.TabIndex = 13;
+            this.btnSyncOnMot4.Text = "Sync On";
+            this.btnSyncOnMot4.UseVisualStyleBackColor = false;
+            this.btnSyncOnMot4.Click += new System.EventHandler(this.btnSyncOnMot4_Click);
+            // 
+            // btnSetPosMot1
+            // 
+            this.btnSetPosMot1.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnSetPosMot1.Location = new System.Drawing.Point(6, 146);
+            this.btnSetPosMot1.Name = "btnSetPosMot1";
+            this.btnSetPosMot1.Size = new System.Drawing.Size(67, 23);
+            this.btnSetPosMot1.TabIndex = 11;
+            this.btnSetPosMot1.Text = "Set Pos";
+            this.btnSetPosMot1.UseVisualStyleBackColor = false;
+            this.btnSetPosMot1.Click += new System.EventHandler(this.btnSetPosMot1_Click);
+            // 
+            // btnSetPosMot2
+            // 
+            this.btnSetPosMot2.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnSetPosMot2.Location = new System.Drawing.Point(6, 146);
+            this.btnSetPosMot2.Name = "btnSetPosMot2";
+            this.btnSetPosMot2.Size = new System.Drawing.Size(67, 23);
+            this.btnSetPosMot2.TabIndex = 12;
+            this.btnSetPosMot2.Text = "Set Pos";
+            this.btnSetPosMot2.UseVisualStyleBackColor = false;
+            this.btnSetPosMot2.Click += new System.EventHandler(this.btnSetPosMot2_Click);
+            // 
+            // btnSetPosMot3
+            // 
+            this.btnSetPosMot3.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnSetPosMot3.Location = new System.Drawing.Point(6, 146);
+            this.btnSetPosMot3.Name = "btnSetPosMot3";
+            this.btnSetPosMot3.Size = new System.Drawing.Size(67, 23);
+            this.btnSetPosMot3.TabIndex = 13;
+            this.btnSetPosMot3.Text = "Set Pos";
+            this.btnSetPosMot3.UseVisualStyleBackColor = false;
+            this.btnSetPosMot3.Click += new System.EventHandler(this.btnSetPosMot3_Click);
+            // 
+            // btnSetPosMot4
+            // 
+            this.btnSetPosMot4.BackColor = System.Drawing.Color.AliceBlue;
+            this.btnSetPosMot4.Location = new System.Drawing.Point(6, 146);
+            this.btnSetPosMot4.Name = "btnSetPosMot4";
+            this.btnSetPosMot4.Size = new System.Drawing.Size(67, 23);
+            this.btnSetPosMot4.TabIndex = 14;
+            this.btnSetPosMot4.Text = "Set Pos";
+            this.btnSetPosMot4.UseVisualStyleBackColor = false;
+            this.btnSetPosMot4.Click += new System.EventHandler(this.btnSetPosMot4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -366,6 +470,14 @@
         private System.Windows.Forms.Button btnMoveBwMot2;
         private System.Windows.Forms.Button btnMoveBwMot3;
         private System.Windows.Forms.Button btnMoveBwMot4;
+        private System.Windows.Forms.Button btnSyncOnMot1;
+        private System.Windows.Forms.Button btnSyncOnMot2;
+        private System.Windows.Forms.Button btnSyncOnMot3;
+        private System.Windows.Forms.Button btnSyncOnMot4;
+        private System.Windows.Forms.Button btnSetPosMot1;
+        private System.Windows.Forms.Button btnSetPosMot2;
+        private System.Windows.Forms.Button btnSetPosMot3;
+        private System.Windows.Forms.Button btnSetPosMot4;
     }
 }
 
