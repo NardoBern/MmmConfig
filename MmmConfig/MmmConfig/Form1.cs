@@ -23,6 +23,8 @@ namespace MmmConfig
         public CPU_Connection CpuConnection;
         public Motor[] motor;
         private int iWdCheck = 0;
+        const string c_strMotionEventLogPath = "GVL_Hmi.stMotionEventLogger";
+        public EventLogger motionEventLogger;
         #endregion
 
         #region Form related function
@@ -41,6 +43,13 @@ namespace MmmConfig
             motor[1] = new Motor();
             motor[2] = new Motor();
             motor[3] = new Motor();
+            motionEventLogger = new EventLogger();
+            motionEventLogger.events = new Event[999];
+            for (int _i = 0; _i < 999; _i++) { 
+                motionEventLogger.events[_i] = new Event();
+                motionEventLogger.events[_i].error = new Error();
+                motionEventLogger.events[_i].operationLog = new OperationLog();
+            }
 
             if (CpuConnection.connected)
             {
@@ -60,6 +69,7 @@ namespace MmmConfig
                 {
                     // Removing Notifications
                     CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
+                    //CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(EventLoggerNotification);
                     // Disposing the Client.
                     CpuConnection.tcClient.Dispose();
                     CpuConnection.tcClient = null;
@@ -221,6 +231,15 @@ namespace MmmConfig
         private void btnSetPosMot2_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot2, 2, 4, CpuConnection); }
         private void btnSetPosMot3_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot3, 3, 4, CpuConnection); }
         private void btnSetPosMot4_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot4, 4, 4, CpuConnection); }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            btnUpdateMotionLog.BackColor = Color.LightPink;
+            motionEventLogger.iFreePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iFreepos", CpuConnection.tcClient);
+            motionEventLogger.iLastWritePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
+            for (int _i = 0; _i <= motionEventLogger.iLastWritePos; _i++) { CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]); }
+            btnUpdateMotionLog.BackColor = Color.LightGreen;
+        }
         #endregion
 
         #region Numeric selectors
@@ -317,6 +336,17 @@ namespace MmmConfig
             updateLabelsPosRpmLoad();
         }
 
+        public void EventLoggerNotification(object sender, AdsNotificationEventArgs e)
+        {
+            ReadOnlyMemory<byte> memory = e.Data;
+
+            if (e.Handle == motionEventLogger.uiVarHandle) {
+                motionEventLogger.iFreePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iFreepos", CpuConnection.tcClient);
+                motionEventLogger.iLastWritePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
+                for (int _i = 0; _i <= motionEventLogger.iLastWritePos; _i++) {CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]);}
+            }
+        }
+
         private void vUpdateConnectedStatus()
         {
             lblConnStatus.Text = "Connected";
@@ -331,6 +361,8 @@ namespace MmmConfig
             vAddMotorStsNotification(motor[2], CpuConnection, 3, "LOC_AdsIO.stOutput.MotorSts");
             vAddMotorStsNotification(motor[3], CpuConnection, 4, "LOC_AdsIO.stOutput.MotorSts");
             CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
+            //vAddEventLoggerNotification(motionEventLogger, CpuConnection, c_strMotionEventLogPath);
+            //CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(EventLoggerNotification);
         }
         private void vUpdateDisconnectedStatus()
         {
@@ -406,6 +438,18 @@ namespace MmmConfig
                 Console.WriteLine("Added status notification to Motor #" + motorIndex.ToString());
             }
         }
+
+        private void vAddEventLoggerNotification(MmmConfig.EventLogger eventLogger, MmmConfig.CPU_Connection cPU_Connection, string partialPath)
+        {
+            if (!eventLogger.xEventEnabled) { 
+                eventLogger.uiVarHandle = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialPath + ".iLastWritePos");
+                eventLogger.xEventEnabled = true;
+                Console.WriteLine("Added status notification to event logger");
+            }
+        }
+
         #endregion
+
+        
     }
 }

@@ -7,6 +7,14 @@ using TwinCAT.Ads;
 using TwinCAT.Ams;
 using TwinCAT.Ads.TcpRouter;
 using System.Net;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Data;
+using TwinCAT.TypeSystem;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MmmConfig
 {
@@ -124,6 +132,220 @@ namespace MmmConfig
                 return false;
             }
         }
+
+        public bool readEvent(string strEventLoggerPath, AdsClient adsClient, int iEventNum, Event @event)
+        {
+            try
+            {
+                uint[] uiHandle = new uint[19];
+                uiHandle[0] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].uiEventID");
+                uiHandle[1] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].strDeviceName");
+                uiHandle[2] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].eTypeOfEvent");
+                uiHandle[3] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].strTimeStamp");
+                uiHandle[4] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].xWrite");
+                uiHandle[5] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].strMessage");
+                uiHandle[6] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].strAlert");
+                uiHandle[7] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stError.axErrBit");
+                uiHandle[8] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stError.xErrorGlobal");
+                uiHandle[9] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stError.enumErrDescr");
+                uiHandle[10] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stError.audiErrId");
+                uiHandle[11] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.strOperationDescr");
+                uiHandle[12] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.aiOpValue");
+                uiHandle[13] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.arOpValue");
+                uiHandle[14] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[0]");
+                uiHandle[15] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[1]");
+                uiHandle[16] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[2]");
+                uiHandle[17] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[3]");
+                uiHandle[18] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[4]");
+
+                @event.uiEventId = (uint)adsClient.ReadAny(uiHandle[0], typeof(uint));
+                @event.strDeviceName = readString(uiHandle[1], adsClient);
+                @event.eTypeOfEvent = readTypeOfEvent(uiHandle[2], adsClient);
+                @event.strTimeStamp = readString(uiHandle[3], adsClient);
+                @event.xWrite = (bool)adsClient.ReadAny(uiHandle[4], typeof(bool));
+                @event.strMessage = readString(uiHandle[5], adsClient);
+                @event.strAlert = readString(uiHandle[6], adsClient);
+                @event.error.axErrBit = readErrorBit(uiHandle[7],adsClient);
+                @event.error.xErrorGlobal = (bool)adsClient.ReadAny(uiHandle[8], typeof(bool));
+                @event.error.enumErrorName = readErrorName(uiHandle[9], adsClient);
+                @event.error.audiErrId = readErrorId(uiHandle[10], adsClient);
+                @event.operationLog.strOperationDescr = readString(uiHandle[11], adsClient);
+                @event.operationLog.aiOpValue = readIntOpValues(uiHandle[12], adsClient);
+                @event.operationLog.arOpValue = readDoubleOpValues(uiHandle[13], adsClient);
+                uint[] strHandles = new uint[5] { uiHandle[14], uiHandle[15], uiHandle[16], uiHandle[17], uiHandle[18] }; 
+                @event.operationLog.astrOpValue = readStringOpValues(strHandles, adsClient);
+
+                for (int _i = 0; _i < uiHandle.Length; _i++) { adsClient.DeleteVariableHandle(uiHandle[_i]); }
+                
+                return true;
+
+            }
+            catch (TwinCAT.Ads.AdsErrorException e)
+            {
+                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
+                Console.WriteLine("Eccezione durante la lettura di un evento " + e.ToString());
+                return false;
+            }
+        }
+
+        private string[] readStringOpValues(uint[] uiVarHandle, AdsClient adsClient)
+        {
+            byte[] readBuffer = new byte[5 * 81];
+            string[] opValues = new string[5];
+
+            for (int _i = 0; _i < uiVarHandle.Length; _i++)
+            {
+                opValues[_i] = readString(uiVarHandle[_i], adsClient);
+            }
+            return opValues;
+        }
+
+        private double[] readDoubleOpValues(uint uiVarHandle, AdsClient adsClient)
+        {
+            byte[] readBuffer = new byte[5 * sizeof(double)];
+            double[] opValues = new double[5];
+
+            adsClient.Read(uiVarHandle, readBuffer.AsMemory());
+
+            MemoryStream dataStream = new MemoryStream(readBuffer);
+            BinaryReader binRead = new BinaryReader(dataStream);
+
+            dataStream.Position = 0;
+            for (int _i = 0; _i < opValues.Length; _i++) { opValues[_i] = binRead.ReadDouble(); }
+
+            return opValues;
+        }
+
+        private int[] readIntOpValues(uint uiVarHandle, AdsClient adsClient)
+        {
+            byte[] readBuffer = new byte[5 * 2];
+            int[] opValues = new int[5];
+
+            adsClient.Read(uiVarHandle, readBuffer.AsMemory());
+
+            MemoryStream dataStream = new MemoryStream(readBuffer);
+            BinaryReader binRead = new BinaryReader(dataStream);
+
+            dataStream.Position = 0;
+            for (int _i = 0; _i < opValues.Length; _i++) { opValues[_i] = binRead.ReadInt16(); }
+
+            return opValues;
+        }
+
+        private uint[] readErrorId(uint uiVarHandle,AdsClient adsClient)
+        {
+            byte[] readBuffer = new byte[16*4];
+            uint[] errorId = new uint[16];
+
+            adsClient.Read(uiVarHandle, readBuffer.AsMemory());
+
+            MemoryStream dataStream = new MemoryStream(readBuffer);
+            BinaryReader binRead = new BinaryReader(dataStream);
+
+            dataStream.Position = 0;
+            for (int _i = 0; _i < errorId.Length ; _i++) { errorId[_i] = binRead.ReadUInt32();}
+
+            return errorId;
+        }
+        private bool[] readErrorBit(uint uiVarHandle, AdsClient adsClient)
+        {
+            byte[] buffer = new byte[16];
+            bool[] errorArray = new bool[16];
+            adsClient.Read(uiVarHandle, buffer.AsMemory());
+            for (int _i = 0; _i < buffer.Length; _i++)
+            {
+                if ((byte)buffer.GetValue(_i) == 0) { errorArray[_i] = false; }
+                else { errorArray[_i] = true; }
+            }
+            return errorArray;
+        }
+
+        private enumErrorName readErrorName(uint uiVarHandle, AdsClient adsClient)
+        {
+            enumErrorName errorName;
+            int tempInt;
+
+            tempInt = (int)adsClient.ReadAny(uiVarHandle, typeof(int));
+
+            switch (tempInt)
+            {
+                case 0:
+                    errorName = enumErrorName.eResetMasterEncoder;
+                    return errorName;
+                case 1:
+                    errorName = enumErrorName.eZeroMasterEncoder;
+                    return errorName;
+                case 2:
+                    errorName = enumErrorName.eFbAxisManager;
+                    return errorName;
+                case 3:
+                    errorName = enumErrorName.eResetAxis;
+                    return errorName;
+                case 4:
+                    errorName = enumErrorName.aAxisHoming;
+                    return errorName;
+                case 5:
+                    errorName = enumErrorName.eGearIn;
+                    return errorName;
+                case 6:
+                    errorName = enumErrorName.eGearOut;
+                    return errorName;
+                case 7:
+                    errorName = enumErrorName.ePhasing;
+                    return errorName;
+                case 8:
+                    errorName = enumErrorName.ePower;
+                    return errorName;
+                case 9:
+                    errorName = enumErrorName.eJog;
+                    return errorName;
+                case 10:
+                    errorName = enumErrorName.eMoveVel;
+                    return errorName;
+                case 11:
+                    errorName = enumErrorName.eSetPos;
+                    return errorName;
+                default:
+                    errorName = enumErrorName.eZeroMasterEncoder;
+                    return errorName;
+            }
+        }
+
+        private eTypeOfEvent readTypeOfEvent(uint uiVarHandle, AdsClient adsClient)
+        {
+            eTypeOfEvent typeOfEvent;
+            int tempInt;
+
+            tempInt = (int)adsClient.ReadAny(uiVarHandle, typeof(int));
+
+            switch (tempInt)
+            {
+                case 0:
+                    typeOfEvent = eTypeOfEvent.Info;
+                    return typeOfEvent;
+                case 1:
+                    typeOfEvent = eTypeOfEvent.Message;
+                    return typeOfEvent;
+                case 2:
+                    typeOfEvent = eTypeOfEvent.Warning;
+                    return typeOfEvent;
+                case 3:
+                    typeOfEvent = eTypeOfEvent.Error;
+                    return typeOfEvent;
+                default:
+                    return eTypeOfEvent.Error;
+            }
+        }
+
+        public string readString(uint uiVarHandle, AdsClient adsClient)
+        {
+            byte[] buffer = new byte[81];
+            string stringa;
+            adsClient.Read(uiVarHandle, buffer.AsMemory());
+            stringa = (Encoding.ASCII.GetString(buffer, 0, buffer.Length)).Replace("\0", string.Empty);
+            return stringa;
+        }
+
         #endregion
 
         #region Write methods
