@@ -20,11 +20,11 @@ namespace MmmConfig
     public partial class Form1 : Form
     {
         #region Variable declarations
-        public CPU_Connection CpuConnection;
+        public static CPU_Connection CpuConnection;
         public Motor[] motor;
         private int iWdCheck = 0;
         const string c_strMotionEventLogPath = "GVL_Hmi.stMotionEventLogger";
-        public EventLogger motionEventLogger;
+        public static EventLogger motionEventLogger;
         #endregion
 
         #region Form related function
@@ -234,11 +234,15 @@ namespace MmmConfig
 
         private void button1_Click(object sender, EventArgs e)
         {
-            btnUpdateMotionLog.BackColor = Color.LightPink;
+            Forms.EventReader EventReaderForm = new Forms.EventReader();
+            //btnOpenLog.BackColor = Color.LightPink;
+            Cursor.Current = Cursors.WaitCursor;
             motionEventLogger.iFreePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iFreepos", CpuConnection.tcClient);
             motionEventLogger.iLastWritePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
-            for (int _i = 0; _i <= motionEventLogger.iLastWritePos; _i++) { CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]); }
-            btnUpdateMotionLog.BackColor = Color.LightGreen;
+            //for (int _i = 0; _i <= motionEventLogger.iLastWritePos; _i++) { CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]); }
+            //btnOpenLog.BackColor = Color.LightGreen;
+            Cursor.Current = Cursors.Default;
+            EventReaderForm.Show();
         }
         #endregion
 

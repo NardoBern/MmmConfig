@@ -193,7 +193,7 @@
             this.txtMaxSpeedM4 = new System.Windows.Forms.TextBox();
             this.lblMaxSpeedM4 = new System.Windows.Forms.Label();
             this.lblFixedSpeedM4 = new System.Windows.Forms.Label();
-            this.btnUpdateMotionLog = new System.Windows.Forms.Button();
+            this.btnOpenLog = new System.Windows.Forms.Button();
             this.grpBoxMot1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot1)).BeginInit();
             this.grpBoxMot2.SuspendLayout();
@@ -2148,22 +2148,22 @@
             this.lblFixedSpeedM4.Text = "Fix Speed:";
             this.lblFixedSpeedM4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnUpdateMotionLog
+            // btnOpenLog
             // 
-            this.btnUpdateMotionLog.Location = new System.Drawing.Point(552, 46);
-            this.btnUpdateMotionLog.Name = "btnUpdateMotionLog";
-            this.btnUpdateMotionLog.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdateMotionLog.TabIndex = 11;
-            this.btnUpdateMotionLog.Text = "Refresh Log";
-            this.btnUpdateMotionLog.UseVisualStyleBackColor = true;
-            this.btnUpdateMotionLog.Click += new System.EventHandler(this.button1_Click);
+            this.btnOpenLog.Location = new System.Drawing.Point(552, 46);
+            this.btnOpenLog.Name = "btnOpenLog";
+            this.btnOpenLog.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenLog.TabIndex = 11;
+            this.btnOpenLog.Text = "Open Log";
+            this.btnOpenLog.UseVisualStyleBackColor = true;
+            this.btnOpenLog.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 879);
-            this.Controls.Add(this.btnUpdateMotionLog);
+            this.Controls.Add(this.btnOpenLog);
             this.Controls.Add(this.grpBoxMot4);
             this.Controls.Add(this.grpBoxMot3);
             this.Controls.Add(this.grpBoxMot2);
@@ -2361,7 +2361,7 @@
         private System.Windows.Forms.Label lblGearOutMot4;
         private System.Windows.Forms.Label lblGearInMot4;
         private System.Windows.Forms.Label lblSyncMasterMot4;
-        private System.Windows.Forms.Button btnUpdateMotionLog;
+        private System.Windows.Forms.Button btnOpenLog;
     }
 }
 
