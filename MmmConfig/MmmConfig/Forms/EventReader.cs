@@ -96,7 +96,7 @@ namespace MmmConfig.Forms
 
         private void populateEventBoard(Event @event)
         {
-            const string c_strEventId         = "Event ID: ";
+            const string c_strEventId       = "Event ID: ";
             const string c_strTimeStamp     = "Timestamp: ";
             const string c_strTypeOfEvent   = "Type of Event: ";
             const string c_strDeviceName    = "Device name: ";
@@ -184,19 +184,136 @@ namespace MmmConfig.Forms
             lblReal3.Text = @event.operationLog.arOpValue[2].ToString();
             lblReal4.Text = @event.operationLog.arOpValue[3].ToString();
 
-            if (@event.error.axErrBit[0]) { lblErrBit0.BackColor = Color.LightPink; } else { lblErrBit0.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[1]) { lblErrBit1.BackColor = Color.LightPink; } else { lblErrBit1.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[2]) { lblErrBit2.BackColor = Color.LightPink; } else { lblErrBit2.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[3]) { lblErrBit3.BackColor = Color.LightPink; } else { lblErrBit3.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[4]) { lblErrBit4.BackColor = Color.LightPink; } else { lblErrBit4.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[5]) { lblErrBit5.BackColor = Color.LightPink; } else { lblErrBit5.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[6]) { lblErrBit6.BackColor = Color.LightPink; } else { lblErrBit6.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[7]) { lblErrBit7.BackColor = Color.LightPink; } else { lblErrBit7.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[8]) { lblErrBit8.BackColor = Color.LightPink; } else { lblErrBit8.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[9]) { lblErrBit9.BackColor = Color.LightPink; } else { lblErrBit9.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[10]) { lblErrBit10.BackColor = Color.LightPink; } else { lblErrBit10.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[11]) { lblErrBit11.BackColor = Color.LightPink; } else { lblErrBit11.BackColor = Color.LightGray; }
-            if (@event.error.axErrBit[12]) { lblErrBit12.BackColor = Color.LightPink; } else { lblErrBit12.BackColor = Color.LightGray; }
+            if (@event.error.axErrBit[0]) { 
+                lblErrBit0.BackColor = Color.LightPink; 
+                lblErrUdi0.BackColor = Color.LightPink;
+                lblResetMasterEnc.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit0.BackColor = Color.LightGray;
+                lblErrUdi0.BackColor = Color.LightGray;
+                lblResetMasterEnc.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[1]) { 
+                lblErrBit1.BackColor = Color.LightPink;
+                lblErrUdi1.BackColor = Color.LightPink;
+                lblZeroMasterEncoder.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit1.BackColor = Color.LightGray;
+                lblErrUdi1.BackColor = Color.LightGray;
+                lblZeroMasterEncoder.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[2]) { 
+                lblErrBit2.BackColor = Color.LightPink;
+                lblErrUdi2.BackColor = Color.LightPink;
+                lblSlaveAxis.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit2.BackColor = Color.LightGray;
+                lblErrUdi2.BackColor = Color.LightGray;
+                lblSlaveAxis.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[3]) { 
+                lblErrBit3.BackColor = Color.LightPink;
+                lblErrUdi3.BackColor = Color.LightPink;
+                lblResetSlaveAxis.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit3.BackColor = Color.LightGray;
+                lblErrUdi3.BackColor = Color.LightGray;
+                lblResetSlaveAxis.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[4]) { 
+                lblErrBit4.BackColor = Color.LightPink;
+                lblErrUdi4.BackColor = Color.LightPink;
+                lblMoveModulo.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit4.BackColor = Color.LightGray;
+                lblErrUdi4.BackColor = Color.LightGray;
+                lblMoveModulo.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[5]) { 
+                lblErrBit5.BackColor = Color.LightPink;
+                lblErrUdi5.BackColor = Color.LightPink;
+                lblGearIn.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit5.BackColor = Color.LightGray;
+                lblErrUdi5.BackColor = Color.LightGray;
+                lblGearIn.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[6]) { 
+                lblErrBit6.BackColor = Color.LightPink;
+                lblErrUdi6.BackColor = Color.LightPink;
+                lblGearOut.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit6.BackColor = Color.LightGray;
+                lblErrUdi6.BackColor = Color.LightGray;
+                lblGearOut.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[7]) { 
+                lblErrBit7.BackColor = Color.LightPink;
+                lblErrUdi7.BackColor = Color.LightPink;
+                lblPhasingRelative.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit7.BackColor = Color.LightGray;
+                lblErrUdi7.BackColor = Color.LightGray;
+                lblPhasingRelative.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[8]) { 
+                lblErrBit8.BackColor = Color.LightPink;
+                lblErrUdi8.BackColor = Color.LightPink;
+                lblPower.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit8.BackColor = Color.LightGray;
+                lblErrUdi8.BackColor = Color.LightGray;
+                lblPower.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[9]) { 
+                lblErrBit9.BackColor = Color.LightPink;
+                lblErrUdi9.BackColor = Color.LightPink;
+                lblJog.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit9.BackColor = Color.LightGray;
+                lblErrUdi9.BackColor = Color.LightGray;
+                lblJog.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[10]) { 
+                lblErrBit10.BackColor = Color.LightPink;
+                lblErrUdi10.BackColor = Color.LightPink;
+                lblMoveVel.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit10.BackColor = Color.LightGray;
+                lblErrUdi10.BackColor = Color.LightGray;
+                lblMoveVel.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[11]) { 
+                lblErrBit11.BackColor = Color.LightPink;
+                lblErrUdi11.BackColor = Color.LightPink;
+                lblSetPos.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit11.BackColor = Color.LightGray;
+                lblErrUdi11.BackColor = Color.LightGray;
+                lblSetPos.BackColor = Color.LightGray;
+            }
+            if (@event.error.axErrBit[12]) { 
+                lblErrBit12.BackColor = Color.LightPink;
+                lblErrUdi12.BackColor = Color.LightPink;
+                lblStop.BackColor = Color.LightPink;
+            } 
+            else { 
+                lblErrBit12.BackColor = Color.LightGray;
+                lblErrUdi12.BackColor = Color.LightGray;
+                lblStop.BackColor = Color.LightGray;
+            }
             if (@event.error.axErrBit[13]) { lblErrBit13.BackColor = Color.LightPink; } else { lblErrBit13.BackColor = Color.LightGray; }
             if (@event.error.axErrBit[14]) { lblErrBit14.BackColor = Color.LightPink; } else { lblErrBit14.BackColor = Color.LightGray; }
             if (@event.error.axErrBit[15]) { lblErrBit15.BackColor = Color.LightPink; } else { lblErrBit15.BackColor = Color.LightGray; }
@@ -226,36 +343,36 @@ namespace MmmConfig.Forms
             switch (typeOfEvent)
             {
                 case eTypeOfEvent.Info:
-                    lblId.BackColor = Color.LightBlue;
-                    lblTimeStamp.BackColor = Color.LightBlue;
-                    lblTypeOfEvent.BackColor = Color.LightBlue;
-                    lblDeviceName.BackColor = Color.LightBlue;
-                    lblMessage.BackColor = Color.LightBlue;
-                    lblAlert.BackColor = Color.LightBlue;
+                    lblId.BackColor             = Color.LightBlue;
+                    lblTimeStamp.BackColor      = Color.LightBlue;
+                    lblTypeOfEvent.BackColor    = Color.LightBlue;
+                    lblDeviceName.BackColor     = Color.LightBlue;
+                    lblMessage.BackColor        = Color.LightBlue;
+                    lblAlert.BackColor          = Color.LightBlue;
                     break;
                 case eTypeOfEvent.Message:
-                    lblId.BackColor = Color.LightGreen;
-                    lblTimeStamp.BackColor = Color.LightGreen;
-                    lblTypeOfEvent.BackColor = Color.LightGreen;
-                    lblDeviceName.BackColor = Color.LightGreen;
-                    lblMessage.BackColor = Color.LightGreen;
-                    lblAlert.BackColor = Color.LightGreen;
+                    lblId.BackColor             = Color.LightGreen;
+                    lblTimeStamp.BackColor      = Color.LightGreen;
+                    lblTypeOfEvent.BackColor    = Color.LightGreen;
+                    lblDeviceName.BackColor     = Color.LightGreen;
+                    lblMessage.BackColor        = Color.LightGreen;
+                    lblAlert.BackColor          = Color.LightGreen;
                     break;
                 case eTypeOfEvent.Warning:
-                    lblId.BackColor = Color.LightYellow;
-                    lblTimeStamp.BackColor = Color.LightYellow;
-                    lblTypeOfEvent.BackColor = Color.LightYellow;
-                    lblDeviceName.BackColor = Color.LightYellow;
-                    lblMessage.BackColor = Color.LightYellow;
-                    lblAlert.BackColor = Color.LightYellow;
+                    lblId.BackColor             = Color.LightYellow;
+                    lblTimeStamp.BackColor      = Color.LightYellow;
+                    lblTypeOfEvent.BackColor    = Color.LightYellow;
+                    lblDeviceName.BackColor     = Color.LightYellow;
+                    lblMessage.BackColor        = Color.LightYellow;
+                    lblAlert.BackColor          = Color.LightYellow;
                     break;
                 case eTypeOfEvent.Error:
-                    lblId.BackColor = Color.LightPink;
-                    lblTimeStamp.BackColor = Color.LightPink;
-                    lblTypeOfEvent.BackColor = Color.LightPink;
-                    lblDeviceName.BackColor = Color.LightPink;
-                    lblMessage.BackColor = Color.LightPink;
-                    lblAlert.BackColor = Color.LightPink;
+                    lblId.BackColor             = Color.LightPink;
+                    lblTimeStamp.BackColor      = Color.LightPink;
+                    lblTypeOfEvent.BackColor    = Color.LightPink;
+                    lblDeviceName.BackColor     = Color.LightPink;
+                    lblMessage.BackColor        = Color.LightPink;
+                    lblAlert.BackColor          = Color.LightPink;
                     break;
             }
         }

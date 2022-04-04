@@ -90,6 +90,22 @@ namespace MmmConfig.Forms
             this.lblReal3 = new System.Windows.Forms.Label();
             this.lblReal2 = new System.Windows.Forms.Label();
             this.lblReal1 = new System.Windows.Forms.Label();
+            this.lblResetMasterEnc = new System.Windows.Forms.Label();
+            this.lblZeroMasterEncoder = new System.Windows.Forms.Label();
+            this.lblSlaveAxis = new System.Windows.Forms.Label();
+            this.lblResetSlaveAxis = new System.Windows.Forms.Label();
+            this.lblMoveModulo = new System.Windows.Forms.Label();
+            this.lblGearIn = new System.Windows.Forms.Label();
+            this.lblGearOut = new System.Windows.Forms.Label();
+            this.lblPhasingRelative = new System.Windows.Forms.Label();
+            this.lblPower = new System.Windows.Forms.Label();
+            this.lblJog = new System.Windows.Forms.Label();
+            this.lblMoveVel = new System.Windows.Forms.Label();
+            this.lblSetPos = new System.Windows.Forms.Label();
+            this.lblStop = new System.Windows.Forms.Label();
+            this.lblFree1 = new System.Windows.Forms.Label();
+            this.lblFree2 = new System.Windows.Forms.Label();
+            this.lblFree3 = new System.Windows.Forms.Label();
             this.grpGenInfo.SuspendLayout();
             this.grpError.SuspendLayout();
             this.grpOpDescr.SuspendLayout();
@@ -643,6 +659,22 @@ namespace MmmConfig.Forms
             // grpError
             // 
             this.grpError.BackColor = System.Drawing.SystemColors.Control;
+            this.grpError.Controls.Add(this.lblFree3);
+            this.grpError.Controls.Add(this.lblFree2);
+            this.grpError.Controls.Add(this.lblFree1);
+            this.grpError.Controls.Add(this.lblStop);
+            this.grpError.Controls.Add(this.lblSetPos);
+            this.grpError.Controls.Add(this.lblMoveVel);
+            this.grpError.Controls.Add(this.lblJog);
+            this.grpError.Controls.Add(this.lblPower);
+            this.grpError.Controls.Add(this.lblPhasingRelative);
+            this.grpError.Controls.Add(this.lblGearOut);
+            this.grpError.Controls.Add(this.lblGearIn);
+            this.grpError.Controls.Add(this.lblMoveModulo);
+            this.grpError.Controls.Add(this.lblResetSlaveAxis);
+            this.grpError.Controls.Add(this.lblSlaveAxis);
+            this.grpError.Controls.Add(this.lblZeroMasterEncoder);
+            this.grpError.Controls.Add(this.lblResetMasterEnc);
             this.grpError.Controls.Add(this.lblError);
             this.grpError.Controls.Add(this.lblErrorDescr);
             this.grpError.Controls.Add(this.lblErrUdi15);
@@ -861,6 +893,182 @@ namespace MmmConfig.Forms
             this.lblReal1.Text = "00000";
             this.lblReal1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblResetMasterEnc
+            // 
+            this.lblResetMasterEnc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblResetMasterEnc.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblResetMasterEnc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResetMasterEnc.Location = new System.Drawing.Point(96, 86);
+            this.lblResetMasterEnc.Name = "lblResetMasterEnc";
+            this.lblResetMasterEnc.Size = new System.Drawing.Size(250, 23);
+            this.lblResetMasterEnc.TabIndex = 11;
+            this.lblResetMasterEnc.Text = "Reset master encoder";
+            // 
+            // lblZeroMasterEncoder
+            // 
+            this.lblZeroMasterEncoder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblZeroMasterEncoder.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblZeroMasterEncoder.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblZeroMasterEncoder.Location = new System.Drawing.Point(96, 109);
+            this.lblZeroMasterEncoder.Name = "lblZeroMasterEncoder";
+            this.lblZeroMasterEncoder.Size = new System.Drawing.Size(250, 23);
+            this.lblZeroMasterEncoder.TabIndex = 45;
+            this.lblZeroMasterEncoder.Text = "Zero master encoder";
+            // 
+            // lblSlaveAxis
+            // 
+            this.lblSlaveAxis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblSlaveAxis.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSlaveAxis.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSlaveAxis.Location = new System.Drawing.Point(96, 132);
+            this.lblSlaveAxis.Name = "lblSlaveAxis";
+            this.lblSlaveAxis.Size = new System.Drawing.Size(250, 23);
+            this.lblSlaveAxis.TabIndex = 46;
+            this.lblSlaveAxis.Text = "Slave axis";
+            // 
+            // lblResetSlaveAxis
+            // 
+            this.lblResetSlaveAxis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblResetSlaveAxis.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblResetSlaveAxis.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResetSlaveAxis.Location = new System.Drawing.Point(96, 155);
+            this.lblResetSlaveAxis.Name = "lblResetSlaveAxis";
+            this.lblResetSlaveAxis.Size = new System.Drawing.Size(250, 23);
+            this.lblResetSlaveAxis.TabIndex = 47;
+            this.lblResetSlaveAxis.Text = "Reset slave axis";
+            // 
+            // lblMoveModulo
+            // 
+            this.lblMoveModulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblMoveModulo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMoveModulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoveModulo.Location = new System.Drawing.Point(96, 178);
+            this.lblMoveModulo.Name = "lblMoveModulo";
+            this.lblMoveModulo.Size = new System.Drawing.Size(250, 23);
+            this.lblMoveModulo.TabIndex = 48;
+            this.lblMoveModulo.Text = "Move modulo function block";
+            // 
+            // lblGearIn
+            // 
+            this.lblGearIn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblGearIn.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblGearIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGearIn.Location = new System.Drawing.Point(96, 201);
+            this.lblGearIn.Name = "lblGearIn";
+            this.lblGearIn.Size = new System.Drawing.Size(250, 23);
+            this.lblGearIn.TabIndex = 49;
+            this.lblGearIn.Text = "Gear in function block";
+            // 
+            // lblGearOut
+            // 
+            this.lblGearOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblGearOut.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblGearOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGearOut.Location = new System.Drawing.Point(96, 224);
+            this.lblGearOut.Name = "lblGearOut";
+            this.lblGearOut.Size = new System.Drawing.Size(250, 23);
+            this.lblGearOut.TabIndex = 50;
+            this.lblGearOut.Text = "Gear out function block";
+            // 
+            // lblPhasingRelative
+            // 
+            this.lblPhasingRelative.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblPhasingRelative.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPhasingRelative.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPhasingRelative.Location = new System.Drawing.Point(96, 247);
+            this.lblPhasingRelative.Name = "lblPhasingRelative";
+            this.lblPhasingRelative.Size = new System.Drawing.Size(250, 23);
+            this.lblPhasingRelative.TabIndex = 51;
+            this.lblPhasingRelative.Text = "Phasing relative function block";
+            // 
+            // lblPower
+            // 
+            this.lblPower.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblPower.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPower.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPower.Location = new System.Drawing.Point(96, 270);
+            this.lblPower.Name = "lblPower";
+            this.lblPower.Size = new System.Drawing.Size(250, 23);
+            this.lblPower.TabIndex = 52;
+            this.lblPower.Text = "Power function block";
+            // 
+            // lblJog
+            // 
+            this.lblJog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblJog.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblJog.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblJog.Location = new System.Drawing.Point(96, 293);
+            this.lblJog.Name = "lblJog";
+            this.lblJog.Size = new System.Drawing.Size(250, 23);
+            this.lblJog.TabIndex = 53;
+            this.lblJog.Text = "Jog function block";
+            // 
+            // lblMoveVel
+            // 
+            this.lblMoveVel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblMoveVel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblMoveVel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMoveVel.Location = new System.Drawing.Point(96, 316);
+            this.lblMoveVel.Name = "lblMoveVel";
+            this.lblMoveVel.Size = new System.Drawing.Size(250, 23);
+            this.lblMoveVel.TabIndex = 54;
+            this.lblMoveVel.Text = "Move velocity function block";
+            // 
+            // lblSetPos
+            // 
+            this.lblSetPos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblSetPos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSetPos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSetPos.Location = new System.Drawing.Point(96, 339);
+            this.lblSetPos.Name = "lblSetPos";
+            this.lblSetPos.Size = new System.Drawing.Size(250, 23);
+            this.lblSetPos.TabIndex = 55;
+            this.lblSetPos.Text = "Set Position function block";
+            // 
+            // lblStop
+            // 
+            this.lblStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblStop.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStop.Location = new System.Drawing.Point(96, 362);
+            this.lblStop.Name = "lblStop";
+            this.lblStop.Size = new System.Drawing.Size(250, 23);
+            this.lblStop.TabIndex = 56;
+            this.lblStop.Text = "Stop function block";
+            // 
+            // lblFree1
+            // 
+            this.lblFree1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblFree1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFree1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFree1.Location = new System.Drawing.Point(96, 385);
+            this.lblFree1.Name = "lblFree1";
+            this.lblFree1.Size = new System.Drawing.Size(250, 23);
+            this.lblFree1.TabIndex = 57;
+            this.lblFree1.Text = "Free of use";
+            // 
+            // lblFree2
+            // 
+            this.lblFree2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblFree2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFree2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFree2.Location = new System.Drawing.Point(96, 408);
+            this.lblFree2.Name = "lblFree2";
+            this.lblFree2.Size = new System.Drawing.Size(250, 23);
+            this.lblFree2.TabIndex = 58;
+            this.lblFree2.Text = "Free of use";
+            // 
+            // lblFree3
+            // 
+            this.lblFree3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.lblFree3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFree3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFree3.Location = new System.Drawing.Point(96, 431);
+            this.lblFree3.Name = "lblFree3";
+            this.lblFree3.Size = new System.Drawing.Size(250, 23);
+            this.lblFree3.TabIndex = 59;
+            this.lblFree3.Text = "Free of use";
+            // 
             // EventReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -948,5 +1156,21 @@ namespace MmmConfig.Forms
         private System.Windows.Forms.Label lblIntVal3;
         private System.Windows.Forms.Label lblIntVal2;
         private System.Windows.Forms.Label lblIntVal1;
+        private System.Windows.Forms.Label lblFree3;
+        private System.Windows.Forms.Label lblFree2;
+        private System.Windows.Forms.Label lblFree1;
+        private System.Windows.Forms.Label lblStop;
+        private System.Windows.Forms.Label lblSetPos;
+        private System.Windows.Forms.Label lblMoveVel;
+        private System.Windows.Forms.Label lblJog;
+        private System.Windows.Forms.Label lblPower;
+        private System.Windows.Forms.Label lblPhasingRelative;
+        private System.Windows.Forms.Label lblGearOut;
+        private System.Windows.Forms.Label lblGearIn;
+        private System.Windows.Forms.Label lblMoveModulo;
+        private System.Windows.Forms.Label lblResetSlaveAxis;
+        private System.Windows.Forms.Label lblSlaveAxis;
+        private System.Windows.Forms.Label lblZeroMasterEncoder;
+        private System.Windows.Forms.Label lblResetMasterEnc;
     }
 }
