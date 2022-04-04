@@ -36,7 +36,6 @@
             this.lblPort = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.tWdTimer = new System.Windows.Forms.Timer(this.components);
-            this.lblTest = new System.Windows.Forms.Label();
             this.btnEnableMot1 = new System.Windows.Forms.Button();
             this.grpBoxMot1 = new System.Windows.Forms.GroupBox();
             this.lblPercM1 = new System.Windows.Forms.Label();
@@ -194,6 +193,7 @@
             this.lblMaxSpeedM4 = new System.Windows.Forms.Label();
             this.lblFixedSpeedM4 = new System.Windows.Forms.Label();
             this.btnOpenLog = new System.Windows.Forms.Button();
+            this.prgConnWd = new System.Windows.Forms.ProgressBar();
             this.grpBoxMot1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot1)).BeginInit();
             this.grpBoxMot2.SuspendLayout();
@@ -261,15 +261,6 @@
             // 
             this.tWdTimer.Interval = 500;
             this.tWdTimer.Tick += new System.EventHandler(this.tWdTimer_Tick);
-            // 
-            // lblTest
-            // 
-            this.lblTest.AutoSize = true;
-            this.lblTest.Location = new System.Drawing.Point(420, 27);
-            this.lblTest.Name = "lblTest";
-            this.lblTest.Size = new System.Drawing.Size(26, 13);
-            this.lblTest.TabIndex = 6;
-            this.lblTest.Text = "Port";
             // 
             // btnEnableMot1
             // 
@@ -2158,17 +2149,25 @@
             this.btnOpenLog.UseVisualStyleBackColor = true;
             this.btnOpenLog.Click += new System.EventHandler(this.button1_Click);
             // 
+            // prgConnWd
+            // 
+            this.prgConnWd.Location = new System.Drawing.Point(15, 70);
+            this.prgConnWd.Name = "prgConnWd";
+            this.prgConnWd.Size = new System.Drawing.Size(73, 15);
+            this.prgConnWd.Step = 1;
+            this.prgConnWd.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 879);
+            this.Controls.Add(this.prgConnWd);
             this.Controls.Add(this.btnOpenLog);
             this.Controls.Add(this.grpBoxMot4);
             this.Controls.Add(this.grpBoxMot3);
             this.Controls.Add(this.grpBoxMot2);
             this.Controls.Add(this.grpBoxMot1);
-            this.Controls.Add(this.lblTest);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.lblPort);
             this.Controls.Add(this.lblNetId);
@@ -2204,7 +2203,6 @@
         private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Timer tWdTimer;
-        private System.Windows.Forms.Label lblTest;
         private System.Windows.Forms.Button btnEnableMot1;
         private System.Windows.Forms.GroupBox grpBoxMot1;
         private System.Windows.Forms.GroupBox grpBoxMot2;
@@ -2362,6 +2360,7 @@
         private System.Windows.Forms.Label lblGearInMot4;
         private System.Windows.Forms.Label lblSyncMasterMot4;
         private System.Windows.Forms.Button btnOpenLog;
+        private System.Windows.Forms.ProgressBar prgConnWd;
     }
 }
 

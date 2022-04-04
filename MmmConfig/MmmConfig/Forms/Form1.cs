@@ -170,7 +170,8 @@ namespace MmmConfig
         private void tWdTimer_Tick(object sender, EventArgs e)
         {
             int iWatchDog = CpuConnection.readInt("LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
-            lblTest.Text = iWatchDog.ToString();
+            //lblTest.Text = iWatchDog.ToString();
+            prgConnWd.Value = iWatchDog;
             CpuConnection.writeInt("LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
             CpuConnection.iWatchDog = iWatchDog;
             iWdCheck = iWdCheck + 1;
@@ -374,6 +375,7 @@ namespace MmmConfig
             lblConnStatus.Text = "No connection";
             btnConnect.Text = "Connect";
             tWdTimer.Enabled = false;
+            
             //tUpdateData.Enabled = false;
         }
 
