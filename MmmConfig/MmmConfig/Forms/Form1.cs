@@ -44,8 +44,8 @@ namespace MmmConfig
             motor[2] = new Motor();
             motor[3] = new Motor();
             motionEventLogger = new EventLogger();
-            motionEventLogger.events = new Event[999];
-            for (int _i = 0; _i < 999; _i++) { 
+            motionEventLogger.events = new Event[1000];
+            for (int _i = 0; _i < 1000; _i++) { 
                 motionEventLogger.events[_i] = new Event();
                 motionEventLogger.events[_i].error = new Error();
                 motionEventLogger.events[_i].operationLog = new OperationLog();
@@ -245,6 +245,15 @@ namespace MmmConfig
             Cursor.Current = Cursors.Default;
             EventReaderForm.Show();
         }
+        private void btnOpenLogReader_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            //Forms.LogReader LogReaderForm = new Forms.LogReader();
+            //LogReaderForm.Show();
+            Forms.GettingInfo gettingInfo = new Forms.GettingInfo();
+            gettingInfo.Show();
+        }
+
         #endregion
 
         #region Numeric selectors
@@ -453,6 +462,7 @@ namespace MmmConfig
                 Console.WriteLine("Added status notification to event logger");
             }
         }
+
 
         #endregion
 

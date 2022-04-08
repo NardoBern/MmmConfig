@@ -11,7 +11,7 @@ namespace MmmConfig
         public int iFreePos;
         public int iLastWritePos;
         public Event[] events;
-        const int iEventSize = 999;
+        public const int iEventSize = 1000;
         public bool xEventEnabled;
         public uint uiVarHandle;
 

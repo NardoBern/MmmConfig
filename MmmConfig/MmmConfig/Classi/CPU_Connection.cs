@@ -95,6 +95,7 @@ namespace MmmConfig
         #endregion
 
         #region Read methods
+
         /* Read integer value */
         public int readInt(string strVarName, AdsClient adsClient)
         {
@@ -204,15 +205,15 @@ namespace MmmConfig
         {
             byte[] readBuffer = new byte[5 * sizeof(double)];
             double[] opValues = new double[5];
-
+            
             adsClient.Read(uiVarHandle, readBuffer.AsMemory());
 
             MemoryStream dataStream = new MemoryStream(readBuffer);
             BinaryReader binRead = new BinaryReader(dataStream);
 
             dataStream.Position = 0;
-            for (int _i = 0; _i < opValues.Length; _i++) { opValues[_i] = binRead.ReadDouble(); }
-
+            for (int _i = 0; _i < opValues.Length; _i++) { opValues[_i] = binRead.ReadSingle();}
+            
             return opValues;
         }
 

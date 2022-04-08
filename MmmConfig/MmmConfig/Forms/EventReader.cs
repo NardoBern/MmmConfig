@@ -44,7 +44,7 @@ namespace MmmConfig.Forms
         private void btnLast_Click(object sender, EventArgs e)
         {
             Form1.motionEventLogger.iLastWritePos = Form1.CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", Form1.CpuConnection.tcClient);
-            iEventIndex = Form1.motionEventLogger.iLastWritePos;
+            iEventIndex = Form1.CpuConnection.readInt("LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient);
             checkIndexBound(iEventIndex);
             readEvent(iEventIndex);
             updateLblEventNumber(iEventIndex);
@@ -54,7 +54,7 @@ namespace MmmConfig.Forms
         {
             Form1.motionEventLogger.iLastWritePos = Form1.CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", Form1.CpuConnection.tcClient);
             iEventIndex--;
-            checkIndexBound(iEventIndex);
+            iEventIndex = checkIndexBound(iEventIndex);
             readEvent(iEventIndex);
             updateLblEventNumber(iEventIndex);
             populateEventBoard(Form1.motionEventLogger.events[iEventIndex]);
@@ -63,28 +63,29 @@ namespace MmmConfig.Forms
         {
             Form1.motionEventLogger.iLastWritePos = Form1.CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", Form1.CpuConnection.tcClient);
             iEventIndex++;
-            checkIndexBound(iEventIndex);
+            iEventIndex = checkIndexBound(iEventIndex);
             readEvent(iEventIndex);
             updateLblEventNumber(iEventIndex);
             populateEventBoard(Form1.motionEventLogger.events[iEventIndex]);
         }
-        private void updateLblEventNumber(int iEventIndex) { lblEventNumber.Text = "Event N°: " + iEventIndex.ToString() + " of " + Form1.motionEventLogger.iLastWritePos.ToString(); }
+        private void updateLblEventNumber(int iEventIndex) { lblEventNumber.Text = "Event N°: " + iEventIndex.ToString() + " of " + Form1.CpuConnection.readInt("LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient).ToString(); }
         #endregion
 
         #region Operative Function
-        private void checkIndexBound(int index)
+        private int checkIndexBound(int index)
         {
-            if (index <= 1) { 
-                btnPrev.Enabled = false;
-                index = 1;
+            if (index < 1)
+            {
+                return Form1.CpuConnection.readInt("LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient);
             }
-            else { btnPrev.Enabled = true; }
-
-            if (index >= Form1.motionEventLogger.iLastWritePos) { 
-                btnNext.Enabled = false;
-                index = Form1.motionEventLogger.iLastWritePos;
+            else
+            {
+                if (index > Form1.CpuConnection.readInt("LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient))
+                {
+                    return 1;
+                }
             }
-            else { btnNext.Enabled = true; }
+            return index;
         }
 
         private void readEvent(int iEventIndex)
@@ -175,14 +176,18 @@ namespace MmmConfig.Forms
             lblOpStr2.Text = c_strValue;
             lblOpStr3.Text = c_strValue;
             lblOpStr4.Text = c_strValue;
+            lblOpStr1.Text = @event.operationLog.astrOpValue[0];
+            lblOpStr2.Text = @event.operationLog.astrOpValue[1];
+            lblOpStr3.Text = @event.operationLog.astrOpValue[2];
+            lblOpStr4.Text = @event.operationLog.astrOpValue[3];
             lblIntVal1.Text = @event.operationLog.aiOpValue[0].ToString();
             lblIntVal2.Text = @event.operationLog.aiOpValue[1].ToString();
             lblIntVal3.Text = @event.operationLog.aiOpValue[2].ToString();
             lblIntVal4.Text = @event.operationLog.aiOpValue[3].ToString();
-            lblReal1.Text = @event.operationLog.arOpValue[0].ToString();
-            lblReal2.Text = @event.operationLog.arOpValue[1].ToString();
-            lblReal3.Text = @event.operationLog.arOpValue[2].ToString();
-            lblReal4.Text = @event.operationLog.arOpValue[3].ToString();
+            lblReal1.Text = @event.operationLog.arOpValue[0].ToString("F0");
+            lblReal2.Text = @event.operationLog.arOpValue[1].ToString("F0");
+            lblReal3.Text = @event.operationLog.arOpValue[2].ToString("F0");
+            lblReal4.Text = @event.operationLog.arOpValue[3].ToString("F0");
 
             if (@event.error.axErrBit[0]) { 
                 lblErrBit0.BackColor = Color.LightPink; 
