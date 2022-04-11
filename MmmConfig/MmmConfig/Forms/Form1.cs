@@ -464,8 +464,16 @@ namespace MmmConfig
         }
 
 
+
         #endregion
 
-        
+        private void btnLoadLog_Click(object sender, EventArgs e)
+        {
+            XmlExtractor xmlReader = new XmlExtractor();
+            EventLogger readLogger = new EventLogger();
+            for (int _i = 0; _i < EventLogger.iEventSize; _i++) { readLogger.events[_i] = new Event(); }
+            xmlReader.readXml("C:\\MmmDiagnostic.xml", readLogger);
+            MessageBox.Show("Pippo");
+        }
     }
 }

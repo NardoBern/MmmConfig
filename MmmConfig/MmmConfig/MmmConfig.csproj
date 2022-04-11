@@ -230,6 +230,7 @@
     <Compile Include="Classi\MotorStatus.cs" />
     <Compile Include="Classi\OperationLog.cs" />
     <Compile Include="Classi\XmlCreator.cs" />
+    <Compile Include="Classi\XmlExtractor.cs" />
     <Compile Include="Forms\EventReader.cs">
       <SubType>Form</SubType>
     </Compile>

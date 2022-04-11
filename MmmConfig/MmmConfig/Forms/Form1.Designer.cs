@@ -195,6 +195,7 @@
             this.btnOpenLog = new System.Windows.Forms.Button();
             this.prgConnWd = new System.Windows.Forms.ProgressBar();
             this.btnOpenLogReader = new System.Windows.Forms.Button();
+            this.btnLoadLog = new System.Windows.Forms.Button();
             this.grpBoxMot1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot1)).BeginInit();
             this.grpBoxMot2.SuspendLayout();
@@ -2168,11 +2169,22 @@
             this.btnOpenLogReader.UseVisualStyleBackColor = true;
             this.btnOpenLogReader.Click += new System.EventHandler(this.btnOpenLogReader_Click);
             // 
+            // btnLoadLog
+            // 
+            this.btnLoadLog.Location = new System.Drawing.Point(367, 20);
+            this.btnLoadLog.Name = "btnLoadLog";
+            this.btnLoadLog.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadLog.TabIndex = 14;
+            this.btnLoadLog.Text = "Load Log";
+            this.btnLoadLog.UseVisualStyleBackColor = true;
+            this.btnLoadLog.Click += new System.EventHandler(this.btnLoadLog_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 879);
+            this.Controls.Add(this.btnLoadLog);
             this.Controls.Add(this.btnOpenLogReader);
             this.Controls.Add(this.prgConnWd);
             this.Controls.Add(this.btnOpenLog);
@@ -2374,6 +2386,7 @@
         private System.Windows.Forms.Button btnOpenLog;
         private System.Windows.Forms.ProgressBar prgConnWd;
         private System.Windows.Forms.Button btnOpenLogReader;
+        private System.Windows.Forms.Button btnLoadLog;
     }
 }
 
