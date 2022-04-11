@@ -1008,14 +1008,14 @@ namespace MmmConfig.Forms
             // 
             // prgBarGetInfo
             // 
-            this.prgBarGetInfo.Location = new System.Drawing.Point(1229, 54);
+            this.prgBarGetInfo.Location = new System.Drawing.Point(1229, 55);
             this.prgBarGetInfo.Name = "prgBarGetInfo";
             this.prgBarGetInfo.Size = new System.Drawing.Size(75, 23);
             this.prgBarGetInfo.TabIndex = 51;
             // 
             // btnStopRefresh
             // 
-            this.btnStopRefresh.Location = new System.Drawing.Point(1229, 87);
+            this.btnStopRefresh.Location = new System.Drawing.Point(1229, 86);
             this.btnStopRefresh.Name = "btnStopRefresh";
             this.btnStopRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnStopRefresh.TabIndex = 52;

@@ -111,7 +111,16 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la lettura di un valore intero " + e.ToString());
-
+                
+                return 99;
+            }
+            catch (System.ObjectDisposedException e) {
+                ErrorManagement(e);
+                return 99;
+            }
+            catch (System.NullReferenceException e)
+            {
+                ErrorManagement(e);
                 return 99;
             }
         }
@@ -130,6 +139,16 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la lettura di un valore boolean " + e.ToString());
+                return false;
+            }
+            catch (System.ObjectDisposedException e)
+            {
+                ErrorManagement(e);
+                return false;
+            }
+            catch (System.NullReferenceException e)
+            {
+                ErrorManagement(e);
                 return false;
             }
         }
@@ -185,6 +204,16 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la lettura di un evento " + e.ToString());
+                return false;
+            }
+            catch (System.ObjectDisposedException e)
+            {
+                ErrorManagement(e);
+                return false;
+            }
+            catch (System.NullReferenceException e)
+            {
+                ErrorManagement(e);
                 return false;
             }
         }
@@ -342,9 +371,27 @@ namespace MmmConfig
         {
             byte[] buffer = new byte[81];
             string stringa;
-            adsClient.Read(uiVarHandle, buffer.AsMemory());
-            stringa = (Encoding.ASCII.GetString(buffer, 0, buffer.Length)).Replace("\0", string.Empty);
-            return stringa;
+            try { 
+                adsClient.Read(uiVarHandle, buffer.AsMemory());
+                stringa = (Encoding.ASCII.GetString(buffer, 0, buffer.Length)).Replace("\0", string.Empty);
+                return stringa;
+            }
+            catch (TwinCAT.Ads.AdsErrorException e)
+            {
+                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
+                Console.WriteLine("Eccezione durante la lettura di un evento " + e.ToString());
+                return "Error";
+            }
+            catch (System.ObjectDisposedException e)
+            {
+                ErrorManagement(e);
+                return "Error";
+            }
+            catch (System.NullReferenceException e)
+            {
+                ErrorManagement(e);
+                return "Error";
+            }
         }
 
         #endregion
@@ -364,6 +411,16 @@ namespace MmmConfig
                 Console.WriteLine("Eccezione durante la scrittura di un valore intero " + e.ToString());
                 return false;
             }
+            catch (System.ObjectDisposedException e)
+            {
+                ErrorManagement(e);
+                return false;
+            }
+            catch (System.NullReferenceException e)
+            {
+                ErrorManagement(e);
+                return false;
+            }
         }
 
         /* Write boolena value */
@@ -378,6 +435,16 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la scrittura di un valore boolean " + e.ToString());
+                return false;
+            }
+            catch (System.ObjectDisposedException e)
+            {
+                ErrorManagement(e);
+                return false;
+            }
+            catch (System.NullReferenceException e)
+            {
+                ErrorManagement(e);
                 return false;
             }
         }
@@ -396,5 +463,12 @@ namespace MmmConfig
         }
         #endregion
 
+        #region Error Manager
+        private void ErrorManagement(Exception e)
+        {
+            MessageBox.Show("CPU Connection is not valid: " + e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Application.Exit();
+        }
+        #endregion
     }
 }

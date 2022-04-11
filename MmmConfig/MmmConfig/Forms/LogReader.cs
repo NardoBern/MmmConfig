@@ -41,33 +41,42 @@ namespace MmmConfig.Forms
             Form1.motionEventLogger.iLastWritePos = iNumOfEventToRead;
             btnRefresh.Enabled = false;
             btnStopRefresh.Enabled = true;
-
-            trd = new Thread(new ThreadStart(readEvent));
-            trd.IsBackground = true;
-            checkThread.Enabled = true;
-            trd.Start();
+            try
+            {
+                trd = new Thread(new ThreadStart(readEvent));
+                trd.IsBackground = true;
+                checkThread.Enabled = true;
+                trd.Start();
+            }
+            catch (Exception _e) { MessageBox.Show("Error during starting of refresh Thread: " + _e.ToString(),"ERROR!!",MessageBoxButtons.OK,MessageBoxIcon.Error); }
         }
         private void btnStopRefresh_Click(object sender, EventArgs e)
         {
-            if (trd.IsAlive)
-            {
-                trd.Abort();
-                checkThread.Enabled = false;
-                btnStopRefresh.Enabled = false;
-                btnRefresh.Enabled = true;
+            try { 
+                if (trd.IsAlive)
+                {
+                    trd.Abort();
+                    checkThread.Enabled = false;
+                    btnStopRefresh.Enabled = false;
+                    btnRefresh.Enabled = true;
+                }
             }
+            catch (Exception _e) { MessageBox.Show("Error during stop of refresh Thread: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         private void checkThread_Tick(object sender, EventArgs e)
         {
-            bool trdState = trd.IsAlive;
-            if (trdState) { prgBarGetInfo.Value = _i; }
-            else
-            {
-                checkThread.Enabled = false;
-                cleanDataGridView();
-                populateDataGridView();
-                colorateDataGridView();
+            try {
+                bool trdState = trd.IsAlive;
+                if (trdState) { prgBarGetInfo.Value = _i; }
+                else
+                {
+                    checkThread.Enabled = false;
+                    cleanDataGridView();
+                    populateDataGridView();
+                    colorateDataGridView();
+                }
             }
+            catch (Exception _e) { MessageBox.Show("Error during updating of logger: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
         #endregion
 
@@ -372,9 +381,6 @@ namespace MmmConfig.Forms
                 Form1.CpuConnection.readEvent(c_strMotionEventLogPath, Form1.CpuConnection.tcClient, _i, Form1.motionEventLogger.events[_i]);
             }
         }
-
-
-
 
         #endregion
 
