@@ -229,6 +229,7 @@
     <Compile Include="Classi\MotorConfig.cs" />
     <Compile Include="Classi\MotorStatus.cs" />
     <Compile Include="Classi\OperationLog.cs" />
+    <Compile Include="Classi\XmlCreator.cs" />
     <Compile Include="Forms\EventReader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +291,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ExampleFiles\diagnosticExample.xml" />
     <Content Include="StaticRoutes.xml">
       <SubType>Designer</SubType>
     </Content>

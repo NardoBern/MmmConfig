@@ -107,6 +107,7 @@ namespace MmmConfig.Forms
             this.checkThread = new System.Windows.Forms.Timer(this.components);
             this.prgBarGetInfo = new System.Windows.Forms.ProgressBar();
             this.btnStopRefresh = new System.Windows.Forms.Button();
+            this.btnCreateXml = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogReader)).BeginInit();
             this.grpOpDescr.SuspendLayout();
             this.grpError.SuspendLayout();
@@ -1023,11 +1024,22 @@ namespace MmmConfig.Forms
             this.btnStopRefresh.UseVisualStyleBackColor = true;
             this.btnStopRefresh.Click += new System.EventHandler(this.btnStopRefresh_Click);
             // 
+            // btnCreateXml
+            // 
+            this.btnCreateXml.Location = new System.Drawing.Point(1229, 118);
+            this.btnCreateXml.Name = "btnCreateXml";
+            this.btnCreateXml.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateXml.TabIndex = 53;
+            this.btnCreateXml.Text = "SaveToFile";
+            this.btnCreateXml.UseVisualStyleBackColor = true;
+            this.btnCreateXml.Click += new System.EventHandler(this.btnCreateXml_Click);
+            // 
             // LogReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 687);
+            this.Controls.Add(this.btnCreateXml);
             this.Controls.Add(this.btnStopRefresh);
             this.Controls.Add(this.prgBarGetInfo);
             this.Controls.Add(this.btnRefresh);
@@ -1123,5 +1135,6 @@ namespace MmmConfig.Forms
         private System.Windows.Forms.Timer checkThread;
         private System.Windows.Forms.ProgressBar prgBarGetInfo;
         private System.Windows.Forms.Button btnStopRefresh;
+        private System.Windows.Forms.Button btnCreateXml;
     }
 }

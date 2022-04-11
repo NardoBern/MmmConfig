@@ -1,0 +1,68 @@
+<xml>
+	<diagnostic>
+		<listOfEvents>
+			<event>
+				<event num="1">  
+					<id>10001</id>
+					<timestamp> </timestamp>
+					<type> </type>
+					<device> </device>
+					<message> </message>
+					<alert> </alert>
+					<operation>
+						<description> </description>
+						<valueString1> </valueString1>
+						<valueString2> </valueString2>
+						<valueString3> </valueString3>
+						<valueString4> </valueString4>
+						<valueInt1> </valueInt1>
+						<valueInt2> </valueInt2>
+						<valueInt3> </valueInt3>
+						<valueInt4> </valueInt4>
+						<valueReal1> </valueReal1>
+						<valueReal2> </valueReal2>
+						<valueReal3> </valueReal3>
+						<valueReal4> </valueReal4>
+					</operation>
+					<error>
+						<errorGlobal> </errorGlobal>
+            <description> </description>
+						<errorBit0> </errorBit0>
+						<errorBit1> </errorBit1>
+						<errorBit2> </errorBit2>
+						<errorBit3> </errorBit3>
+						<errorBit4> </errorBit4>
+						<errorBit5> </errorBit5>
+						<errorBit6> </errorBit6>
+						<errorBit7> </errorBit7>
+						<errorBit8> </errorBit8>
+						<errorBit9> </errorBit9>
+						<errorBit10> </errorBit10>
+						<errorBit11> </errorBit11>
+						<errorBit12> </errorBit12>
+						<errorBit13> </errorBit13>
+						<errorBit14> </errorBit14>
+						<errorBit15> </errorBit15>
+						<errorCode0> </errorCode0>
+						<errorCode1> </errorCode1>
+						<errorCode2> </errorCode2>
+						<errorCode3> </errorCode3>
+						<errorCode4> </errorCode4>
+						<errorCode5> </errorCode5>
+						<errorCode6> </errorCode6>
+						<errorCode7> </errorCode7>
+						<errorCode8> </errorCode8>
+						<errorCode9> </errorCode9>
+						<errorCode10> </errorCode10>
+						<errorCode11> </errorCode11>
+						<errorCode12> </errorCode12>
+						<errorCode13> </errorCode13>
+						<errorCode14> </errorCode14>
+						<errorCode15> </errorCode15>
+					</error>
+				</event> 
+			</event>
+		</listOfEvents>
+	</diagnostic>
+
+</xml>

@@ -382,8 +382,13 @@ namespace MmmConfig.Forms
             }
         }
 
+
         #endregion
 
-        
+        private void btnCreateXml_Click(object sender, EventArgs e)
+        {
+            XmlCreator xmlCreator = new XmlCreator();
+            xmlCreator.createXmlFile(Form1.motionEventLogger);
+        }
     }
 }
