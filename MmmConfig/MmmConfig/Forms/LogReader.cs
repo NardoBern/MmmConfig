@@ -28,7 +28,7 @@ namespace MmmConfig.Forms
 
         private void LogReader_Load(object sender, EventArgs e)
         {
-            
+            cleanDataGridView();
             populateDataGridView();
             colorateDataGridView();
             

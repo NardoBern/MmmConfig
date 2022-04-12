@@ -268,11 +268,21 @@ namespace MmmConfig
                 readLogger.events[_i].error.axErrBit = new bool[16];
                 readLogger.events[_i].error.audiErrId = new uint[16];
             }
-            xmlReader.readXml("C:\\MmmDiagnostic.xml", readLogger);
-            Form1.motionEventLogger = readLogger;
-            Forms.LogReader LogReaderForm = new Forms.LogReader();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.FileName = "Select an xml file";
+            openFileDialog.Filter = "Xml files (*.xml|*.xml";
+            openFileDialog.Title = "Open xml file";
+            openFileDialog.InitialDirectory = "C:\\";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try {xmlReader.readXml(openFileDialog.FileName, readLogger); }
+                catch (Exception ex) { MessageBox.Show("Error while opening xml file: " + ex.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                
+                Form1.motionEventLogger = readLogger;
+                Forms.LogReader LogReaderForm = new Forms.LogReader();
 
-            LogReaderForm.Show();
+                LogReaderForm.Show();
+            }
 
         }
 
