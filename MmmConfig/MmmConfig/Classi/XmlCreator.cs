@@ -16,9 +16,9 @@ namespace MmmConfig
         private XmlWriter xmlWriter;
         #endregion
 
-        public void createXmlFile(EventLogger eventLogger)
+        public void createXmlFile(EventLogger eventLogger, string strFilePath)
         {
-            xmlWriter = XmlWriter.Create("C:\\" + strXmlFileName + strXmlExtension);
+            xmlWriter = XmlWriter.Create(strFilePath);
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteComment("This is the Diagnostic file of the Beckhoff MultiMotorManager, generated on: "  + DateTime.Now.ToString());
             xmlWriter.WriteStartElement("diagnostic");

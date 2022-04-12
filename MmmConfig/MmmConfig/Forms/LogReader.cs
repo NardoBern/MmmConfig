@@ -389,7 +389,18 @@ namespace MmmConfig.Forms
         private void btnCreateXml_Click(object sender, EventArgs e)
         {
             XmlCreator xmlCreator = new XmlCreator();
-            xmlCreator.createXmlFile(Form1.motionEventLogger);
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "xml file|*.xml";
+            saveFileDialog.Title = "Save diagnostic file";
+            string tempString = DateTime.Now.ToString();
+            tempString = tempString.Replace(" ", "");
+            tempString = tempString.Replace("/", "");
+            tempString = tempString.Replace(":", "");
+            saveFileDialog.FileName = "MmmDiagnostic_" + tempString; 
+            if (saveFileDialog.ShowDialog() == DialogResult.OK) { 
+            if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(Form1.motionEventLogger, saveFileDialog.FileName); }
+            }
+
         }
     }
 }
