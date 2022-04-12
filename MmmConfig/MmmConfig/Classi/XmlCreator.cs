@@ -23,9 +23,10 @@ namespace MmmConfig
             xmlWriter.WriteComment("This is the Diagnostic file of the Beckhoff MultiMotorManager, generated on: "  + DateTime.Now.ToString());
             xmlWriter.WriteStartElement("diagnostic");
             xmlWriter.WriteStartElement("listOfEvents");
-            xmlWriter.WriteStartElement("event");
+            //xmlWriter.WriteStartElement("event");
             for (int _i = 0; _i < eventLogger.iLastWritePos; _i++) { addEventToXml(_i, eventLogger.events[_i]); }
 
+            xmlWriter.WriteEndElement();
             xmlWriter.WriteEndElement();
             xmlWriter.WriteEndDocument();
             xmlWriter.Close();
@@ -62,8 +63,8 @@ namespace MmmConfig
             xmlWriter.WriteElementString("device", @event.strDeviceName);
             xmlWriter.WriteElementString("message", @event.strMessage);
             xmlWriter.WriteElementString("alert", @event.strAlert);
-            xmlWriter.WriteStartElement("operation");
-            xmlWriter.WriteElementString("description", @event.operationLog.strOperationDescr);
+            //xmlWriter.WriteStartElement("operation");
+            xmlWriter.WriteElementString("OperationDescription", @event.operationLog.strOperationDescr);
             xmlWriter.WriteElementString("valueString1", @event.operationLog.astrOpValue[0]);
             xmlWriter.WriteElementString("valueString2", @event.operationLog.astrOpValue[1]);
             xmlWriter.WriteElementString("valueString3", @event.operationLog.astrOpValue[2]);
@@ -76,8 +77,8 @@ namespace MmmConfig
             xmlWriter.WriteElementString("valueReal2", @event.operationLog.arOpValue[1].ToString("F0"));
             xmlWriter.WriteElementString("valueReal3", @event.operationLog.arOpValue[2].ToString("F0"));
             xmlWriter.WriteElementString("valueReal4", @event.operationLog.arOpValue[3].ToString("F0"));
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteStartElement("error");
+            //xmlWriter.WriteEndElement();
+            //xmlWriter.WriteStartElement("error");
             xmlWriter.WriteElementString("errorGlobal", @event.error.xErrorGlobal.ToString());
             string strErrorDescription;
             switch (@event.error.enumErrorName)
@@ -122,7 +123,7 @@ namespace MmmConfig
                     strErrorDescription = "Invalid error code";
                     break;
             }
-            xmlWriter.WriteElementString("description", strErrorDescription);
+            xmlWriter.WriteElementString("ErrorDescription", strErrorDescription);
             xmlWriter.WriteElementString("errorBit0", @event.error.axErrBit[0].ToString());
             xmlWriter.WriteElementString("errorBit1", @event.error.axErrBit[1].ToString());
             xmlWriter.WriteElementString("errorBit2", @event.error.axErrBit[2].ToString());
@@ -156,7 +157,7 @@ namespace MmmConfig
             xmlWriter.WriteElementString("errorCode14", @event.error.audiErrId[14].ToString());
             xmlWriter.WriteElementString("errorCode15", @event.error.audiErrId[15].ToString());
             xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndElement();
+            //xmlWriter.WriteEndElement();
         }
     }
 }

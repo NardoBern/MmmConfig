@@ -253,6 +253,28 @@ namespace MmmConfig
             Forms.GettingInfo gettingInfo = new Forms.GettingInfo();
             gettingInfo.Show();
         }
+        private void btnLoadLog_Click(object sender, EventArgs e)
+        {
+            XmlExtractor xmlReader = new XmlExtractor();
+            EventLogger readLogger = new EventLogger();
+            for (int _i = 0; _i < EventLogger.iEventSize; _i++)
+            {
+                readLogger.events[_i] = new Event();
+                readLogger.events[_i].operationLog = new OperationLog();
+                readLogger.events[_i].operationLog.aiOpValue = new int[5];
+                readLogger.events[_i].operationLog.arOpValue = new double[5];
+                readLogger.events[_i].operationLog.astrOpValue = new string[5];
+                readLogger.events[_i].error = new Error();
+                readLogger.events[_i].error.axErrBit = new bool[16];
+                readLogger.events[_i].error.audiErrId = new uint[16];
+            }
+            xmlReader.readXml("C:\\MmmDiagnostic.xml", readLogger);
+            Form1.motionEventLogger = readLogger;
+            Forms.LogReader LogReaderForm = new Forms.LogReader();
+
+            LogReaderForm.Show();
+
+        }
 
         #endregion
 
@@ -467,13 +489,6 @@ namespace MmmConfig
 
         #endregion
 
-        private void btnLoadLog_Click(object sender, EventArgs e)
-        {
-            XmlExtractor xmlReader = new XmlExtractor();
-            EventLogger readLogger = new EventLogger();
-            for (int _i = 0; _i < EventLogger.iEventSize; _i++) { readLogger.events[_i] = new Event(); }
-            xmlReader.readXml("C:\\MmmDiagnostic.xml", readLogger);
-            MessageBox.Show("Pippo");
-        }
+        
     }
 }
