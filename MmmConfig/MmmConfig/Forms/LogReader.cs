@@ -392,7 +392,7 @@ namespace MmmConfig.Forms
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "xml file|*.xml";
             saveFileDialog.Title = "Save diagnostic file";
-            string tempString = DateTime.Now.ToString();
+            string tempString = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
             tempString = tempString.Replace(" ", "");
             tempString = tempString.Replace("/", "");
             tempString = tempString.Replace(":", "");
