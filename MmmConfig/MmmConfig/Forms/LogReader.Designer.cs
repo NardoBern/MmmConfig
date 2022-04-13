@@ -1051,11 +1051,10 @@ namespace MmmConfig.Forms
             // 
             // lblInProgress
             // 
-            this.lblInProgress.AutoSize = true;
             this.lblInProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInProgress.Location = new System.Drawing.Point(202, 131);
+            this.lblInProgress.Location = new System.Drawing.Point(168, 128);
             this.lblInProgress.Name = "lblInProgress";
-            this.lblInProgress.Size = new System.Drawing.Size(95, 15);
+            this.lblInProgress.Size = new System.Drawing.Size(158, 21);
             this.lblInProgress.TabIndex = 57;
             this.lblInProgress.Text = "Ready to start";
             this.lblInProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

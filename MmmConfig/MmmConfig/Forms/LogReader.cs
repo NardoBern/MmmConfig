@@ -32,7 +32,6 @@ namespace MmmConfig.Forms
         {
             InitializeComponent();
         }
-
         private void LogReader_Load(object sender, EventArgs e)
         {
             CpuConnection = new CPU_Connection();
@@ -112,6 +111,79 @@ namespace MmmConfig.Forms
             }
             catch (Exception _e) { MessageBox.Show("Error during updating of logger: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+        private void saveToToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveToFile();
+        }
+        private void openFromToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFile();
+        }
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            if (CpuConnection.connected)
+            {
+                CpuConnection.disconnect(CpuConnection.tcClient);
+                vUpdateDisconnectedStatus();
+            }
+            else
+            {
+                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
+                tWdTimer.Enabled = true;
+            }
+        }
+        private void tWdTimer_Tick(object sender, EventArgs e)
+        {
+            int iWatchDog = CpuConnection.readInt("LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
+            //lblTest.Text = iWatchDog.ToString();
+            prgConnWd.Value = iWatchDog;
+            CpuConnection.writeInt("LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
+            CpuConnection.iWatchDog = iWatchDog;
+            iWdCheck = iWdCheck + 1;
+            if (iWdCheck >= 6)
+            {
+                if (CpuConnection.checkWdValue(iWatchDog))
+                {
+                    vUpdateConnectedStatus();
+                }
+                else
+                {
+                    vUpdateDisconnectedStatus();
+                }
+                iWdCheck = 0;
+            }
+        }
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            CpuConnection.disconnect(CpuConnection.tcClient);
+            vUpdateDisconnectedStatus();
+            this.Hide();
+            Forms.MainSelector mainSelector = new Forms.MainSelector();
+            mainSelector.ShowDialog();
+            this.Dispose();
+            this.Close();
+        }
+        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ConnectionSettings connectionSettings = new Forms.ConnectionSettings();
+            connectionSettings.strNetId = strNetId;
+            connectionSettings.strPort = strPort;
+            var result = connectionSettings.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                strNetId = connectionSettings.strNetId;
+                strPort = connectionSettings.strPort;
+            }
+        }
+        private void btnSaveToFile_Click(object sender, EventArgs e)
+        {
+            saveToFile();
+        }
+        private void btnOpenFile_Click(object sender, EventArgs e)
+        {
+            openFile();
+        }
+
         #endregion
 
         #region Operative functions
@@ -147,7 +219,6 @@ namespace MmmConfig.Forms
             }
             for (int _i = 0; _i < 7; _i++) { dgvLogReader.AutoResizeColumn(_i); }        
         }
-        
         public void colorateDataGridView()
         {
             foreach (DataGridViewRow row in dgvLogReader.Rows)
@@ -406,7 +477,6 @@ namespace MmmConfig.Forms
             lblErrUdi14.Text = @event.error.audiErrId[14].ToString();
             lblErrUdi15.Text = @event.error.audiErrId[15].ToString();
         }
-
         private void readEvent()
         {
             int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
@@ -415,31 +485,6 @@ namespace MmmConfig.Forms
                 CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]);
             }
         }
-
-
-        #endregion
-
-        private void btnCreateXml_Click(object sender, EventArgs e)
-        {
-            XmlCreator xmlCreator = new XmlCreator();
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "xml file|*.xml";
-            saveFileDialog.Title = "Save diagnostic file";
-            string tempString = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
-            tempString = tempString.Replace(" ", "");
-            tempString = tempString.Replace("/", "");
-            tempString = tempString.Replace(":", "");
-            saveFileDialog.FileName = "MmmDiagnostic_" + tempString; 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK) { 
-            if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName); }
-            }
-        }
-
-        private void saveToToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saveToFile();
-        }
-
         private void saveToFile()
         {
             XmlCreator xmlCreator = new XmlCreator();
@@ -456,12 +501,6 @@ namespace MmmConfig.Forms
                 if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName); }
             }
         }
-
-        private void openFromToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            openFile();
-        }
-
         private void openFile()
         {
             XmlExtractor xmlReader = new XmlExtractor();
@@ -493,42 +532,6 @@ namespace MmmConfig.Forms
                 colorateDataGridView();
             }
         }
-
-        private void btnConnect_Click(object sender, EventArgs e)
-        {
-            if (CpuConnection.connected)
-            {
-                CpuConnection.disconnect(CpuConnection.tcClient);
-                vUpdateDisconnectedStatus();
-            }
-            else
-            {
-                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
-                tWdTimer.Enabled = true;
-            }
-        }
-
-        private void tWdTimer_Tick(object sender, EventArgs e)
-        {
-            int iWatchDog = CpuConnection.readInt("LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
-            //lblTest.Text = iWatchDog.ToString();
-            prgConnWd.Value = iWatchDog;
-            CpuConnection.writeInt("LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
-            CpuConnection.iWatchDog = iWatchDog;
-            iWdCheck = iWdCheck + 1;
-            if (iWdCheck >= 6)
-            {
-                if (CpuConnection.checkWdValue(iWatchDog))
-                {
-                    vUpdateConnectedStatus();
-                }
-                else
-                {
-                    vUpdateDisconnectedStatus();
-                }
-                iWdCheck = 0;
-            }
-        }
         private void vUpdateConnectedStatus()
         {
             lblConnStatus.Text = "Connected";
@@ -544,39 +547,6 @@ namespace MmmConfig.Forms
             tWdTimer.Enabled = false;
             btnRefresh.Enabled = false;
         }
-
-        private void btnMain_Click(object sender, EventArgs e)
-        {
-            CpuConnection.disconnect(CpuConnection.tcClient);
-            vUpdateDisconnectedStatus();
-            this.Hide();
-            Forms.MainSelector mainSelector = new Forms.MainSelector();
-            mainSelector.ShowDialog();
-            this.Dispose();
-            this.Close();
-        }
-
-        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.ConnectionSettings connectionSettings = new Forms.ConnectionSettings();
-            connectionSettings.strNetId = strNetId;
-            connectionSettings.strPort = strPort;
-            var result = connectionSettings.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                strNetId = connectionSettings.strNetId;
-                strPort = connectionSettings.strPort;
-            }
-        }
-
-        private void btnSaveToFile_Click(object sender, EventArgs e)
-        {
-            saveToFile();
-        }
-
-        private void btnOpenFile_Click(object sender, EventArgs e)
-        {
-            openFile();
-        }
+        #endregion
     }
 }
