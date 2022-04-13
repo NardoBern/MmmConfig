@@ -14,6 +14,11 @@ namespace MmmConfig.Forms
     public partial class LogReader : Form
     {
         #region Variable declarations
+        public static CPU_Connection CpuConnection;
+        public Motor[] motor;
+        private int iWdCheck = 0;
+        
+        public static EventLogger motionEventLogger;
         const string c_strMotionEventLogPath = "GVL_Hmi.stMotionEventLogger";
         string[,] astrString = new string[1000,7];
         public Thread trd;
@@ -28,18 +33,38 @@ namespace MmmConfig.Forms
 
         private void LogReader_Load(object sender, EventArgs e)
         {
+            CpuConnection = new CPU_Connection();
+            
+            motionEventLogger = new EventLogger();
+            motionEventLogger.events = new Event[1000];
+            for (int _i = 0; _i < 1000; _i++)
+            {
+                motionEventLogger.events[_i] = new Event();
+                motionEventLogger.events[_i].error = new Error();
+                motionEventLogger.events[_i].operationLog = new OperationLog();
+            }
+
+            if (CpuConnection.connected)
+            {
+                vUpdateConnectedStatus();
+
+            }
+            else
+            {
+                vUpdateDisconnectedStatus();
+            }
             cleanDataGridView();
             populateDataGridView();
             colorateDataGridView();
             
             Cursor.Current = Cursors.Default;
         }
-        private void dgvLogReader_CellContentClick(object sender, DataGridViewCellEventArgs e) { populateEventDetail(Form1.motionEventLogger.events[Convert.ToInt16(dgvLogReader.Rows[e.RowIndex].Cells[0].Value)]); }
+        private void dgvLogReader_CellContentClick(object sender, DataGridViewCellEventArgs e) { populateEventDetail(motionEventLogger.events[Convert.ToInt16(dgvLogReader.Rows[e.RowIndex].Cells[0].Value)]); }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            int iNumOfEventToRead = Form1.CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", Form1.CpuConnection.tcClient);
+            int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
             prgBarGetInfo.Maximum = iNumOfEventToRead;
-            Form1.motionEventLogger.iLastWritePos = iNumOfEventToRead;
+            motionEventLogger.iLastWritePos = iNumOfEventToRead;
             btnRefresh.Enabled = false;
             btnStopRefresh.Enabled = true;
             try
@@ -84,12 +109,12 @@ namespace MmmConfig.Forms
         #region Operative functions
         public void populateDataGridView()
         {
-            for (int _i = 0; _i < Form1.motionEventLogger.iLastWritePos; _i++)
+            for (int _i = 0; _i <= motionEventLogger.iLastWritePos; _i++)
             {
                 astrString[_i, 0] = _i.ToString();
-                astrString[_i, 1] = Form1.motionEventLogger.events[_i].uiEventId.ToString();
-                astrString[_i, 2] = Form1.motionEventLogger.events[_i].strTimeStamp;
-                switch (Form1.motionEventLogger.events[_i].eTypeOfEvent)
+                astrString[_i, 1] = motionEventLogger.events[_i].uiEventId.ToString();
+                astrString[_i, 2] = motionEventLogger.events[_i].strTimeStamp;
+                switch (motionEventLogger.events[_i].eTypeOfEvent)
                 {
                     case eTypeOfEvent.Info:
                         astrString[_i, 3] = "Information";
@@ -104,9 +129,9 @@ namespace MmmConfig.Forms
                         astrString[_i, 3] = "Error";
                         break;
                 }
-                astrString[_i, 4] = Form1.motionEventLogger.events[_i].strDeviceName;
-                astrString[_i, 5] = Form1.motionEventLogger.events[_i].strMessage;
-                astrString[_i, 6] = Form1.motionEventLogger.events[_i].strAlert;
+                astrString[_i, 4] = motionEventLogger.events[_i].strDeviceName;
+                astrString[_i, 5] = motionEventLogger.events[_i].strMessage;
+                astrString[_i, 6] = motionEventLogger.events[_i].strAlert;
 
                 string[] strStringToAdd = { astrString[_i, 0], astrString[_i, 1], astrString[_i, 2], astrString[_i, 3], astrString[_i, 4], astrString[_i, 5], astrString[_i, 6] };
 
@@ -376,10 +401,10 @@ namespace MmmConfig.Forms
 
         private void readEvent()
         {
-            int iNumOfEventToRead = Form1.CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", Form1.CpuConnection.tcClient);
+            int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
             for (_i = 0; _i < iNumOfEventToRead; _i++)
             {
-                Form1.CpuConnection.readEvent(c_strMotionEventLogPath, Form1.CpuConnection.tcClient, _i, Form1.motionEventLogger.events[_i]);
+                CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]);
             }
         }
 
@@ -398,9 +423,109 @@ namespace MmmConfig.Forms
             tempString = tempString.Replace(":", "");
             saveFileDialog.FileName = "MmmDiagnostic_" + tempString; 
             if (saveFileDialog.ShowDialog() == DialogResult.OK) { 
-            if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(Form1.motionEventLogger, saveFileDialog.FileName); }
+            if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName); }
             }
+        }
 
+        private void saveToToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            XmlCreator xmlCreator = new XmlCreator();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "xml file|*.xml";
+            saveFileDialog.Title = "Save diagnostic file";
+            string tempString = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
+            tempString = tempString.Replace(" ", "");
+            tempString = tempString.Replace("/", "");
+            tempString = tempString.Replace(":", "");
+            saveFileDialog.FileName = "MmmDiagnostic_" + tempString;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName); }
+            }
+        }
+
+        private void openFromToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            XmlExtractor xmlReader = new XmlExtractor();
+            EventLogger readLogger = new EventLogger();
+            for (int _i = 0; _i < EventLogger.iEventSize; _i++)
+            {
+                readLogger.events[_i] = new Event();
+                readLogger.events[_i].operationLog = new OperationLog();
+                readLogger.events[_i].operationLog.aiOpValue = new int[5];
+                readLogger.events[_i].operationLog.arOpValue = new double[5];
+                readLogger.events[_i].operationLog.astrOpValue = new string[5];
+                readLogger.events[_i].error = new Error();
+                readLogger.events[_i].error.axErrBit = new bool[16];
+                readLogger.events[_i].error.audiErrId = new uint[16];
+            }
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.FileName = "Select an xml file";
+            openFileDialog.Filter = "Xml files (*.xml|*.xml";
+            openFileDialog.Title = "Open xml file";
+            openFileDialog.InitialDirectory = "C:\\";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try { xmlReader.readXml(openFileDialog.FileName, readLogger); }
+                catch (Exception ex) { MessageBox.Show("Error while opening xml file: " + ex.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+                motionEventLogger = readLogger;
+                cleanDataGridView();
+                populateDataGridView();
+                colorateDataGridView();
+            }
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            if (CpuConnection.connected)
+            {
+                CpuConnection.disconnect(CpuConnection.tcClient);
+                vUpdateDisconnectedStatus();
+            }
+            else
+            {
+                CpuConnection.tcClient = CpuConnection.connect(txtNetId.Text, int.Parse(txtPort.Text));
+                tWdTimer.Enabled = true;
+            }
+        }
+
+        private void tWdTimer_Tick(object sender, EventArgs e)
+        {
+            int iWatchDog = CpuConnection.readInt("LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
+            //lblTest.Text = iWatchDog.ToString();
+            prgConnWd.Value = iWatchDog;
+            CpuConnection.writeInt("LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
+            CpuConnection.iWatchDog = iWatchDog;
+            iWdCheck = iWdCheck + 1;
+            if (iWdCheck >= 6)
+            {
+                if (CpuConnection.checkWdValue(iWatchDog))
+                {
+                    vUpdateConnectedStatus();
+                }
+                else
+                {
+                    vUpdateDisconnectedStatus();
+                }
+                iWdCheck = 0;
+            }
+        }
+        private void vUpdateConnectedStatus()
+        {
+            lblConnStatus.Text = "Connected";
+            btnConnect.Text = "Disconnect";
+            tWdTimer.Enabled = true;
+            
+        }
+        private void vUpdateDisconnectedStatus()
+        {
+            CpuConnection.connected = false;
+            lblConnStatus.Text = "No connection";
+            btnConnect.Text = "Connect";
+            tWdTimer.Enabled = false;
+
+            
         }
     }
 }

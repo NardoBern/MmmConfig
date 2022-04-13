@@ -237,11 +237,11 @@
     <Compile Include="Forms\EventReader.Designer.cs">
       <DependentUpon>EventReader.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Forms\Configurator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\Configurator.Designer.cs">
+      <DependentUpon>Configurator.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GettingInfo.cs">
       <SubType>Form</SubType>
@@ -260,8 +260,8 @@
     <EmbeddedResource Include="Forms\EventReader.resx">
       <DependentUpon>EventReader.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Configurator.resx">
+      <DependentUpon>Configurator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GettingInfo.resx">
       <DependentUpon>GettingInfo.cs</DependentUpon>

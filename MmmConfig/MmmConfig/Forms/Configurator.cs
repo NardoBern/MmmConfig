@@ -255,34 +255,7 @@ namespace MmmConfig
         }
         private void btnLoadLog_Click(object sender, EventArgs e)
         {
-            XmlExtractor xmlReader = new XmlExtractor();
-            EventLogger readLogger = new EventLogger();
-            for (int _i = 0; _i < EventLogger.iEventSize; _i++)
-            {
-                readLogger.events[_i] = new Event();
-                readLogger.events[_i].operationLog = new OperationLog();
-                readLogger.events[_i].operationLog.aiOpValue = new int[5];
-                readLogger.events[_i].operationLog.arOpValue = new double[5];
-                readLogger.events[_i].operationLog.astrOpValue = new string[5];
-                readLogger.events[_i].error = new Error();
-                readLogger.events[_i].error.axErrBit = new bool[16];
-                readLogger.events[_i].error.audiErrId = new uint[16];
-            }
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.FileName = "Select an xml file";
-            openFileDialog.Filter = "Xml files (*.xml|*.xml";
-            openFileDialog.Title = "Open xml file";
-            openFileDialog.InitialDirectory = "C:\\";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                try {xmlReader.readXml(openFileDialog.FileName, readLogger); }
-                catch (Exception ex) { MessageBox.Show("Error while opening xml file: " + ex.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                
-                Form1.motionEventLogger = readLogger;
-                Forms.LogReader LogReaderForm = new Forms.LogReader();
-
-                LogReaderForm.Show();
-            }
+            
 
         }
 
