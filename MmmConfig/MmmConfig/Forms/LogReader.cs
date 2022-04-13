@@ -516,7 +516,6 @@ namespace MmmConfig.Forms
             lblConnStatus.Text = "Connected";
             btnConnect.Text = "Disconnect";
             tWdTimer.Enabled = true;
-            
         }
         private void vUpdateDisconnectedStatus()
         {
@@ -524,8 +523,6 @@ namespace MmmConfig.Forms
             lblConnStatus.Text = "No connection";
             btnConnect.Text = "Connect";
             tWdTimer.Enabled = false;
-
-            
         }
     }
 }

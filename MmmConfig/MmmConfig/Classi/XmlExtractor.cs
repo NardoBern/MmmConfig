@@ -11,7 +11,7 @@ namespace MmmConfig
     class XmlExtractor
     {
         #region Variable declarations
-        private XmlReader xmlReader;
+        
         #endregion
 
        

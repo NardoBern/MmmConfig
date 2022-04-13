@@ -11,8 +11,6 @@ namespace MmmConfig
     class XmlCreator
     {
         #region Variable declarations
-        private string strXmlFileName = "MmmDiagnostic";
-        private string strXmlExtension = ".xml";
         private XmlWriter xmlWriter;
         #endregion
 

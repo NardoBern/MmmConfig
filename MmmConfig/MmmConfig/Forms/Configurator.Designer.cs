@@ -192,9 +192,7 @@
             this.txtMaxSpeedM4 = new System.Windows.Forms.TextBox();
             this.lblMaxSpeedM4 = new System.Windows.Forms.Label();
             this.lblFixedSpeedM4 = new System.Windows.Forms.Label();
-            this.btnOpenLog = new System.Windows.Forms.Button();
             this.prgConnWd = new System.Windows.Forms.ProgressBar();
-            this.btnOpenLogReader = new System.Windows.Forms.Button();
             this.grpBoxMot1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot1)).BeginInit();
             this.grpBoxMot2.SuspendLayout();
@@ -2140,16 +2138,6 @@
             this.lblFixedSpeedM4.Text = "Fix Speed:";
             this.lblFixedSpeedM4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // btnOpenLog
-            // 
-            this.btnOpenLog.Location = new System.Drawing.Point(552, 46);
-            this.btnOpenLog.Name = "btnOpenLog";
-            this.btnOpenLog.Size = new System.Drawing.Size(75, 23);
-            this.btnOpenLog.TabIndex = 11;
-            this.btnOpenLog.Text = "Open Log";
-            this.btnOpenLog.UseVisualStyleBackColor = true;
-            this.btnOpenLog.Click += new System.EventHandler(this.button1_Click);
-            // 
             // prgConnWd
             // 
             this.prgConnWd.Location = new System.Drawing.Point(15, 70);
@@ -2158,24 +2146,12 @@
             this.prgConnWd.Step = 1;
             this.prgConnWd.TabIndex = 12;
             // 
-            // btnOpenLogReader
-            // 
-            this.btnOpenLogReader.Location = new System.Drawing.Point(269, 19);
-            this.btnOpenLogReader.Name = "btnOpenLogReader";
-            this.btnOpenLogReader.Size = new System.Drawing.Size(75, 23);
-            this.btnOpenLogReader.TabIndex = 13;
-            this.btnOpenLogReader.Text = "Show Log";
-            this.btnOpenLogReader.UseVisualStyleBackColor = true;
-            this.btnOpenLogReader.Click += new System.EventHandler(this.btnOpenLogReader_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 879);
-            this.Controls.Add(this.btnOpenLogReader);
             this.Controls.Add(this.prgConnWd);
-            this.Controls.Add(this.btnOpenLog);
             this.Controls.Add(this.grpBoxMot4);
             this.Controls.Add(this.grpBoxMot3);
             this.Controls.Add(this.grpBoxMot2);
@@ -2371,9 +2347,7 @@
         private System.Windows.Forms.Label lblGearOutMot4;
         private System.Windows.Forms.Label lblGearInMot4;
         private System.Windows.Forms.Label lblSyncMasterMot4;
-        private System.Windows.Forms.Button btnOpenLog;
         private System.Windows.Forms.ProgressBar prgConnWd;
-        private System.Windows.Forms.Button btnOpenLogReader;
     }
 }
 

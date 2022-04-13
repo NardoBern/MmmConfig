@@ -232,33 +232,7 @@ namespace MmmConfig
         private void btnSetPosMot2_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot2, 2, 4, CpuConnection); }
         private void btnSetPosMot3_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot3, 3, 4, CpuConnection); }
         private void btnSetPosMot4_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot4, 4, 4, CpuConnection); }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Forms.EventReader EventReaderForm = new Forms.EventReader();
-            //btnOpenLog.BackColor = Color.LightPink;
-            Cursor.Current = Cursors.WaitCursor;
-            motionEventLogger.iFreePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iFreepos", CpuConnection.tcClient);
-            motionEventLogger.iLastWritePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
-            //for (int _i = 0; _i <= motionEventLogger.iLastWritePos; _i++) { CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]); }
-            //btnOpenLog.BackColor = Color.LightGreen;
-            Cursor.Current = Cursors.Default;
-            EventReaderForm.Show();
-        }
-        private void btnOpenLogReader_Click(object sender, EventArgs e)
-        {
-            Cursor.Current = Cursors.WaitCursor;
-            //Forms.LogReader LogReaderForm = new Forms.LogReader();
-            //LogReaderForm.Show();
-            Forms.GettingInfo gettingInfo = new Forms.GettingInfo();
-            gettingInfo.Show();
-        }
-        private void btnLoadLog_Click(object sender, EventArgs e)
-        {
-            
-
-        }
-
+        
         #endregion
 
         #region Numeric selectors
