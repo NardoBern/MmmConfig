@@ -2162,6 +2162,8 @@
             this.Controls.Add(this.txtNetId);
             this.Controls.Add(this.lblConnStatus);
             this.Controls.Add(this.btnConnect);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Multi Motor Manager";
             this.Load += new System.EventHandler(this.Form1_Load);

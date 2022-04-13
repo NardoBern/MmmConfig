@@ -1191,7 +1191,9 @@ namespace MmmConfig.Forms
             this.Controls.Add(this.grpOpDescr);
             this.Controls.Add(this.dgvLogReader);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "LogReader";
             this.Text = "LogReader";
             this.Load += new System.EventHandler(this.LogReader_Load);

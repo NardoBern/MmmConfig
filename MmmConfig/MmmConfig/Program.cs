@@ -15,7 +15,7 @@ namespace MmmConfig
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.LogReader());
+            Application.Run(new Forms.MainSelector());
         }
     }
 }
