@@ -444,8 +444,15 @@ namespace MmmConfig
 
 
 
+
         #endregion
 
-        
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Forms.MainSelector mainSelector = new Forms.MainSelector();
+            mainSelector.ShowDialog();
+            this.Close();
+        }
     }
 }

@@ -22,9 +22,7 @@ namespace MmmConfig.Forms
             this.Hide();
             Form1 configuratorForm = new Form1();
             configuratorForm.ShowDialog();
-            this.Close();
-            
-            
+            this.Close();     
         }
 
         private void btnDiagnostic_Click(object sender, EventArgs e)

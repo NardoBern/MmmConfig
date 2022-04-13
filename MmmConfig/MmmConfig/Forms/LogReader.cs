@@ -23,6 +23,8 @@ namespace MmmConfig.Forms
         string[,] astrString = new string[1000,7];
         public Thread trd;
         private int _i;
+        public string strNetId = "192.168.193.200.1.1";
+        public string strPort = "851";
         #endregion
 
         #region Form related functions
@@ -44,6 +46,9 @@ namespace MmmConfig.Forms
                 motionEventLogger.events[_i].operationLog = new OperationLog();
             }
 
+            btnRefresh.Enabled = false;
+            btnStopRefresh.Enabled = false;
+
             if (CpuConnection.connected)
             {
                 vUpdateConnectedStatus();
@@ -54,8 +59,7 @@ namespace MmmConfig.Forms
                 vUpdateDisconnectedStatus();
             }
             cleanDataGridView();
-            populateDataGridView();
-            colorateDataGridView();
+            
             
             Cursor.Current = Cursors.Default;
         }
@@ -67,6 +71,7 @@ namespace MmmConfig.Forms
             motionEventLogger.iLastWritePos = iNumOfEventToRead;
             btnRefresh.Enabled = false;
             btnStopRefresh.Enabled = true;
+            lblInProgress.Text = "In progress...";
             try
             {
                 trd = new Thread(new ThreadStart(readEvent));
@@ -85,6 +90,7 @@ namespace MmmConfig.Forms
                     checkThread.Enabled = false;
                     btnStopRefresh.Enabled = false;
                     btnRefresh.Enabled = true;
+                    lblInProgress.Text = "Stopped";
                 }
             }
             catch (Exception _e) { MessageBox.Show("Error during stop of refresh Thread: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -100,6 +106,8 @@ namespace MmmConfig.Forms
                     cleanDataGridView();
                     populateDataGridView();
                     colorateDataGridView();
+                    lblInProgress.Text = "Done!!";
+                    btnStopRefresh.Enabled = false;
                 }
             }
             catch (Exception _e) { MessageBox.Show("Error during updating of logger: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -429,6 +437,11 @@ namespace MmmConfig.Forms
 
         private void saveToToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            saveToFile();
+        }
+
+        private void saveToFile()
+        {
             XmlCreator xmlCreator = new XmlCreator();
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "xml file|*.xml";
@@ -445,6 +458,11 @@ namespace MmmConfig.Forms
         }
 
         private void openFromToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFile();
+        }
+
+        private void openFile()
         {
             XmlExtractor xmlReader = new XmlExtractor();
             EventLogger readLogger = new EventLogger();
@@ -485,7 +503,7 @@ namespace MmmConfig.Forms
             }
             else
             {
-                CpuConnection.tcClient = CpuConnection.connect(txtNetId.Text, int.Parse(txtPort.Text));
+                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
                 tWdTimer.Enabled = true;
             }
         }
@@ -514,15 +532,51 @@ namespace MmmConfig.Forms
         private void vUpdateConnectedStatus()
         {
             lblConnStatus.Text = "Connected";
-            btnConnect.Text = "Disconnect";
+            btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png");
             tWdTimer.Enabled = true;
+            btnRefresh.Enabled = true;
         }
         private void vUpdateDisconnectedStatus()
         {
             CpuConnection.connected = false;
             lblConnStatus.Text = "No connection";
-            btnConnect.Text = "Connect";
+            btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png");
             tWdTimer.Enabled = false;
+            btnRefresh.Enabled = false;
+        }
+
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            CpuConnection.disconnect(CpuConnection.tcClient);
+            vUpdateDisconnectedStatus();
+            this.Hide();
+            Forms.MainSelector mainSelector = new Forms.MainSelector();
+            mainSelector.ShowDialog();
+            this.Dispose();
+            this.Close();
+        }
+
+        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ConnectionSettings connectionSettings = new Forms.ConnectionSettings();
+            connectionSettings.strNetId = strNetId;
+            connectionSettings.strPort = strPort;
+            var result = connectionSettings.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                strNetId = connectionSettings.strNetId;
+                strPort = connectionSettings.strPort;
+            }
+        }
+
+        private void btnSaveToFile_Click(object sender, EventArgs e)
+        {
+            saveToFile();
+        }
+
+        private void btnOpenFile_Click(object sender, EventArgs e)
+        {
+            openFile();
         }
     }
 }

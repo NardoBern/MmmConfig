@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnConnect = new System.Windows.Forms.Button();
             this.lblConnStatus = new System.Windows.Forms.Label();
             this.txtNetId = new System.Windows.Forms.TextBox();
@@ -193,6 +194,8 @@
             this.lblMaxSpeedM4 = new System.Windows.Forms.Label();
             this.lblFixedSpeedM4 = new System.Windows.Forms.Label();
             this.prgConnWd = new System.Windows.Forms.ProgressBar();
+            this.btnMain = new System.Windows.Forms.Button();
+            this.lblMainMenu = new System.Windows.Forms.Label();
             this.grpBoxMot1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot1)).BeginInit();
             this.grpBoxMot2.SuspendLayout();
@@ -2146,11 +2149,34 @@
             this.prgConnWd.Step = 1;
             this.prgConnWd.TabIndex = 12;
             // 
+            // btnMain
+            // 
+            this.btnMain.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMain.BackgroundImage")));
+            this.btnMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMain.Location = new System.Drawing.Point(619, 26);
+            this.btnMain.Name = "btnMain";
+            this.btnMain.Size = new System.Drawing.Size(75, 67);
+            this.btnMain.TabIndex = 13;
+            this.btnMain.UseVisualStyleBackColor = true;
+            this.btnMain.Click += new System.EventHandler(this.btnMain_Click);
+            // 
+            // lblMainMenu
+            // 
+            this.lblMainMenu.AutoSize = true;
+            this.lblMainMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMainMenu.Location = new System.Drawing.Point(636, 7);
+            this.lblMainMenu.Name = "lblMainMenu";
+            this.lblMainMenu.Size = new System.Drawing.Size(41, 16);
+            this.lblMainMenu.TabIndex = 14;
+            this.lblMainMenu.Text = "Main";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(708, 879);
+            this.Controls.Add(this.lblMainMenu);
+            this.Controls.Add(this.btnMain);
             this.Controls.Add(this.prgConnWd);
             this.Controls.Add(this.grpBoxMot4);
             this.Controls.Add(this.grpBoxMot3);
@@ -2163,8 +2189,10 @@
             this.Controls.Add(this.lblConnStatus);
             this.Controls.Add(this.btnConnect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Multi Motor Manager";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.grpBoxMot1.ResumeLayout(false);
@@ -2350,6 +2378,8 @@
         private System.Windows.Forms.Label lblGearInMot4;
         private System.Windows.Forms.Label lblSyncMasterMot4;
         private System.Windows.Forms.ProgressBar prgConnWd;
+        private System.Windows.Forms.Button btnMain;
+        private System.Windows.Forms.Label lblMainMenu;
     }
 }
 

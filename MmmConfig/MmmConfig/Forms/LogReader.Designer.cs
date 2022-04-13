@@ -30,6 +30,7 @@ namespace MmmConfig.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogReader));
             this.dgvLogReader = new System.Windows.Forms.DataGridView();
             this.EventNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,24 +108,29 @@ namespace MmmConfig.Forms
             this.checkThread = new System.Windows.Forms.Timer(this.components);
             this.prgBarGetInfo = new System.Windows.Forms.ProgressBar();
             this.btnStopRefresh = new System.Windows.Forms.Button();
-            this.grpLoadFromCpu = new System.Windows.Forms.GroupBox();
             this.lblInProgress = new System.Windows.Forms.Label();
             this.prgConnWd = new System.Windows.Forms.ProgressBar();
-            this.lblNetId = new System.Windows.Forms.Label();
-            this.txtPort = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
-            this.lblPort = new System.Windows.Forms.Label();
             this.lblConnStatus = new System.Windows.Forms.Label();
-            this.txtNetId = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tWdTimer = new System.Windows.Forms.Timer(this.components);
+            this.lblMainMenu = new System.Windows.Forms.Label();
+            this.btnMain = new System.Windows.Forms.Button();
+            this.lblConnect = new System.Windows.Forms.Label();
+            this.lblUpload = new System.Windows.Forms.Label();
+            this.lblCancel = new System.Windows.Forms.Label();
+            this.btnSaveToFile = new System.Windows.Forms.Button();
+            this.lblSaveToFile = new System.Windows.Forms.Label();
+            this.btnOpenFile = new System.Windows.Forms.Button();
+            this.lblOpenFile = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogReader)).BeginInit();
             this.grpOpDescr.SuspendLayout();
             this.grpError.SuspendLayout();
-            this.grpLoadFromCpu.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1009,12 +1015,13 @@ namespace MmmConfig.Forms
             // 
             // btnRefresh
             // 
+            this.btnRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRefresh.BackgroundImage")));
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRefresh.Location = new System.Drawing.Point(100, 48);
+            this.btnRefresh.Location = new System.Drawing.Point(168, 57);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.Size = new System.Drawing.Size(75, 67);
             this.btnRefresh.TabIndex = 50;
-            this.btnRefresh.Text = "Load";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
@@ -1025,127 +1032,71 @@ namespace MmmConfig.Forms
             // 
             // prgBarGetInfo
             // 
-            this.prgBarGetInfo.Location = new System.Drawing.Point(100, 97);
+            this.prgBarGetInfo.Location = new System.Drawing.Point(168, 151);
             this.prgBarGetInfo.Name = "prgBarGetInfo";
-            this.prgBarGetInfo.Size = new System.Drawing.Size(75, 15);
+            this.prgBarGetInfo.Size = new System.Drawing.Size(158, 24);
             this.prgBarGetInfo.TabIndex = 51;
             // 
             // btnStopRefresh
             // 
+            this.btnStopRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnStopRefresh.BackgroundImage")));
+            this.btnStopRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnStopRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStopRefresh.Location = new System.Drawing.Point(100, 120);
+            this.btnStopRefresh.Location = new System.Drawing.Point(251, 57);
             this.btnStopRefresh.Name = "btnStopRefresh";
-            this.btnStopRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnStopRefresh.Size = new System.Drawing.Size(75, 67);
             this.btnStopRefresh.TabIndex = 52;
-            this.btnStopRefresh.Text = "Cancel";
             this.btnStopRefresh.UseVisualStyleBackColor = true;
             this.btnStopRefresh.Click += new System.EventHandler(this.btnStopRefresh_Click);
-            // 
-            // grpLoadFromCpu
-            // 
-            this.grpLoadFromCpu.Controls.Add(this.lblInProgress);
-            this.grpLoadFromCpu.Controls.Add(this.btnStopRefresh);
-            this.grpLoadFromCpu.Controls.Add(this.prgConnWd);
-            this.grpLoadFromCpu.Controls.Add(this.lblNetId);
-            this.grpLoadFromCpu.Controls.Add(this.txtPort);
-            this.grpLoadFromCpu.Controls.Add(this.prgBarGetInfo);
-            this.grpLoadFromCpu.Controls.Add(this.btnConnect);
-            this.grpLoadFromCpu.Controls.Add(this.btnRefresh);
-            this.grpLoadFromCpu.Controls.Add(this.lblPort);
-            this.grpLoadFromCpu.Controls.Add(this.lblConnStatus);
-            this.grpLoadFromCpu.Controls.Add(this.txtNetId);
-            this.grpLoadFromCpu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpLoadFromCpu.Location = new System.Drawing.Point(12, 33);
-            this.grpLoadFromCpu.Name = "grpLoadFromCpu";
-            this.grpLoadFromCpu.Size = new System.Drawing.Size(201, 153);
-            this.grpLoadFromCpu.TabIndex = 54;
-            this.grpLoadFromCpu.TabStop = false;
-            this.grpLoadFromCpu.Text = "Load from CPU";
             // 
             // lblInProgress
             // 
             this.lblInProgress.AutoSize = true;
-            this.lblInProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInProgress.Location = new System.Drawing.Point(103, 81);
+            this.lblInProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInProgress.Location = new System.Drawing.Point(202, 131);
             this.lblInProgress.Name = "lblInProgress";
-            this.lblInProgress.Size = new System.Drawing.Size(68, 13);
+            this.lblInProgress.Size = new System.Drawing.Size(95, 15);
             this.lblInProgress.TabIndex = 57;
-            this.lblInProgress.Text = "In progress...";
+            this.lblInProgress.Text = "Ready to start";
             this.lblInProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // prgConnWd
             // 
-            this.prgConnWd.Location = new System.Drawing.Point(9, 124);
+            this.prgConnWd.Location = new System.Drawing.Point(35, 151);
             this.prgConnWd.Name = "prgConnWd";
-            this.prgConnWd.Size = new System.Drawing.Size(73, 15);
+            this.prgConnWd.Size = new System.Drawing.Size(73, 24);
             this.prgConnWd.Step = 1;
             this.prgConnWd.TabIndex = 61;
             // 
-            // lblNetId
-            // 
-            this.lblNetId.AutoSize = true;
-            this.lblNetId.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNetId.Location = new System.Drawing.Point(6, 30);
-            this.lblNetId.Name = "lblNetId";
-            this.lblNetId.Size = new System.Drawing.Size(35, 13);
-            this.lblNetId.TabIndex = 58;
-            this.lblNetId.Text = "NetID";
-            // 
-            // txtPort
-            // 
-            this.txtPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPort.Location = new System.Drawing.Point(48, 49);
-            this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(34, 20);
-            this.txtPort.TabIndex = 60;
-            this.txtPort.Text = "851";
-            // 
             // btnConnect
             // 
+            this.btnConnect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnConnect.BackgroundImage")));
+            this.btnConnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnect.Location = new System.Drawing.Point(9, 73);
+            this.btnConnect.Location = new System.Drawing.Point(34, 57);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(75, 23);
+            this.btnConnect.Size = new System.Drawing.Size(75, 67);
             this.btnConnect.TabIndex = 55;
-            this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
-            // lblPort
-            // 
-            this.lblPort.AutoSize = true;
-            this.lblPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPort.Location = new System.Drawing.Point(6, 52);
-            this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(26, 13);
-            this.lblPort.TabIndex = 59;
-            this.lblPort.Text = "Port";
-            // 
             // lblConnStatus
             // 
-            this.lblConnStatus.AutoSize = true;
-            this.lblConnStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConnStatus.Location = new System.Drawing.Point(7, 103);
+            this.lblConnStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConnStatus.Location = new System.Drawing.Point(21, 132);
             this.lblConnStatus.Name = "lblConnStatus";
-            this.lblConnStatus.Size = new System.Drawing.Size(78, 13);
+            this.lblConnStatus.Size = new System.Drawing.Size(100, 13);
             this.lblConnStatus.TabIndex = 56;
             this.lblConnStatus.Text = "Not connected";
-            // 
-            // txtNetId
-            // 
-            this.txtNetId.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNetId.Location = new System.Drawing.Point(45, 26);
-            this.txtNetId.Name = "txtNetId";
-            this.txtNetId.Size = new System.Drawing.Size(117, 20);
-            this.txtNetId.TabIndex = 57;
-            this.txtNetId.Text = "192.168.193.200.1.1";
+            this.lblConnStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.Menu;
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1234, 25);
@@ -1175,33 +1126,156 @@ namespace MmmConfig.Forms
             this.openFromToolStripMenuItem.Text = "Open From...";
             this.openFromToolStripMenuItem.Click += new System.EventHandler(this.openFromToolStripMenuItem_Click);
             // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.connectionToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(66, 21);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // connectionToolStripMenuItem
+            // 
+            this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
+            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.connectionToolStripMenuItem.Text = "Connection";
+            this.connectionToolStripMenuItem.Click += new System.EventHandler(this.connectionToolStripMenuItem_Click);
+            // 
             // tWdTimer
             // 
             this.tWdTimer.Interval = 500;
             this.tWdTimer.Tick += new System.EventHandler(this.tWdTimer_Tick);
             // 
+            // lblMainMenu
+            // 
+            this.lblMainMenu.AutoSize = true;
+            this.lblMainMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMainMenu.Location = new System.Drawing.Point(1162, 38);
+            this.lblMainMenu.Name = "lblMainMenu";
+            this.lblMainMenu.Size = new System.Drawing.Size(41, 16);
+            this.lblMainMenu.TabIndex = 58;
+            this.lblMainMenu.Text = "Main";
+            // 
+            // btnMain
+            // 
+            this.btnMain.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMain.BackgroundImage")));
+            this.btnMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnMain.Location = new System.Drawing.Point(1145, 57);
+            this.btnMain.Name = "btnMain";
+            this.btnMain.Size = new System.Drawing.Size(75, 67);
+            this.btnMain.TabIndex = 57;
+            this.btnMain.UseVisualStyleBackColor = true;
+            this.btnMain.Click += new System.EventHandler(this.btnMain_Click);
+            // 
+            // lblConnect
+            // 
+            this.lblConnect.AutoSize = true;
+            this.lblConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConnect.Location = new System.Drawing.Point(39, 38);
+            this.lblConnect.Name = "lblConnect";
+            this.lblConnect.Size = new System.Drawing.Size(64, 16);
+            this.lblConnect.TabIndex = 62;
+            this.lblConnect.Text = "Connect";
+            // 
+            // lblUpload
+            // 
+            this.lblUpload.AutoSize = true;
+            this.lblUpload.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUpload.Location = new System.Drawing.Point(174, 38);
+            this.lblUpload.Name = "lblUpload";
+            this.lblUpload.Size = new System.Drawing.Size(63, 16);
+            this.lblUpload.TabIndex = 63;
+            this.lblUpload.Text = "UpLoad";
+            // 
+            // lblCancel
+            // 
+            this.lblCancel.AutoSize = true;
+            this.lblCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCancel.Location = new System.Drawing.Point(260, 38);
+            this.lblCancel.Name = "lblCancel";
+            this.lblCancel.Size = new System.Drawing.Size(56, 16);
+            this.lblCancel.TabIndex = 64;
+            this.lblCancel.Text = "Cancel";
+            // 
+            // btnSaveToFile
+            // 
+            this.btnSaveToFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSaveToFile.BackgroundImage")));
+            this.btnSaveToFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSaveToFile.Location = new System.Drawing.Point(379, 57);
+            this.btnSaveToFile.Name = "btnSaveToFile";
+            this.btnSaveToFile.Size = new System.Drawing.Size(75, 67);
+            this.btnSaveToFile.TabIndex = 65;
+            this.btnSaveToFile.UseVisualStyleBackColor = true;
+            this.btnSaveToFile.Click += new System.EventHandler(this.btnSaveToFile_Click);
+            // 
+            // lblSaveToFile
+            // 
+            this.lblSaveToFile.AutoSize = true;
+            this.lblSaveToFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSaveToFile.Location = new System.Drawing.Point(377, 38);
+            this.lblSaveToFile.Name = "lblSaveToFile";
+            this.lblSaveToFile.Size = new System.Drawing.Size(79, 16);
+            this.lblSaveToFile.TabIndex = 66;
+            this.lblSaveToFile.Text = "Save To...";
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOpenFile.BackgroundImage")));
+            this.btnOpenFile.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOpenFile.Location = new System.Drawing.Point(464, 57);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(75, 67);
+            this.btnOpenFile.TabIndex = 67;
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            // 
+            // lblOpenFile
+            // 
+            this.lblOpenFile.AutoSize = true;
+            this.lblOpenFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOpenFile.Location = new System.Drawing.Point(462, 38);
+            this.lblOpenFile.Name = "lblOpenFile";
+            this.lblOpenFile.Size = new System.Drawing.Size(70, 16);
+            this.lblOpenFile.TabIndex = 68;
+            this.lblOpenFile.Text = "Open file";
+            // 
             // LogReader
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Menu;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1234, 862);
-            this.Controls.Add(this.grpLoadFromCpu);
+            this.Controls.Add(this.lblOpenFile);
+            this.Controls.Add(this.btnOpenFile);
+            this.Controls.Add(this.lblSaveToFile);
+            this.Controls.Add(this.btnSaveToFile);
+            this.Controls.Add(this.lblCancel);
+            this.Controls.Add(this.lblUpload);
+            this.Controls.Add(this.lblConnect);
+            this.Controls.Add(this.lblInProgress);
+            this.Controls.Add(this.lblMainMenu);
+            this.Controls.Add(this.btnStopRefresh);
+            this.Controls.Add(this.btnMain);
+            this.Controls.Add(this.prgBarGetInfo);
+            this.Controls.Add(this.prgConnWd);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.grpError);
+            this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.lblConnStatus);
             this.Controls.Add(this.grpOpDescr);
             this.Controls.Add(this.dgvLogReader);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "LogReader";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LogReader";
             this.Load += new System.EventHandler(this.LogReader_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLogReader)).EndInit();
             this.grpOpDescr.ResumeLayout(false);
             this.grpError.ResumeLayout(false);
-            this.grpLoadFromCpu.ResumeLayout(false);
-            this.grpLoadFromCpu.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1288,19 +1362,25 @@ namespace MmmConfig.Forms
         private System.Windows.Forms.Timer checkThread;
         private System.Windows.Forms.ProgressBar prgBarGetInfo;
         private System.Windows.Forms.Button btnStopRefresh;
-        private System.Windows.Forms.GroupBox grpLoadFromCpu;
         private System.Windows.Forms.Label lblInProgress;
         private System.Windows.Forms.ProgressBar prgConnWd;
-        private System.Windows.Forms.Label lblNetId;
-        private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Button btnConnect;
-        private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.Label lblConnStatus;
-        private System.Windows.Forms.TextBox txtNetId;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openFromToolStripMenuItem;
         private System.Windows.Forms.Timer tWdTimer;
+        private System.Windows.Forms.Label lblMainMenu;
+        private System.Windows.Forms.Button btnMain;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
+        private System.Windows.Forms.Label lblConnect;
+        private System.Windows.Forms.Label lblUpload;
+        private System.Windows.Forms.Label lblCancel;
+        private System.Windows.Forms.Button btnSaveToFile;
+        private System.Windows.Forms.Label lblSaveToFile;
+        private System.Windows.Forms.Button btnOpenFile;
+        private System.Windows.Forms.Label lblOpenFile;
     }
 }
