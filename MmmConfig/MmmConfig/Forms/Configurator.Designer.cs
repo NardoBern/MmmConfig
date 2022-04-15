@@ -32,10 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnConnect = new System.Windows.Forms.Button();
             this.lblConnStatus = new System.Windows.Forms.Label();
-            this.txtNetId = new System.Windows.Forms.TextBox();
-            this.lblNetId = new System.Windows.Forms.Label();
-            this.lblPort = new System.Windows.Forms.Label();
-            this.txtPort = new System.Windows.Forms.TextBox();
             this.tWdTimer = new System.Windows.Forms.Timer(this.components);
             this.btnEnableMot1 = new System.Windows.Forms.Button();
             this.grpBoxMot1 = new System.Windows.Forms.GroupBox();
@@ -196,6 +192,10 @@
             this.prgConnWd = new System.Windows.Forms.ProgressBar();
             this.btnMain = new System.Windows.Forms.Button();
             this.lblMainMenu = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblConnect = new System.Windows.Forms.Label();
             this.grpBoxMot1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot1)).BeginInit();
             this.grpBoxMot2.SuspendLayout();
@@ -204,60 +204,28 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot3)).BeginInit();
             this.grpBoxMot4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot4)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(174, 19);
+            this.btnConnect.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnConnect.BackgroundImage")));
+            this.btnConnect.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnConnect.Location = new System.Drawing.Point(15, 64);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(75, 23);
+            this.btnConnect.Size = new System.Drawing.Size(75, 67);
             this.btnConnect.TabIndex = 0;
-            this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // lblConnStatus
             // 
-            this.lblConnStatus.AutoSize = true;
-            this.lblConnStatus.Location = new System.Drawing.Point(94, 46);
+            this.lblConnStatus.Location = new System.Drawing.Point(13, 146);
             this.lblConnStatus.Name = "lblConnStatus";
             this.lblConnStatus.Size = new System.Drawing.Size(78, 13);
             this.lblConnStatus.TabIndex = 1;
             this.lblConnStatus.Text = "Not connected";
-            // 
-            // txtNetId
-            // 
-            this.txtNetId.Location = new System.Drawing.Point(51, 20);
-            this.txtNetId.Name = "txtNetId";
-            this.txtNetId.Size = new System.Drawing.Size(117, 20);
-            this.txtNetId.TabIndex = 2;
-            this.txtNetId.Text = "192.168.193.200.1.1";
-            // 
-            // lblNetId
-            // 
-            this.lblNetId.AutoSize = true;
-            this.lblNetId.Location = new System.Drawing.Point(12, 24);
-            this.lblNetId.Name = "lblNetId";
-            this.lblNetId.Size = new System.Drawing.Size(35, 13);
-            this.lblNetId.TabIndex = 3;
-            this.lblNetId.Text = "NetID";
-            // 
-            // lblPort
-            // 
-            this.lblPort.AutoSize = true;
-            this.lblPort.Location = new System.Drawing.Point(12, 46);
-            this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(26, 13);
-            this.lblPort.TabIndex = 4;
-            this.lblPort.Text = "Port";
-            // 
-            // txtPort
-            // 
-            this.txtPort.Location = new System.Drawing.Point(54, 43);
-            this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(34, 20);
-            this.txtPort.TabIndex = 5;
-            this.txtPort.Text = "851";
+            this.lblConnStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tWdTimer
             // 
@@ -317,7 +285,7 @@
             this.grpBoxMot1.Controls.Add(this.btnMoveFwMot1);
             this.grpBoxMot1.Controls.Add(this.btnEnableMot1);
             this.grpBoxMot1.ForeColor = System.Drawing.Color.Black;
-            this.grpBoxMot1.Location = new System.Drawing.Point(15, 97);
+            this.grpBoxMot1.Location = new System.Drawing.Point(15, 204);
             this.grpBoxMot1.Name = "grpBoxMot1";
             this.grpBoxMot1.Size = new System.Drawing.Size(337, 373);
             this.grpBoxMot1.TabIndex = 8;
@@ -776,7 +744,7 @@
             this.grpBoxMot2.Controls.Add(this.lblMaxSpeedM2);
             this.grpBoxMot2.Controls.Add(this.lblRpmM2);
             this.grpBoxMot2.ForeColor = System.Drawing.Color.Black;
-            this.grpBoxMot2.Location = new System.Drawing.Point(358, 97);
+            this.grpBoxMot2.Location = new System.Drawing.Point(358, 204);
             this.grpBoxMot2.Name = "grpBoxMot2";
             this.grpBoxMot2.Size = new System.Drawing.Size(337, 373);
             this.grpBoxMot2.TabIndex = 9;
@@ -1245,7 +1213,7 @@
             this.grpBoxMot3.Controls.Add(this.btnMoveFwMot3);
             this.grpBoxMot3.Controls.Add(this.btnEnableMot3);
             this.grpBoxMot3.ForeColor = System.Drawing.Color.Black;
-            this.grpBoxMot3.Location = new System.Drawing.Point(15, 476);
+            this.grpBoxMot3.Location = new System.Drawing.Point(15, 580);
             this.grpBoxMot3.Name = "grpBoxMot3";
             this.grpBoxMot3.Size = new System.Drawing.Size(337, 373);
             this.grpBoxMot3.TabIndex = 10;
@@ -1714,7 +1682,7 @@
             this.grpBoxMot4.Controls.Add(this.lblMaxSpeedM4);
             this.grpBoxMot4.Controls.Add(this.lblFixedSpeedM4);
             this.grpBoxMot4.ForeColor = System.Drawing.Color.Black;
-            this.grpBoxMot4.Location = new System.Drawing.Point(358, 476);
+            this.grpBoxMot4.Location = new System.Drawing.Point(358, 580);
             this.grpBoxMot4.Name = "grpBoxMot4";
             this.grpBoxMot4.Size = new System.Drawing.Size(337, 373);
             this.grpBoxMot4.TabIndex = 9;
@@ -2143,7 +2111,7 @@
             // 
             // prgConnWd
             // 
-            this.prgConnWd.Location = new System.Drawing.Point(15, 70);
+            this.prgConnWd.Location = new System.Drawing.Point(16, 162);
             this.prgConnWd.Name = "prgConnWd";
             this.prgConnWd.Size = new System.Drawing.Size(73, 15);
             this.prgConnWd.Step = 1;
@@ -2153,7 +2121,7 @@
             // 
             this.btnMain.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnMain.BackgroundImage")));
             this.btnMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnMain.Location = new System.Drawing.Point(619, 26);
+            this.btnMain.Location = new System.Drawing.Point(620, 64);
             this.btnMain.Name = "btnMain";
             this.btnMain.Size = new System.Drawing.Size(75, 67);
             this.btnMain.TabIndex = 13;
@@ -2164,17 +2132,54 @@
             // 
             this.lblMainMenu.AutoSize = true;
             this.lblMainMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMainMenu.Location = new System.Drawing.Point(636, 7);
+            this.lblMainMenu.Location = new System.Drawing.Point(637, 45);
             this.lblMainMenu.Name = "lblMainMenu";
             this.lblMainMenu.Size = new System.Drawing.Size(41, 16);
             this.lblMainMenu.TabIndex = 14;
             this.lblMainMenu.Text = "Main";
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(708, 24);
+            this.menuStrip1.TabIndex = 15;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.connectionToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // connectionToolStripMenuItem
+            // 
+            this.connectionToolStripMenuItem.Name = "connectionToolStripMenuItem";
+            this.connectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.connectionToolStripMenuItem.Text = "Connection";
+            this.connectionToolStripMenuItem.Click += new System.EventHandler(this.connectionToolStripMenuItem_Click);
+            // 
+            // lblConnect
+            // 
+            this.lblConnect.AutoSize = true;
+            this.lblConnect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConnect.Location = new System.Drawing.Point(20, 45);
+            this.lblConnect.Name = "lblConnect";
+            this.lblConnect.Size = new System.Drawing.Size(64, 16);
+            this.lblConnect.TabIndex = 63;
+            this.lblConnect.Text = "Connect";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 879);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(708, 962);
+            this.Controls.Add(this.lblConnect);
             this.Controls.Add(this.lblMainMenu);
             this.Controls.Add(this.btnMain);
             this.Controls.Add(this.prgConnWd);
@@ -2182,14 +2187,12 @@
             this.Controls.Add(this.grpBoxMot3);
             this.Controls.Add(this.grpBoxMot2);
             this.Controls.Add(this.grpBoxMot1);
-            this.Controls.Add(this.txtPort);
-            this.Controls.Add(this.lblPort);
-            this.Controls.Add(this.lblNetId);
-            this.Controls.Add(this.txtNetId);
             this.Controls.Add(this.lblConnStatus);
             this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -2207,6 +2210,8 @@
             this.grpBoxMot4.ResumeLayout(false);
             this.grpBoxMot4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSyncMasterMot4)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2216,10 +2221,6 @@
 
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.Label lblConnStatus;
-        private System.Windows.Forms.TextBox txtNetId;
-        private System.Windows.Forms.Label lblNetId;
-        private System.Windows.Forms.Label lblPort;
-        private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Timer tWdTimer;
         private System.Windows.Forms.Button btnEnableMot1;
         private System.Windows.Forms.GroupBox grpBoxMot1;
@@ -2380,6 +2381,10 @@
         private System.Windows.Forms.ProgressBar prgConnWd;
         private System.Windows.Forms.Button btnMain;
         private System.Windows.Forms.Label lblMainMenu;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connectionToolStripMenuItem;
+        private System.Windows.Forms.Label lblConnect;
     }
 }
 
