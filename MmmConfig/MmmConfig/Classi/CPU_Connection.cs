@@ -44,42 +44,25 @@ namespace MmmConfig
 
             tcClient.Timeout = 5000;
 
-            try
-            {
-                tcClient.Connect(strNetId, 851);
-            }
+            try { tcClient.Connect(strNetId, 851); }
             catch (TwinCAT.Ads.AdsErrorException e) {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione: " + e.ToString());
             }
             
-            if (tcClient.IsConnected)
-            {
-                //connected = true;
-                return tcClient;
-            }
-            else
-            {
-                //connected = false;
-                return null;
-            }
+            if (tcClient.IsConnected) { return tcClient; } else { return null;}
         }
         
         /* Disconnection function */
         public bool disconnect(AdsClient adsClient)
         {
-            adsClient.Disconnect();
-            adsClient.Dispose();
-            if (adsClient.IsConnected)
+            if (adsClient != null)
             {
-                //connected = true;
-                return false;
+                adsClient.Disconnect();
+                adsClient.Dispose();
+                if (adsClient.IsConnected) { return false;} else { return true;}
             }
-            else
-            {
-                //connected = false;
-                return true;
-            }
+            else { return false;}
         }
         #endregion
 

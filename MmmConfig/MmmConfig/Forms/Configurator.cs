@@ -25,6 +25,8 @@ namespace MmmConfig
         private int iWdCheck = 0;
         const string c_strMotionEventLogPath = "GVL_Hmi.stMotionEventLogger";
         public static EventLogger motionEventLogger;
+        public string strNetId = "192.168.193.200.1.1";
+        public string strPort = "851";
         #endregion
 
         #region Form related function
@@ -200,7 +202,7 @@ namespace MmmConfig
             }
             else
             {
-                CpuConnection.tcClient = CpuConnection.connect(txtNetId.Text, int.Parse(txtPort.Text));
+                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
                 tWdTimer.Enabled = true;
             }
         }
@@ -343,7 +345,7 @@ namespace MmmConfig
         private void vUpdateConnectedStatus()
         {
             lblConnStatus.Text = "Connected";
-            btnConnect.Text = "Disconnect";
+            btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png");
             tWdTimer.Enabled = true;
             if (!(motor[0].motorStatus.xEventEnabled)) { 
                 ReadMotorSts();
@@ -361,7 +363,7 @@ namespace MmmConfig
         {
             CpuConnection.connected = false;
             lblConnStatus.Text = "No connection";
-            btnConnect.Text = "Connect";
+            btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png");
             tWdTimer.Enabled = false;
             
             //tUpdateData.Enabled = false;
@@ -449,10 +451,25 @@ namespace MmmConfig
 
         private void btnMain_Click(object sender, EventArgs e)
         {
+            CpuConnection.disconnect(CpuConnection.tcClient);
+            vUpdateDisconnectedStatus();
             this.Hide();
             Forms.MainSelector mainSelector = new Forms.MainSelector();
             mainSelector.ShowDialog();
             this.Close();
+        }
+
+        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ConnectionSettings connectionSettings = new Forms.ConnectionSettings();
+            connectionSettings.strNetId = strNetId;
+            connectionSettings.strPort = strPort;
+            var result = connectionSettings.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                strNetId = connectionSettings.strNetId;
+                strPort = connectionSettings.strPort;
+            }
         }
     }
 }
