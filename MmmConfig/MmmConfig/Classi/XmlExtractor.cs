@@ -13,8 +13,52 @@ namespace MmmConfig
         #region Variable declarations
         
         #endregion
+        public void readConfiguration(string strFilePath)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(strFilePath);
+            foreach (XmlNode firstLevelNode in doc.DocumentElement.ChildNodes)
+            {
+                switch (firstLevelNode.Name) 
+                {
+                    case "connection":
+                        foreach (XmlNode secondLevelNode in firstLevelNode.ChildNodes)
+                        {
+                            switch (secondLevelNode.Name)
+                            {
+                                case "netId":
+                                    break;
+                                case "port":
+                                    break;
+                            }
+                        }
+                        break;
+                    case "variablePath":
+                        foreach (XmlNode secondLevelNode in firstLevelNode.ChildNodes) 
+                        { 
+                            switch (secondLevelNode.Name)
+                            {
+                                case "eventLog":
+                                    break;
+                                case "eventLogSize":
+                                    break;
+                                case "readWd":
+                                    break;
+                                case "writeWd":
+                                    break;
+                                case "motorCfgWrite":
+                                    break;
+                                case "motorCfgRead":
+                                    break;
+                                case "motorStatus":
+                                    break;
+                            }
+                        }
+                        break;
+                }
+            }
+        }
 
-       
         public void readXml(string strFilePath, EventLogger eventLogger)
         {
             XmlDocument doc = new XmlDocument();

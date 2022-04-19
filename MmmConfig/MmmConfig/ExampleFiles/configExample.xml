@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <xml>
   <connection>
-    <NetId>192.168.193.200.1.1</NetId>
+    <netId>192.168.193.200.1.1</netId>
     <port>851</port>
   </connection>
   <variablePath>
