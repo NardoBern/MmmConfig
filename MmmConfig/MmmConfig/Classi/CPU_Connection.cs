@@ -15,6 +15,9 @@ using System.Data;
 using TwinCAT.TypeSystem;
 using System.Threading;
 using System.Threading.Tasks;
+using TwinCAT.Ads.TypeSystem;
+using TwinCAT;
+
 
 namespace MmmConfig
 {
@@ -28,6 +31,7 @@ namespace MmmConfig
         public int iTimeOut = 0;
         public Motor Motors;
         public MemoryStream datastream;
+        private IAdsSymbolLoader symbolLoader;
         #endregion
 
         #region Connection methods
@@ -374,6 +378,22 @@ namespace MmmConfig
             {
                 ErrorManagement(e);
                 return "Error";
+            }
+        }
+
+        public void browseTag(AdsClient adsClient)
+        {
+            if (adsClient.IsConnected)
+            {
+                symbolLoader = (IAdsSymbolLoader)SymbolLoaderFactory.Create(adsClient, SymbolLoaderSettings.Default);
+
+                foreach (IAdsSymbol symbol in symbolLoader.Symbols)
+                {
+                    TreeNode node = new TreeNode(symbol.InstanceName);
+                    node.Tag = symbol;
+                    //treeViewSymbols.Nodes.Add(node); dall'esempio
+                }
+
             }
         }
 

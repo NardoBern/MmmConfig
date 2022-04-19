@@ -471,5 +471,10 @@ namespace MmmConfig
                 strPort = connectionSettings.strPort;
             }
         }
+
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            CpuConnection.browseTag(CpuConnection.tcClient);
+        }
     }
 }
