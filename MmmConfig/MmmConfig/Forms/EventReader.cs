@@ -134,6 +134,9 @@ namespace MmmConfig.Forms
             
             switch (@event.error.enumErrorName)
             {
+                case enumErrorName.eNoError:
+                    lblErrorDescr.Text = "No error";
+                    break;
                 case enumErrorName.eResetMasterEncoder:
                     lblErrorDescr.Text = c_strErrorDescr + "Reset master encoder";
                     break;

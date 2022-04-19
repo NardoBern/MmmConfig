@@ -8,6 +8,7 @@ namespace MmmConfig
 {
     public enum enumErrorName
     {
+        eNoError,
         eResetMasterEncoder,
         eZeroMasterEncoder,
         eFbAxisManager,

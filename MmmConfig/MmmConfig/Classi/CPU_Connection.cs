@@ -283,39 +283,42 @@ namespace MmmConfig
             switch (tempInt)
             {
                 case 0:
-                    errorName = enumErrorName.eResetMasterEncoder;
+                    errorName = enumErrorName.eNoError;
                     return errorName;
                 case 1:
-                    errorName = enumErrorName.eZeroMasterEncoder;
+                    errorName = enumErrorName.eResetMasterEncoder;
                     return errorName;
                 case 2:
-                    errorName = enumErrorName.eFbAxisManager;
+                    errorName = enumErrorName.eZeroMasterEncoder;
                     return errorName;
                 case 3:
-                    errorName = enumErrorName.eResetAxis;
+                    errorName = enumErrorName.eFbAxisManager;
                     return errorName;
                 case 4:
-                    errorName = enumErrorName.aAxisHoming;
+                    errorName = enumErrorName.eResetAxis;
                     return errorName;
                 case 5:
-                    errorName = enumErrorName.eGearIn;
+                    errorName = enumErrorName.aAxisHoming;
                     return errorName;
                 case 6:
-                    errorName = enumErrorName.eGearOut;
+                    errorName = enumErrorName.eGearIn;
                     return errorName;
                 case 7:
-                    errorName = enumErrorName.ePhasing;
+                    errorName = enumErrorName.eGearOut;
                     return errorName;
                 case 8:
-                    errorName = enumErrorName.ePower;
+                    errorName = enumErrorName.ePhasing;
                     return errorName;
                 case 9:
-                    errorName = enumErrorName.eJog;
+                    errorName = enumErrorName.ePower;
                     return errorName;
                 case 10:
-                    errorName = enumErrorName.eMoveVel;
+                    errorName = enumErrorName.eJog;
                     return errorName;
                 case 11:
+                    errorName = enumErrorName.eMoveVel;
+                    return errorName;
+                case 12:
                     errorName = enumErrorName.eSetPos;
                     return errorName;
                 default:

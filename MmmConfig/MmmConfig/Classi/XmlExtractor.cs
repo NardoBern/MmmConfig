@@ -110,6 +110,9 @@ namespace MmmConfig
                             case "ErrorDescription":
                                 switch (thirdLevelNode.InnerText)
                                 {
+                                    case "No error":
+                                        eventLogger.events[_i].error.enumErrorName = enumErrorName.eNoError;
+                                        break;
                                     case "Reset master encoder":
                                         eventLogger.events[_i].error.enumErrorName = enumErrorName.eResetMasterEncoder;
                                         break;

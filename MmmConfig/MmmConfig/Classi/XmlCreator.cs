@@ -81,6 +81,9 @@ namespace MmmConfig
             string strErrorDescription;
             switch (@event.error.enumErrorName)
             {
+                case enumErrorName.eNoError:
+                    strErrorDescription = "No error";
+                    break;
                 case enumErrorName.eResetMasterEncoder:
                     strErrorDescription = "Reset master encoder";
                     break;

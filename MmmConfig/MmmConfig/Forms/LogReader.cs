@@ -263,6 +263,9 @@ namespace MmmConfig.Forms
             lblError.Text = "Error global: " + @event.error.xErrorGlobal.ToString();
             switch (@event.error.enumErrorName)
             {
+                case enumErrorName.eNoError:
+                    lblErrorDescr.Text = "No error";
+                    break;
                 case enumErrorName.eResetMasterEncoder:
                     lblErrorDescr.Text = c_strErrorDescr + "Reset master encoder";
                     break;
