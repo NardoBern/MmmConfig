@@ -19,12 +19,12 @@ namespace MmmConfig.Forms
         private int iWdCheck = 0;
         
         public static EventLogger motionEventLogger;
-        public string c_strMotionEventLogPath = MainSelector.appConfig.strMotionEventLogPath; //"GVL_Hmi.stMotionEventLogger";
+        public string c_strMotionEventLogPath = MainSelector.appConfig.strMotionEventLogPath;
         string[,] astrString = new string[1000,7];
         public Thread trd;
         private int _i;
-        public string strNetId = MainSelector.appConfig.strDefaultNetId; //"192.168.193.200.1.1";
-        public string strPort = MainSelector.appConfig.iDefaultPort.ToString(); //"851";
+        public string strNetId = MainSelector.appConfig.strDefaultNetId;
+        public string strPort = MainSelector.appConfig.iDefaultPort.ToString();
         #endregion
 
         #region Form related functions
@@ -34,19 +34,22 @@ namespace MmmConfig.Forms
         }
         private void LogReader_Load(object sender, EventArgs e)
         {
-            CpuConnection = new CPU_Connection();
+            try {             
+                CpuConnection = new CPU_Connection();
             
-            motionEventLogger = new EventLogger();
-            motionEventLogger.events = new Event[1000];
-            for (int _i = 0; _i < 1000; _i++)
-            {
-                motionEventLogger.events[_i] = new Event();
-                motionEventLogger.events[_i].error = new Error();
-                motionEventLogger.events[_i].operationLog = new OperationLog();
-            }
+                motionEventLogger = new EventLogger();
+                motionEventLogger.events = new Event[1000];
+                for (int _i = 0; _i < 1000; _i++)
+                {
+                    motionEventLogger.events[_i] = new Event();
+                    motionEventLogger.events[_i].error = new Error();
+                    motionEventLogger.events[_i].operationLog = new OperationLog();
+                }
 
-            btnRefresh.Enabled = false;
-            btnStopRefresh.Enabled = false;
+                btnRefresh.Enabled = false;
+                btnStopRefresh.Enabled = false;
+            }
+            catch (Exception ex) { MessageBox.Show("Error while laoding diagnostic app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
 
             if (CpuConnection.connected)
             {
@@ -62,7 +65,11 @@ namespace MmmConfig.Forms
             
             Cursor.Current = Cursors.Default;
         }
-        private void dgvLogReader_CellContentClick(object sender, DataGridViewCellEventArgs e) { populateEventDetail(motionEventLogger.events[Convert.ToInt16(dgvLogReader.Rows[e.RowIndex].Cells[0].Value)]); }
+        private void dgvLogReader_CellContentClick(object sender, DataGridViewCellEventArgs e) 
+        { 
+            try { populateEventDetail(motionEventLogger.events[Convert.ToInt16(dgvLogReader.Rows[e.RowIndex].Cells[0].Value)]); }
+            catch (Exception ex) { MessageBox.Show("Error while retrieving event information: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);}
+        }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
@@ -175,14 +182,8 @@ namespace MmmConfig.Forms
                 strPort = connectionSettings.strPort;
             }
         }
-        private void btnSaveToFile_Click(object sender, EventArgs e)
-        {
-            saveToFile();
-        }
-        private void btnOpenFile_Click(object sender, EventArgs e)
-        {
-            openFile();
-        }
+        private void btnSaveToFile_Click(object sender, EventArgs e) {saveToFile();}
+        private void btnOpenFile_Click(object sender, EventArgs e) {openFile();}
 
         #endregion
 
@@ -494,31 +495,39 @@ namespace MmmConfig.Forms
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "xml file|*.xml";
             saveFileDialog.Title = "Save diagnostic file";
-            string tempString = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
-            tempString = tempString.Replace(" ", "");
-            tempString = tempString.Replace("/", "");
-            tempString = tempString.Replace(":", "");
-            saveFileDialog.FileName = "MmmDiagnostic_" + tempString;
+            try 
+            {
+                string tempString = DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
+                tempString = tempString.Replace(" ", "");
+                tempString = tempString.Replace("/", "");
+                tempString = tempString.Replace(":", "");
+                saveFileDialog.FileName = "MmmDiagnostic_" + tempString;
+            }
+            catch (Exception ex) { MessageBox.Show("Error while get date and time to save the file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName); }
+                try { if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName); } }
+                catch (Exception ex) { MessageBox.Show("Error while saving file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             }
         }
         private void openFile()
         {
             XmlExtractor xmlReader = new XmlExtractor();
             EventLogger readLogger = new EventLogger();
-            for (int _i = 0; _i < EventLogger.iEventSize; _i++)
-            {
-                readLogger.events[_i] = new Event();
-                readLogger.events[_i].operationLog = new OperationLog();
-                readLogger.events[_i].operationLog.aiOpValue = new int[5];
-                readLogger.events[_i].operationLog.arOpValue = new double[5];
-                readLogger.events[_i].operationLog.astrOpValue = new string[5];
-                readLogger.events[_i].error = new Error();
-                readLogger.events[_i].error.axErrBit = new bool[16];
-                readLogger.events[_i].error.audiErrId = new uint[16];
+            try { 
+                for (int _i = 0; _i < EventLogger.iEventSize; _i++)
+                {
+                    readLogger.events[_i] = new Event();
+                    readLogger.events[_i].operationLog = new OperationLog();
+                    readLogger.events[_i].operationLog.aiOpValue = new int[5];
+                    readLogger.events[_i].operationLog.arOpValue = new double[5];
+                    readLogger.events[_i].operationLog.astrOpValue = new string[5];
+                    readLogger.events[_i].error = new Error();
+                    readLogger.events[_i].error.axErrBit = new bool[16];
+                    readLogger.events[_i].error.audiErrId = new uint[16];
+                }
             }
+            catch (Exception ex) { MessageBox.Show("Error while inizializing logger reader: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.FileName = "Select an xml file";
             openFileDialog.Filter = "Xml files (*.xml|*.xml";
@@ -538,7 +547,8 @@ namespace MmmConfig.Forms
         private void vUpdateConnectedStatus()
         {
             lblConnStatus.Text = "Connected";
-            btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png");
+            try { btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png"); }
+            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             tWdTimer.Enabled = true;
             btnRefresh.Enabled = true;
         }
@@ -546,7 +556,8 @@ namespace MmmConfig.Forms
         {
             CpuConnection.connected = false;
             lblConnStatus.Text = "No connection";
-            btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png");
+            try { btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png"); }
+            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             tWdTimer.Enabled = false;
             btnRefresh.Enabled = false;
         }

@@ -8,10 +8,12 @@ namespace MmmConfig
 {
     public class OperationLog
     {
+        #region Variable declaration
         public string strOperationDescr;
         public int[] aiOpValue;
         public double[] arOpValue;
         public string[] astrOpValue;
+        #endregion
 
         public OperationLog()
         {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MmmConfig
 {
+    #region Variable declaration
     public enum enumErrorName
     {
         eNoError,
@@ -22,6 +23,7 @@ namespace MmmConfig
         eMoveVel,
         eSetPos
     }
+    #endregion
     public class Error
     {
         public bool xErrorGlobal;

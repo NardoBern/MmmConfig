@@ -13,28 +13,40 @@ namespace MmmConfig.Forms
 {
     public partial class MainSelector : Form
     {
+        #region Variable declarations
         public static AppConfig appConfig = new AppConfig();
+        #endregion
+
+        #region Form related functions
         public MainSelector()
         {
             InitializeComponent();
         }
 
+        #region Button related functions
         private void btnConfigurator_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Form1 configuratorForm = new Form1();
-            configuratorForm.ShowDialog();
-            this.Close();     
+            try { 
+                this.Hide();
+                Form1 configuratorForm = new Form1();
+                configuratorForm.ShowDialog();
+                this.Close();
+            }
+            catch (Exception ex) { MessageBox.Show("Error while opening configurator app: " + ex.ToString(),"Error",MessageBoxButtons.OK,MessageBoxIcon.Error); this.Dispose(); }
         }
 
         private void btnDiagnostic_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            Forms.LogReader logReader = new Forms.LogReader();
-            logReader.ShowDialog();
-            this.Close();
+            try { 
+                this.Hide();
+                Forms.LogReader logReader = new Forms.LogReader();
+                logReader.ShowDialog();
+                this.Close();
+            }
+            catch (Exception ex) { MessageBox.Show("Error while opening diagnostic app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Dispose();  }
         }
 
+        #endregion
         private void MainSelector_Load(object sender, EventArgs e)
         {
             XmlExtractor xmlExtractor = new XmlExtractor();
@@ -49,5 +61,6 @@ namespace MmmConfig.Forms
             catch (UnauthorizedAccessException ue) { MessageBox.Show("Access to folder is not authorized: " + ue.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             catch (FileNotFoundException ue) { MessageBox.Show("File not found: " + ue.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
+        #endregion
     }
 }

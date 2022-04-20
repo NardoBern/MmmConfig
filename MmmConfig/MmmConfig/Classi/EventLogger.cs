@@ -8,22 +8,15 @@ namespace MmmConfig
 {
     public class EventLogger
     {
+        #region Variable declaration
         public int iFreePos;
         public int iLastWritePos;
         public Event[] events;
         public const int iEventSize = 1000;
         public bool xEventEnabled;
         public uint uiVarHandle;
+        #endregion
 
-        public EventLogger()
-        {
-            //int _i;
-            events = new Event[iEventSize];
-            /*for (_i = 0; _i <= iEventSize; _i++)
-            {
-                events[_i] = new Event();
-            }*/
-        
-        }
+        public EventLogger() {events = new Event[iEventSize];}
     }
 }

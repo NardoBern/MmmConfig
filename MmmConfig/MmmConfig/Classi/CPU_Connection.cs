@@ -48,6 +48,7 @@ namespace MmmConfig
             catch (TwinCAT.Ads.AdsErrorException e) {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione: " + e.ToString());
+                MessageBox.Show("Connection error: " + e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
             if (tcClient.IsConnected) { return tcClient; } else { return null;}
@@ -94,6 +95,7 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la lettura di un valore intero " + e.ToString());
+                MessageBox.Show("Error while reading integer value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
                 return 99;
             }
@@ -122,6 +124,7 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la lettura di un valore boolean " + e.ToString());
+                MessageBox.Show("Error while reading boolean value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (System.ObjectDisposedException e)
@@ -187,6 +190,7 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la lettura di un evento " + e.ToString());
+                MessageBox.Show("Error while reading event: " + iEventNum.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (System.ObjectDisposedException e)
@@ -206,43 +210,64 @@ namespace MmmConfig
             byte[] readBuffer = new byte[5 * 81];
             string[] opValues = new string[5];
 
-            for (int _i = 0; _i < uiVarHandle.Length; _i++)
-            {
-                opValues[_i] = readString(uiVarHandle[_i], adsClient);
+            try { 
+                for (int _i = 0; _i < uiVarHandle.Length; _i++)
+                {
+                    opValues[_i] = readString(uiVarHandle[_i], adsClient);
+                }
+                return opValues;
             }
-            return opValues;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while reading string operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private double[] readDoubleOpValues(uint uiVarHandle, AdsClient adsClient)
         {
             byte[] readBuffer = new byte[5 * sizeof(double)];
             double[] opValues = new double[5];
-            
-            adsClient.Read(uiVarHandle, readBuffer.AsMemory());
+            try
+            {
+                adsClient.Read(uiVarHandle, readBuffer.AsMemory());
 
-            MemoryStream dataStream = new MemoryStream(readBuffer);
-            BinaryReader binRead = new BinaryReader(dataStream);
+                MemoryStream dataStream = new MemoryStream(readBuffer);
+                BinaryReader binRead = new BinaryReader(dataStream);
 
-            dataStream.Position = 0;
-            for (int _i = 0; _i < opValues.Length; _i++) { opValues[_i] = binRead.ReadSingle();}
+                dataStream.Position = 0;
             
-            return opValues;
+                for (int _i = 0; _i < opValues.Length; _i++) { opValues[_i] = binRead.ReadSingle();}
+                return opValues;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while reading double operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private int[] readIntOpValues(uint uiVarHandle, AdsClient adsClient)
         {
             byte[] readBuffer = new byte[5 * 2];
             int[] opValues = new int[5];
+            try
+            {
+                adsClient.Read(uiVarHandle, readBuffer.AsMemory());
 
-            adsClient.Read(uiVarHandle, readBuffer.AsMemory());
+                MemoryStream dataStream = new MemoryStream(readBuffer);
+                BinaryReader binRead = new BinaryReader(dataStream);
 
-            MemoryStream dataStream = new MemoryStream(readBuffer);
-            BinaryReader binRead = new BinaryReader(dataStream);
-
-            dataStream.Position = 0;
-            for (int _i = 0; _i < opValues.Length; _i++) { opValues[_i] = binRead.ReadInt16(); }
-
-            return opValues;
+                dataStream.Position = 0;
+            
+                for (int _i = 0; _i < opValues.Length; _i++) { opValues[_i] = binRead.ReadInt16(); }
+                return opValues;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while reading integer operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private uint[] readErrorId(uint uiVarHandle,AdsClient adsClient)
@@ -250,27 +275,39 @@ namespace MmmConfig
             byte[] readBuffer = new byte[16*4];
             uint[] errorId = new uint[16];
 
-            adsClient.Read(uiVarHandle, readBuffer.AsMemory());
+            try {
+                adsClient.Read(uiVarHandle, readBuffer.AsMemory());
 
-            MemoryStream dataStream = new MemoryStream(readBuffer);
-            BinaryReader binRead = new BinaryReader(dataStream);
+                MemoryStream dataStream = new MemoryStream(readBuffer);
+                BinaryReader binRead = new BinaryReader(dataStream);
 
-            dataStream.Position = 0;
-            for (int _i = 0; _i < errorId.Length ; _i++) { errorId[_i] = binRead.ReadUInt32();}
+                dataStream.Position = 0;
+                for (int _i = 0; _i < errorId.Length ; _i++) { errorId[_i] = binRead.ReadUInt32();}
 
-            return errorId;
+                return errorId;
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Error while reading error ID: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
         private bool[] readErrorBit(uint uiVarHandle, AdsClient adsClient)
         {
             byte[] buffer = new byte[16];
             bool[] errorArray = new bool[16];
-            adsClient.Read(uiVarHandle, buffer.AsMemory());
-            for (int _i = 0; _i < buffer.Length; _i++)
-            {
-                if ((byte)buffer.GetValue(_i) == 0) { errorArray[_i] = false; }
-                else { errorArray[_i] = true; }
+            try {
+                adsClient.Read(uiVarHandle, buffer.AsMemory());
+                for (int _i = 0; _i < buffer.Length; _i++)
+                {
+                    if ((byte)buffer.GetValue(_i) == 0) { errorArray[_i] = false; }
+                    else { errorArray[_i] = true; }
+                }
+                return errorArray;
             }
-            return errorArray;
+            catch (Exception ex) {
+                MessageBox.Show("Error while reading error bit array: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private enumErrorName readErrorName(uint uiVarHandle, AdsClient adsClient)
@@ -278,52 +315,60 @@ namespace MmmConfig
             enumErrorName errorName;
             int tempInt;
 
-            tempInt = (int)adsClient.ReadAny(uiVarHandle, typeof(int));
-
-            switch (tempInt)
+            try
             {
-                case 0:
-                    errorName = enumErrorName.eNoError;
-                    return errorName;
-                case 1:
-                    errorName = enumErrorName.eResetMasterEncoder;
-                    return errorName;
-                case 2:
-                    errorName = enumErrorName.eZeroMasterEncoder;
-                    return errorName;
-                case 3:
-                    errorName = enumErrorName.eFbAxisManager;
-                    return errorName;
-                case 4:
-                    errorName = enumErrorName.eResetAxis;
-                    return errorName;
-                case 5:
-                    errorName = enumErrorName.aAxisHoming;
-                    return errorName;
-                case 6:
-                    errorName = enumErrorName.eGearIn;
-                    return errorName;
-                case 7:
-                    errorName = enumErrorName.eGearOut;
-                    return errorName;
-                case 8:
-                    errorName = enumErrorName.ePhasing;
-                    return errorName;
-                case 9:
-                    errorName = enumErrorName.ePower;
-                    return errorName;
-                case 10:
-                    errorName = enumErrorName.eJog;
-                    return errorName;
-                case 11:
-                    errorName = enumErrorName.eMoveVel;
-                    return errorName;
-                case 12:
-                    errorName = enumErrorName.eSetPos;
-                    return errorName;
-                default:
-                    errorName = enumErrorName.eZeroMasterEncoder;
-                    return errorName;
+                tempInt = (int)adsClient.ReadAny(uiVarHandle, typeof(int));
+
+                switch (tempInt)
+                {
+                    case 0:
+                        errorName = enumErrorName.eNoError;
+                        return errorName;
+                    case 1:
+                        errorName = enumErrorName.eResetMasterEncoder;
+                        return errorName;
+                    case 2:
+                        errorName = enumErrorName.eZeroMasterEncoder;
+                        return errorName;
+                    case 3:
+                        errorName = enumErrorName.eFbAxisManager;
+                        return errorName;
+                    case 4:
+                        errorName = enumErrorName.eResetAxis;
+                        return errorName;
+                    case 5:
+                        errorName = enumErrorName.aAxisHoming;
+                        return errorName;
+                    case 6:
+                        errorName = enumErrorName.eGearIn;
+                        return errorName;
+                    case 7:
+                        errorName = enumErrorName.eGearOut;
+                        return errorName;
+                    case 8:
+                        errorName = enumErrorName.ePhasing;
+                        return errorName;
+                    case 9:
+                        errorName = enumErrorName.ePower;
+                        return errorName;
+                    case 10:
+                        errorName = enumErrorName.eJog;
+                        return errorName;
+                    case 11:
+                        errorName = enumErrorName.eMoveVel;
+                        return errorName;
+                    case 12:
+                        errorName = enumErrorName.eSetPos;
+                        return errorName;
+                    default:
+                        errorName = enumErrorName.eZeroMasterEncoder;
+                        return errorName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while reading error enumerator name: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return enumErrorName.eNoError;
             }
         }
 
@@ -332,24 +377,31 @@ namespace MmmConfig
             eTypeOfEvent typeOfEvent;
             int tempInt;
 
-            tempInt = (int)adsClient.ReadAny(uiVarHandle, typeof(int));
+            try { 
+                tempInt = (int)adsClient.ReadAny(uiVarHandle, typeof(int));
 
-            switch (tempInt)
+                switch (tempInt)
+                {
+                    case 0:
+                        typeOfEvent = eTypeOfEvent.Info;
+                        return typeOfEvent;
+                    case 1:
+                        typeOfEvent = eTypeOfEvent.Message;
+                        return typeOfEvent;
+                    case 2:
+                        typeOfEvent = eTypeOfEvent.Warning;
+                        return typeOfEvent;
+                    case 3:
+                        typeOfEvent = eTypeOfEvent.Error;
+                        return typeOfEvent;
+                    default:
+                        return eTypeOfEvent.Error;
+                }
+            }
+            catch (Exception ex)
             {
-                case 0:
-                    typeOfEvent = eTypeOfEvent.Info;
-                    return typeOfEvent;
-                case 1:
-                    typeOfEvent = eTypeOfEvent.Message;
-                    return typeOfEvent;
-                case 2:
-                    typeOfEvent = eTypeOfEvent.Warning;
-                    return typeOfEvent;
-                case 3:
-                    typeOfEvent = eTypeOfEvent.Error;
-                    return typeOfEvent;
-                default:
-                    return eTypeOfEvent.Error;
+                MessageBox.Show("Error while reading type of event: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return eTypeOfEvent.Error;
             }
         }
 
@@ -366,6 +418,7 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la lettura di un evento " + e.ToString());
+                MessageBox.Show("Error while reading a string: " + e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "Error";
             }
             catch (System.ObjectDisposedException e)
@@ -395,6 +448,7 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la scrittura di un valore intero " + e.ToString());
+                MessageBox.Show("Error while writing an integer value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (System.ObjectDisposedException e)
@@ -421,6 +475,7 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la scrittura di un valore boolean " + e.ToString());
+                MessageBox.Show("Error while writing a boolean value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (System.ObjectDisposedException e)
@@ -441,11 +496,16 @@ namespace MmmConfig
         public uint AddNotification(AdsClient adsClient, string strVariableName)
         {
             uint hTest;
-
-            hTest = adsClient.AddDeviceNotification(strVariableName, 2,
-                    new NotificationSettings(AdsTransMode.OnChange, 100, 0), null);
-
-            return hTest;
+            try { 
+                hTest = adsClient.AddDeviceNotification(strVariableName, 2,
+                        new NotificationSettings(AdsTransMode.OnChange, 100, 0), null);
+                return hTest;
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Error while adding notification to variable: " + strVariableName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 99999;
+            }
+            
         }
         #endregion
 

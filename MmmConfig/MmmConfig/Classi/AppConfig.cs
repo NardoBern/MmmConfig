@@ -8,6 +8,7 @@ namespace MmmConfig
 {
     public class AppConfig
     {
+        #region Variable declaration
         public string strDefaultNetId;
         public int iDefaultPort;
         public string strMotionEventLogPath;
@@ -17,7 +18,10 @@ namespace MmmConfig
         public string strMotCfgWrite;
         public string strMotCfgRead;
         public string strMotStatus;
+        public string strMotCommands;
+        #endregion
 
+        #region Class constructor
         public AppConfig()
         {
             string strDefaultNetId = "192.168.193.200.1.1";
@@ -29,6 +33,8 @@ namespace MmmConfig
             string strMotCfgWrite;
             string strMotCfgRead;
             string strMotStatus;
+            string strMotCommands;
         }
+        #endregion
     }
 }

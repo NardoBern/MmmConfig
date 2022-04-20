@@ -16,19 +16,28 @@ namespace MmmConfig
 
         public void createXmlFile(EventLogger eventLogger, string strFilePath)
         {
-            xmlWriter = XmlWriter.Create(strFilePath);
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteComment("This is the Diagnostic file of the Beckhoff MultiMotorManager, generated on: "  + DateTime.Now.ToString());
-            xmlWriter.WriteStartElement("diagnostic");
-            xmlWriter.WriteStartElement("listOfEvents");
-            //xmlWriter.WriteStartElement("event");
-            for (int _i = 0; _i < eventLogger.iLastWritePos; _i++) { addEventToXml(_i, eventLogger.events[_i]); }
+            try { xmlWriter = XmlWriter.Create(strFilePath); }
+            catch (XmlException ex) { MessageBox.Show("Error while creating xml logger file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndElement();
-            xmlWriter.WriteEndDocument();
-            xmlWriter.Close();
-            MessageBox.Show("File Salvato");
+            try { 
+                xmlWriter.WriteStartDocument();
+                xmlWriter.WriteComment("This is the Diagnostic file of the Beckhoff MultiMotorManager, generated on: "  + DateTime.Now.ToString());
+                xmlWriter.WriteStartElement("diagnostic");
+                xmlWriter.WriteStartElement("listOfEvents");
+            }
+            catch (XmlException ex) { MessageBox.Show("Error while adding header to xml logger file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+            try { for (int _i = 0; _i < eventLogger.iLastWritePos; _i++) { addEventToXml(_i, eventLogger.events[_i]); } }
+            catch (XmlException ex) { MessageBox.Show("Error while adding event to xml logger file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+
+            try {
+                xmlWriter.WriteEndElement();
+                xmlWriter.WriteEndElement();
+                xmlWriter.WriteEndDocument();
+                xmlWriter.Close();
+                MessageBox.Show("File Salvato");
+            }
+            catch (XmlException ex) { MessageBox.Show("Error while adding end lines of xml logger file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
         }
 

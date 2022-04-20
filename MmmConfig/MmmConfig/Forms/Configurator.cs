@@ -23,10 +23,10 @@ namespace MmmConfig
         public static CPU_Connection CpuConnection;
         public Motor[] motor;
         private int iWdCheck = 0;
-        public string c_strMotionEventLogPath = Forms.MainSelector.appConfig.strMotionEventLogPath;  //"GVL_Hmi.stMotionEventLogger";
+        public string c_strMotionEventLogPath = Forms.MainSelector.appConfig.strMotionEventLogPath;  
         public static EventLogger motionEventLogger;
-        public string strNetId =  Forms.MainSelector.appConfig.strDefaultNetId; //"192.168.193.200.1.1";
-        public string strPort = Forms.MainSelector.appConfig.iDefaultPort.ToString(); //"851"
+        public string strNetId =  Forms.MainSelector.appConfig.strDefaultNetId; 
+        public string strPort = Forms.MainSelector.appConfig.iDefaultPort.ToString();
         #endregion
 
         #region Form related function
@@ -39,19 +39,22 @@ namespace MmmConfig
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CpuConnection = new CPU_Connection();
-            motor = new Motor[4];
-            motor[0] = new Motor();
-            motor[1] = new Motor();
-            motor[2] = new Motor();
-            motor[3] = new Motor();
-            motionEventLogger = new EventLogger();
-            motionEventLogger.events = new Event[1000];
-            for (int _i = 0; _i < 1000; _i++) { 
-                motionEventLogger.events[_i] = new Event();
-                motionEventLogger.events[_i].error = new Error();
-                motionEventLogger.events[_i].operationLog = new OperationLog();
+            try { 
+                CpuConnection = new CPU_Connection();
+                motor = new Motor[4];
+                motor[0] = new Motor();
+                motor[1] = new Motor();
+                motor[2] = new Motor();
+                motor[3] = new Motor();
+                motionEventLogger = new EventLogger();
+                motionEventLogger.events = new Event[1000];
+                for (int _i = 0; _i < 1000; _i++) { 
+                    motionEventLogger.events[_i] = new Event();
+                    motionEventLogger.events[_i].error = new Error();
+                    motionEventLogger.events[_i].operationLog = new OperationLog();
+                }
             }
+            catch (Exception ex) { MessageBox.Show("Error while loading configurator app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Dispose();}
 
             if (CpuConnection.connected)
             {
@@ -71,7 +74,6 @@ namespace MmmConfig
                 {
                     // Removing Notifications
                     CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
-                    //CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(EventLoggerNotification);
                     // Disposing the Client.
                     CpuConnection.tcClient.Dispose();
                     CpuConnection.tcClient = null;
@@ -331,42 +333,29 @@ namespace MmmConfig
             updateLabelsPosRpmLoad();
         }
 
-        public void EventLoggerNotification(object sender, AdsNotificationEventArgs e)
-        {
-            ReadOnlyMemory<byte> memory = e.Data;
-
-            if (e.Handle == motionEventLogger.uiVarHandle) {
-                motionEventLogger.iFreePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iFreepos", CpuConnection.tcClient);
-                motionEventLogger.iLastWritePos = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
-                for (int _i = 0; _i <= motionEventLogger.iLastWritePos; _i++) {CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]);}
-            }
-        }
-
         private void vUpdateConnectedStatus()
         {
             lblConnStatus.Text = "Connected";
-            btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png");
+            try {btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png");}
+            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             tWdTimer.Enabled = true;
             if (!(motor[0].motorStatus.xEventEnabled)) { 
                 ReadMotorSts();
                 ReadMotorConfig();
             }
-            vAddMotorStsNotification(motor[0], CpuConnection, 1, Forms.MainSelector.appConfig.strMotStatus); //"LOC_AdsIO.stOutput.MotorSts");
+            vAddMotorStsNotification(motor[0], CpuConnection, 1, Forms.MainSelector.appConfig.strMotStatus);
             vAddMotorStsNotification(motor[1], CpuConnection, 2, Forms.MainSelector.appConfig.strMotStatus);
             vAddMotorStsNotification(motor[2], CpuConnection, 3, Forms.MainSelector.appConfig.strMotStatus);
             vAddMotorStsNotification(motor[3], CpuConnection, 4, Forms.MainSelector.appConfig.strMotStatus);
             CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
-            //vAddEventLoggerNotification(motionEventLogger, CpuConnection, c_strMotionEventLogPath);
-            //CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(EventLoggerNotification);
         }
         private void vUpdateDisconnectedStatus()
         {
             CpuConnection.connected = false;
             lblConnStatus.Text = "No connection";
-            btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png");
+            try {btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png");}
+            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             tWdTimer.Enabled = false;
-            
-            //tUpdateData.Enabled = false;
         }
 
         private void ReadMotorSts()
@@ -405,7 +394,7 @@ namespace MmmConfig
             int iMotIndex;
             for (iMotIndex = 0; iMotIndex < 4; iMotIndex++)
             {
-                tempInt = motor[iMotIndex].ReadMotorConfig(iMotIndex + 1, CpuConnection, Forms.MainSelector.appConfig.strMotCfgRead); //"GVL_Hmi.Config.astMotorCfg");
+                tempInt = motor[iMotIndex].ReadMotorConfig(iMotIndex + 1, CpuConnection, Forms.MainSelector.appConfig.strMotCfgRead);
                 motor[iMotIndex].motorConfig.iSyncMaster    = tempInt[0];
                 motor[iMotIndex].motorConfig.diGearIn       = tempInt[1];
                 motor[iMotIndex].motorConfig.diGearOut      = tempInt[2];
@@ -443,10 +432,6 @@ namespace MmmConfig
                 Console.WriteLine("Added status notification to event logger");
             }
         }
-
-
-
-
         #endregion
 
         private void btnMain_Click(object sender, EventArgs e)
