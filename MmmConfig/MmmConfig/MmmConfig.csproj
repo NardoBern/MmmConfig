@@ -225,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classi\AppConfig.cs" />
+    <Compile Include="Classi\AppLogger.cs" />
     <Compile Include="Classi\CPU_Connection.cs" />
     <Compile Include="Classi\Error.cs" />
     <Compile Include="Classi\Event.cs" />

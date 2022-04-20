@@ -15,6 +15,7 @@ namespace MmmConfig.Forms
     {
         #region Variable declarations
         public static AppConfig appConfig = new AppConfig();
+        public static AppLogger appLogger = new AppLogger();
         #endregion
 
         #region Form related functions
