@@ -49,7 +49,12 @@ namespace MmmConfig.Forms
                 btnRefresh.Enabled = false;
                 btnStopRefresh.Enabled = false;
             }
-            catch (Exception ex) { MessageBox.Show("Error while laoding diagnostic app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading diagnostic app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error while loading diagnostic app: " + ex.ToString(), AppLogger.eLogLevel.fatal);
+                this.Close();
+            }
 
             if (CpuConnection.connected)
             {
@@ -68,7 +73,11 @@ namespace MmmConfig.Forms
         private void dgvLogReader_CellContentClick(object sender, DataGridViewCellEventArgs e) 
         { 
             try { populateEventDetail(motionEventLogger.events[Convert.ToInt16(dgvLogReader.Rows[e.RowIndex].Cells[0].Value)]); }
-            catch (Exception ex) { MessageBox.Show("Error while retrieving event information: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);}
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while retrieving event information: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error while retrieving event information: " + ex.ToString(), AppLogger.eLogLevel.error); 
+            }
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -85,7 +94,11 @@ namespace MmmConfig.Forms
                 checkThread.Enabled = true;
                 trd.Start();
             }
-            catch (Exception _e) { MessageBox.Show("Error during starting of refresh Thread: " + _e.ToString(),"ERROR!!",MessageBoxButtons.OK,MessageBoxIcon.Error); }
+            catch (Exception _e) 
+            { 
+                MessageBox.Show("Error during starting of refresh Thread: " + _e.ToString(),"ERROR!!",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error during starting of refresh Thread: " + _e.ToString(), AppLogger.eLogLevel.error);
+            }
         }
         private void btnStopRefresh_Click(object sender, EventArgs e)
         {
@@ -99,7 +112,11 @@ namespace MmmConfig.Forms
                     lblInProgress.Text = "Stopped";
                 }
             }
-            catch (Exception _e) { MessageBox.Show("Error during stop of refresh Thread: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception _e) 
+            { 
+                MessageBox.Show("Error during stop of refresh Thread: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error during stop of refresh Thread: " + _e.ToString(), AppLogger.eLogLevel.error);
+            }
         }
         private void checkThread_Tick(object sender, EventArgs e)
         {
@@ -116,7 +133,11 @@ namespace MmmConfig.Forms
                     btnStopRefresh.Enabled = false;
                 }
             }
-            catch (Exception _e) { MessageBox.Show("Error during updating of logger: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception _e) 
+            { 
+                MessageBox.Show("Error during updating of logger: " + _e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error during updating of logger: " + _e.ToString(), AppLogger.eLogLevel.error);
+            }
         }
         private void saveToToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -503,11 +524,19 @@ namespace MmmConfig.Forms
                 tempString = tempString.Replace(":", "");
                 saveFileDialog.FileName = "MmmDiagnostic_" + tempString;
             }
-            catch (Exception ex) { MessageBox.Show("Error while get date and time to save the file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while get date and time to save the file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error while get date and time to save the file: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try { if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName); } }
-                catch (Exception ex) { MessageBox.Show("Error while saving file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                catch (Exception ex) 
+                { 
+                    MessageBox.Show("Error while saving file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MainSelector.appLogger.addLine("Error while saving file: " + ex.ToString(), AppLogger.eLogLevel.error);
+                }
             }
         }
         private void openFile()
@@ -527,7 +556,11 @@ namespace MmmConfig.Forms
                     readLogger.events[_i].error.audiErrId = new uint[16];
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Error while inizializing logger reader: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while inizializing logger reader: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error while inizializing logger reader: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.FileName = "Select an xml file";
             openFileDialog.Filter = "Xml files (*.xml|*.xml";
@@ -536,7 +569,11 @@ namespace MmmConfig.Forms
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try { xmlReader.readXml(openFileDialog.FileName, readLogger); }
-                catch (Exception ex) { MessageBox.Show("Error while opening xml file: " + ex.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                catch (Exception ex) 
+                { 
+                    MessageBox.Show("Error while opening xml file: " + ex.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MainSelector.appLogger.addLine("Error while opening xml file: " + ex.ToString(), AppLogger.eLogLevel.error);
+                }
 
                 motionEventLogger = readLogger;
                 cleanDataGridView();
@@ -548,7 +585,11 @@ namespace MmmConfig.Forms
         {
             lblConnStatus.Text = "Connected";
             try { btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png"); }
-            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
             tWdTimer.Enabled = true;
             btnRefresh.Enabled = true;
         }
@@ -557,7 +598,11 @@ namespace MmmConfig.Forms
             CpuConnection.connected = false;
             lblConnStatus.Text = "No connection";
             try { btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png"); }
-            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
             tWdTimer.Enabled = false;
             btnRefresh.Enabled = false;
         }

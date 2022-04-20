@@ -19,7 +19,11 @@ namespace MmmConfig
         {
             XmlDocument doc = new XmlDocument();
             try {doc.Load(strFilePath);}
-            catch (XmlException ex) { MessageBox.Show("Error while loading xml configuration file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (XmlException ex) 
+            {
+                Forms.MainSelector.appLogger.addLine("Error while loading xml configuration file: " + ex.ToString(), AppLogger.eLogLevel.error);
+                MessageBox.Show("Error while loading xml configuration file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
             
             try { 
                 foreach (XmlNode firstLevelNode in doc.DocumentElement.ChildNodes)
@@ -75,7 +79,11 @@ namespace MmmConfig
                     }
                 }
             }
-            catch (XmlException ex) { MessageBox.Show("Error while reading xml config file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (XmlException ex) 
+            {
+                Forms.MainSelector.appLogger.addLine("Error while reading xml config file: " + ex.ToString(), AppLogger.eLogLevel.error);
+                MessageBox.Show("Error while reading xml config file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
         }
         #endregion
 
@@ -84,7 +92,11 @@ namespace MmmConfig
         {
             XmlDocument doc = new XmlDocument();
             try { doc.Load(strFilePath); }
-            catch (XmlException ex) { MessageBox.Show("Error while loading xml event file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (XmlException ex) 
+            {
+                Forms.MainSelector.appLogger.addLine("Error while loading xml event file: " + ex.ToString(), AppLogger.eLogLevel.error);
+                MessageBox.Show("Error while loading xml event file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
             int _i = -1;
             int iNumOfEvent = 0;
             try { 
@@ -322,7 +334,11 @@ namespace MmmConfig
                 }
                 eventLogger.iLastWritePos = iNumOfEvent;
             }
-            catch (XmlException ex) { MessageBox.Show("Error while reading xml event file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (XmlException ex) 
+            {
+                Forms.MainSelector.appLogger.addLine("Error while reading xml event file: " + ex.ToString(), AppLogger.eLogLevel.error);
+                MessageBox.Show("Error while reading xml event file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
         }
         #endregion
     }

@@ -54,7 +54,11 @@ namespace MmmConfig
                     motionEventLogger.events[_i].operationLog = new OperationLog();
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Error while loading configurator app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Dispose();}
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading configurator app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Dispose();
+                Forms.MainSelector.appLogger.addLine("Error while loading configurator app: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
 
             if (CpuConnection.connected)
             {
@@ -337,7 +341,11 @@ namespace MmmConfig
         {
             lblConnStatus.Text = "Connected";
             try {btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png");}
-            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
             tWdTimer.Enabled = true;
             if (!(motor[0].motorStatus.xEventEnabled)) { 
                 ReadMotorSts();
@@ -354,7 +362,11 @@ namespace MmmConfig
             CpuConnection.connected = false;
             lblConnStatus.Text = "No connection";
             try {btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png");}
-            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
             tWdTimer.Enabled = false;
         }
 
