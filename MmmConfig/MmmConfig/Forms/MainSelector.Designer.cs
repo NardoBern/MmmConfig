@@ -97,6 +97,7 @@ namespace MmmConfig.Forms
             this.Name = "MainSelector";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainSelector";
+            this.Load += new System.EventHandler(this.MainSelector_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -15,7 +15,7 @@ namespace MmmConfig.Forms
 
         #region Variable declarations
         public int iEventIndex;
-        const string c_strMotionEventLogPath = "GVL_Hmi.stMotionEventLogger";
+        public string c_strMotionEventLogPath = Forms.MainSelector.appConfig.strMotionEventLogPath; //"GVL_Hmi.stMotionEventLogger";
         #endregion
 
         #region Form related functions
@@ -44,7 +44,7 @@ namespace MmmConfig.Forms
         private void btnLast_Click(object sender, EventArgs e)
         {
             Form1.motionEventLogger.iLastWritePos = Form1.CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", Form1.CpuConnection.tcClient);
-            iEventIndex = Form1.CpuConnection.readInt("LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient);
+            iEventIndex = Form1.CpuConnection.readInt(Forms.MainSelector.appConfig.strEventLogSize, Form1.CpuConnection.tcClient); //"LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient);
             checkIndexBound(iEventIndex);
             readEvent(iEventIndex);
             updateLblEventNumber(iEventIndex);
@@ -68,7 +68,7 @@ namespace MmmConfig.Forms
             updateLblEventNumber(iEventIndex);
             populateEventBoard(Form1.motionEventLogger.events[iEventIndex]);
         }
-        private void updateLblEventNumber(int iEventIndex) { lblEventNumber.Text = "Event N°: " + iEventIndex.ToString() + " of " + Form1.CpuConnection.readInt("LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient).ToString(); }
+        private void updateLblEventNumber(int iEventIndex) { lblEventNumber.Text = "Event N°: " + iEventIndex.ToString() + " of " + Form1.CpuConnection.readInt(Forms.MainSelector.appConfig.strEventLogSize, Form1.CpuConnection.tcClient).ToString(); }
         #endregion
 
         #region Operative Function
@@ -76,11 +76,11 @@ namespace MmmConfig.Forms
         {
             if (index < 1)
             {
-                return Form1.CpuConnection.readInt("LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient);
+                return Form1.CpuConnection.readInt(Forms.MainSelector.appConfig.strEventLogSize, Form1.CpuConnection.tcClient);
             }
             else
             {
-                if (index > Form1.CpuConnection.readInt("LoggerConst.c_iEventSize", Form1.CpuConnection.tcClient))
+                if (index > Form1.CpuConnection.readInt(Forms.MainSelector.appConfig.strEventLogSize, Form1.CpuConnection.tcClient))
                 {
                     return 1;
                 }
