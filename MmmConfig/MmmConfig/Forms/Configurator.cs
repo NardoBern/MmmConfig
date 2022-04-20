@@ -23,10 +23,10 @@ namespace MmmConfig
         public static CPU_Connection CpuConnection;
         public Motor[] motor;
         private int iWdCheck = 0;
-        const string c_strMotionEventLogPath = "GVL_Hmi.stMotionEventLogger";
+        public string c_strMotionEventLogPath = Forms.MainSelector.appConfig.strMotionEventLogPath;  //"GVL_Hmi.stMotionEventLogger";
         public static EventLogger motionEventLogger;
-        public string strNetId = "192.168.193.200.1.1";
-        public string strPort = "851";
+        public string strNetId =  Forms.MainSelector.appConfig.strDefaultNetId; //"192.168.193.200.1.1";
+        public string strPort = Forms.MainSelector.appConfig.iDefaultPort.ToString(); //"851"
         #endregion
 
         #region Form related function
@@ -171,10 +171,10 @@ namespace MmmConfig
         #region Timers
         private void tWdTimer_Tick(object sender, EventArgs e)
         {
-            int iWatchDog = CpuConnection.readInt("LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
+            int iWatchDog = CpuConnection.readInt(Forms.MainSelector.appConfig.strReadWatchDog, CpuConnection.tcClient);     //("LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
             //lblTest.Text = iWatchDog.ToString();
             prgConnWd.Value = iWatchDog;
-            CpuConnection.writeInt("LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
+            CpuConnection.writeInt(Forms.MainSelector.appConfig.strWriteWatchDog, iWatchDog);         //("LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
             CpuConnection.iWatchDog = iWatchDog;
             iWdCheck = iWdCheck + 1;
             if (iWdCheck >= 6)
@@ -246,10 +246,10 @@ namespace MmmConfig
                 if (xTemp) { numericUpDown.BackColor = Color.LightGreen; }
                 else { numericUpDown.BackColor = Color.LightPink; }
             }
-        private void numSyncMasterMot1_ValueChanged(object sender, EventArgs e) { numSelChanged(numSyncMasterMot1, 1, 1, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void numSyncMasterMot2_ValueChanged(object sender, EventArgs e) { numSelChanged(numSyncMasterMot2, 2, 1, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void numSyncMasterMot3_ValueChanged(object sender, EventArgs e) { numSelChanged(numSyncMasterMot3, 3, 1, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void numSyncMasterMot4_ValueChanged(object sender, EventArgs e) { numSelChanged(numSyncMasterMot4, 4, 1, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
+        private void numSyncMasterMot1_ValueChanged(object sender, EventArgs e) { numSelChanged(numSyncMasterMot1, 1, 1, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } //"LOC_AdsIO.stInput.Config.astMotorCfg"); }
+        private void numSyncMasterMot2_ValueChanged(object sender, EventArgs e) { numSelChanged(numSyncMasterMot2, 2, 1, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void numSyncMasterMot3_ValueChanged(object sender, EventArgs e) { numSelChanged(numSyncMasterMot3, 3, 1, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void numSyncMasterMot4_ValueChanged(object sender, EventArgs e) { numSelChanged(numSyncMasterMot4, 4, 1, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
         #endregion
 
         #region Text Boxes
@@ -269,42 +269,42 @@ namespace MmmConfig
             }
         }
 
-        private void txtGearInMot1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearInMot1, 1, 2, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtGearInMot2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearInMot2, 2, 2, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtGearInMot3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearInMot3, 3, 2, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtGearInMot4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearInMot4, 4, 2, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtGearOutMot1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearOutMot1, 1, 3, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); } 
-        private void txtGearOutMot2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearOutMot2, 2, 3, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); } 
-        private void txtGearOutMot3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearOutMot3, 3, 3, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); } 
-        private void txtGearOutMot4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearOutMot4, 4, 3, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); } 
-        private void txtNumOfPhasesMot1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtNumOfPhasesMot1, 1, 4, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); } 
-        private void txtNumOfPhasesMot2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtNumOfPhasesMot2, 2, 4, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); } 
-        private void txtNumOfPhasesMot3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtNumOfPhasesMot3, 3, 4, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); } 
-        private void txtNumOfPhasesMot4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtNumOfPhasesMot4, 4, 4, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtFixedSpeedM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtFixedSpeedM1, 1, 5, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtFixedSpeedM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtFixedSpeedM2, 2, 5, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtFixedSpeedM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtFixedSpeedM3, 3, 5, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtFixedSpeedM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtFixedSpeedM4, 4, 5, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtMaxSpeedM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtMaxSpeedM1, 1, 6, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtMaxSpeedM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtMaxSpeedM2, 2, 6, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtMaxSpeedM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtMaxSpeedM3, 3, 6, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtMaxSpeedM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtMaxSpeedM4, 4, 6, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtStartRampM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStartRampM1, 1, 7, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtStartRampM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStartRampM2, 2, 7, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtStartRampM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStartRampM3, 3, 7, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtStartRampM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStartRampM4, 4, 7, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtStopRampM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStopRampM1, 1, 8, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtStopRampM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStopRampM2, 2, 8, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtStopRampM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStopRampM3, 3, 8, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtStopRampM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStopRampM4, 4, 8, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtEstopRampM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtEstopRampM1, 1, 9, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtEstopRampM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtEstopRampM2, 2, 9, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtEstopRampM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtEstopRampM3, 3, 9, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtEstopRampM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtEstopRampM4, 4, 9, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtCurrLimitM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM1, 1, 10, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtCurrLimitM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM2, 2, 10, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtCurrLimitM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM3, 3, 10, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
-        private void txtCurrLimitM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM4, 4, 10, CpuConnection, "LOC_AdsIO.stInput.Config.astMotorCfg"); }
+        private void txtGearInMot1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearInMot1, 1, 2, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } //"LOC_AdsIO.stInput.Config.astMotorCfg"); }
+        private void txtGearInMot2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearInMot2, 2, 2, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtGearInMot3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearInMot3, 3, 2, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtGearInMot4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearInMot4, 4, 2, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtGearOutMot1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearOutMot1, 1, 3, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } 
+        private void txtGearOutMot2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearOutMot2, 2, 3, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } 
+        private void txtGearOutMot3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearOutMot3, 3, 3, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } 
+        private void txtGearOutMot4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtGearOutMot4, 4, 3, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } 
+        private void txtNumOfPhasesMot1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtNumOfPhasesMot1, 1, 4, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } 
+        private void txtNumOfPhasesMot2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtNumOfPhasesMot2, 2, 4, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } 
+        private void txtNumOfPhasesMot3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtNumOfPhasesMot3, 3, 4, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); } 
+        private void txtNumOfPhasesMot4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtNumOfPhasesMot4, 4, 4, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtFixedSpeedM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtFixedSpeedM1, 1, 5, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtFixedSpeedM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtFixedSpeedM2, 2, 5, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtFixedSpeedM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtFixedSpeedM3, 3, 5, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtFixedSpeedM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtFixedSpeedM4, 4, 5, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtMaxSpeedM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtMaxSpeedM1, 1, 6, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtMaxSpeedM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtMaxSpeedM2, 2, 6, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtMaxSpeedM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtMaxSpeedM3, 3, 6, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtMaxSpeedM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtMaxSpeedM4, 4, 6, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtStartRampM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStartRampM1, 1, 7, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtStartRampM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStartRampM2, 2, 7, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtStartRampM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStartRampM3, 3, 7, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtStartRampM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStartRampM4, 4, 7, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtStopRampM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStopRampM1, 1, 8, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtStopRampM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStopRampM2, 2, 8, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtStopRampM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStopRampM3, 3, 8, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtStopRampM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtStopRampM4, 4, 8, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtEstopRampM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtEstopRampM1, 1, 9, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtEstopRampM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtEstopRampM2, 2, 9, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtEstopRampM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtEstopRampM3, 3, 9, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtEstopRampM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtEstopRampM4, 4, 9, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtCurrLimitM1_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM1, 1, 10, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtCurrLimitM2_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM2, 2, 10, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtCurrLimitM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM3, 3, 10, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
+        private void txtCurrLimitM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM4, 4, 10, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
         #endregion
         
         #endregion
@@ -351,10 +351,10 @@ namespace MmmConfig
                 ReadMotorSts();
                 ReadMotorConfig();
             }
-            vAddMotorStsNotification(motor[0], CpuConnection, 1, "LOC_AdsIO.stOutput.MotorSts");
-            vAddMotorStsNotification(motor[1], CpuConnection, 2, "LOC_AdsIO.stOutput.MotorSts");
-            vAddMotorStsNotification(motor[2], CpuConnection, 3, "LOC_AdsIO.stOutput.MotorSts");
-            vAddMotorStsNotification(motor[3], CpuConnection, 4, "LOC_AdsIO.stOutput.MotorSts");
+            vAddMotorStsNotification(motor[0], CpuConnection, 1, Forms.MainSelector.appConfig.strMotStatus); //"LOC_AdsIO.stOutput.MotorSts");
+            vAddMotorStsNotification(motor[1], CpuConnection, 2, Forms.MainSelector.appConfig.strMotStatus);
+            vAddMotorStsNotification(motor[2], CpuConnection, 3, Forms.MainSelector.appConfig.strMotStatus);
+            vAddMotorStsNotification(motor[3], CpuConnection, 4, Forms.MainSelector.appConfig.strMotStatus);
             CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
             //vAddEventLoggerNotification(motionEventLogger, CpuConnection, c_strMotionEventLogPath);
             //CpuConnection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(EventLoggerNotification);
@@ -377,7 +377,7 @@ namespace MmmConfig
             int iMotorIndex;
             for (iMotorIndex = 0; iMotorIndex < 4; iMotorIndex++)
             {
-                tempBool = motor[iMotorIndex].ReadMotorSts(iMotorIndex + 1, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+                tempBool = motor[iMotorIndex].ReadMotorSts(iMotorIndex + 1, CpuConnection, Forms.MainSelector.appConfig.strMotStatus);
                 motor[iMotorIndex].motorStatus.xError       = tempBool[0];
                 motor[iMotorIndex].motorStatus.xMoving      = tempBool[1];
                 motor[iMotorIndex].motorStatus.xSync        = tempBool[2];
@@ -389,7 +389,7 @@ namespace MmmConfig
             tempInt = new int[3];
             for (iMotorIndex = 0; iMotorIndex < 4; iMotorIndex++)
             {
-                tempInt = motor[iMotorIndex].ReadMotorValFdbk(iMotorIndex + 1, CpuConnection, "LOC_AdsIO.stOutput.MotorSts");
+                tempInt = motor[iMotorIndex].ReadMotorValFdbk(iMotorIndex + 1, CpuConnection, Forms.MainSelector.appConfig.strMotStatus);
                 motor[iMotorIndex].motorStatus.iSpeedRpm = tempInt[0];
                 motor[iMotorIndex].motorStatus.iPosition = tempInt[1];
                 motor[iMotorIndex].motorStatus.iCurrLoad = tempInt[2];
@@ -405,7 +405,7 @@ namespace MmmConfig
             int iMotIndex;
             for (iMotIndex = 0; iMotIndex < 4; iMotIndex++)
             {
-                tempInt = motor[iMotIndex].ReadMotorConfig(iMotIndex + 1, CpuConnection, "GVL_Hmi.Config.astMotorCfg");
+                tempInt = motor[iMotIndex].ReadMotorConfig(iMotIndex + 1, CpuConnection, Forms.MainSelector.appConfig.strMotCfgRead); //"GVL_Hmi.Config.astMotorCfg");
                 motor[iMotIndex].motorConfig.iSyncMaster    = tempInt[0];
                 motor[iMotIndex].motorConfig.diGearIn       = tempInt[1];
                 motor[iMotIndex].motorConfig.diGearOut      = tempInt[2];

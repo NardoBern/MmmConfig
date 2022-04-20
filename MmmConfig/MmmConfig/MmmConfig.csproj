@@ -221,6 +221,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classi\AppConfig.cs" />
     <Compile Include="Classi\CPU_Connection.cs" />
     <Compile Include="Classi\Error.cs" />
     <Compile Include="Classi\Event.cs" />
@@ -310,6 +311,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ExampleFiles\configExample.xml" />
     <Content Include="ExampleFiles\diagnosticExample.xml" />
     <Content Include="Img\768px-Settings_%28iOS%29.png" />
     <Content Include="Img\ArolLogo.ico" />

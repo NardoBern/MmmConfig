@@ -13,8 +13,61 @@ namespace MmmConfig
         #region Variable declarations
         
         #endregion
+        public void readConfiguration(string strFilePath, AppConfig appConfig)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(strFilePath);
+            foreach (XmlNode firstLevelNode in doc.DocumentElement.ChildNodes)
+            {
+                switch (firstLevelNode.Name) 
+                {
+                    case "connection":
+                        foreach (XmlNode secondLevelNode in firstLevelNode.ChildNodes)
+                        {
+                            switch (secondLevelNode.Name)
+                            {
+                                case "netId":
+                                    appConfig.strDefaultNetId = secondLevelNode.InnerText;
+                                    break;
+                                case "port":
+                                    appConfig.iDefaultPort = Convert.ToInt32(secondLevelNode.InnerText);
+                                    break;
+                            }
+                        }
+                        break;
+                    case "variablePath":
+                        foreach (XmlNode secondLevelNode in firstLevelNode.ChildNodes) 
+                        { 
+                            switch (secondLevelNode.Name)
+                            {
+                                case "eventLog":
+                                    appConfig.strMotionEventLogPath = secondLevelNode.InnerText;
+                                    break;
+                                case "eventLogSize":
+                                    appConfig.strEventLogSize = secondLevelNode.InnerText;
+                                    break;
+                                case "readWd":
+                                    appConfig.strReadWatchDog = secondLevelNode.InnerText;
+                                    break;
+                                case "writeWd":
+                                    appConfig.strWriteWatchDog = secondLevelNode.InnerText;
+                                    break;
+                                case "motorCfgWrite":
+                                    appConfig.strMotCfgWrite = secondLevelNode.InnerText;
+                                    break;
+                                case "motorCfgRead":
+                                    appConfig.strMotCfgRead = secondLevelNode.InnerText;
+                                    break;
+                                case "motorStatus":
+                                    appConfig.strMotStatus = secondLevelNode.InnerText;
+                                    break;
+                            }
+                        }
+                        break;
+                }
+            }
+        }
 
-       
         public void readXml(string strFilePath, EventLogger eventLogger)
         {
             XmlDocument doc = new XmlDocument();

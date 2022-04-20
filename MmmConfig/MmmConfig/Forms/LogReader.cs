@@ -19,12 +19,12 @@ namespace MmmConfig.Forms
         private int iWdCheck = 0;
         
         public static EventLogger motionEventLogger;
-        const string c_strMotionEventLogPath = "GVL_Hmi.stMotionEventLogger";
+        public string c_strMotionEventLogPath = MainSelector.appConfig.strMotionEventLogPath; //"GVL_Hmi.stMotionEventLogger";
         string[,] astrString = new string[1000,7];
         public Thread trd;
         private int _i;
-        public string strNetId = "192.168.193.200.1.1";
-        public string strPort = "851";
+        public string strNetId = MainSelector.appConfig.strDefaultNetId; //"192.168.193.200.1.1";
+        public string strPort = MainSelector.appConfig.iDefaultPort.ToString(); //"851";
         #endregion
 
         #region Form related functions
@@ -134,10 +134,10 @@ namespace MmmConfig.Forms
         }
         private void tWdTimer_Tick(object sender, EventArgs e)
         {
-            int iWatchDog = CpuConnection.readInt("LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
+            int iWatchDog = CpuConnection.readInt(MainSelector.appConfig.strReadWatchDog, CpuConnection.tcClient); //"LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
             //lblTest.Text = iWatchDog.ToString();
             prgConnWd.Value = iWatchDog;
-            CpuConnection.writeInt("LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
+            CpuConnection.writeInt(MainSelector.appConfig.strWriteWatchDog, iWatchDog); //"LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
             CpuConnection.iWatchDog = iWatchDog;
             iWdCheck = iWdCheck + 1;
             if (iWdCheck >= 6)
