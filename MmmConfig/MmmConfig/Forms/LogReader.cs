@@ -222,7 +222,7 @@ namespace MmmConfig.Forms
             motionEventLogger.events = eventLogger.events;
         }
 
-        public void populateDataGridView()
+        private void populateDataGridView()
         {
             for (int _i = 0; _i < motionEventLogger.iLastWritePos; _i++)
             {
@@ -254,7 +254,7 @@ namespace MmmConfig.Forms
             }
             for (int _i = 0; _i < 7; _i++) { dgvLogReader.AutoResizeColumn(_i); }        
         }
-        public void colorateDataGridView()
+        private void colorateDataGridView()
         {
             foreach (DataGridViewRow row in dgvLogReader.Rows)
             {
