@@ -72,8 +72,16 @@ namespace MmmConfig
         /* Check watch-dog value */
         public bool checkWdValue(int iWdValue)
         {
-            if (iWdValue != iWatchDogOld) { connected = true; }
-            else { connected = false; }
+            if (iWdValue != iWatchDogOld) 
+            {
+                if (!(connected)) { Forms.MainSelector.appLogger.addLine("CPU with Net-id: " + tcClient.Address.NetId.ToString() + " has been connected at port: " + tcClient.Address.Port.ToString(), AppLogger.eLogLevel.debug); }
+                connected = true; 
+            }
+            else 
+            {
+                if (connected) { Forms.MainSelector.appLogger.addLine("CPU with Net-id: " + tcClient.Address.NetId.ToString() + " has been disconnected.", AppLogger.eLogLevel.debug); }
+                connected = false; 
+            }
             iWatchDogOld = iWdValue;
             return connected;
         }

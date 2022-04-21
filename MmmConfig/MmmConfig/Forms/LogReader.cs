@@ -66,9 +66,8 @@ namespace MmmConfig.Forms
                 vUpdateDisconnectedStatus();
             }
             cleanDataGridView();
-            
-            
             Cursor.Current = Cursors.Default;
+            MainSelector.appLogger.addLine("Log reader form has been corrected load", AppLogger.eLogLevel.debug);
         }
         private void dgvLogReader_CellContentClick(object sender, DataGridViewCellEventArgs e) 
         { 
@@ -78,6 +77,7 @@ namespace MmmConfig.Forms
                 MessageBox.Show("Error while retrieving event information: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 MainSelector.appLogger.addLine("Error while retrieving event information: " + ex.ToString(), AppLogger.eLogLevel.error); 
             }
+            MainSelector.appLogger.addLine("The row n°: " + e.RowIndex.ToString() + " has been selected.", AppLogger.eLogLevel.debug);
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -87,6 +87,7 @@ namespace MmmConfig.Forms
             btnRefresh.Enabled = false;
             btnStopRefresh.Enabled = true;
             lblInProgress.Text = "In progress...";
+            MainSelector.appLogger.addLine("Updating of the logger is started.", AppLogger.eLogLevel.debug);
             try
             {
                 trd = new Thread(new ThreadStart(readEvent));
@@ -97,7 +98,7 @@ namespace MmmConfig.Forms
             catch (Exception _e) 
             { 
                 MessageBox.Show("Error during starting of refresh Thread: " + _e.ToString(),"ERROR!!",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                MainSelector.appLogger.addLine("Error during starting of refresh Thread: " + _e.ToString(), AppLogger.eLogLevel.error);
+                MainSelector.appLogger.addLine("Error during refresh Thread: " + _e.ToString(), AppLogger.eLogLevel.error);
             }
         }
         private void btnStopRefresh_Click(object sender, EventArgs e)
@@ -110,6 +111,7 @@ namespace MmmConfig.Forms
                     btnStopRefresh.Enabled = false;
                     btnRefresh.Enabled = true;
                     lblInProgress.Text = "Stopped";
+                    MainSelector.appLogger.addLine("Updating of the logger has been stopped.", AppLogger.eLogLevel.debug);
                 }
             }
             catch (Exception _e) 
@@ -131,6 +133,7 @@ namespace MmmConfig.Forms
                     colorateDataGridView();
                     lblInProgress.Text = "Done!!";
                     btnStopRefresh.Enabled = false;
+                    MainSelector.appLogger.addLine("Updating of the logger has been done.", AppLogger.eLogLevel.debug);
                 }
             }
             catch (Exception _e) 
@@ -162,10 +165,9 @@ namespace MmmConfig.Forms
         }
         private void tWdTimer_Tick(object sender, EventArgs e)
         {
-            int iWatchDog = CpuConnection.readInt(MainSelector.appConfig.strReadWatchDog, CpuConnection.tcClient); //"LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
-            //lblTest.Text = iWatchDog.ToString();
+            int iWatchDog = CpuConnection.readInt(MainSelector.appConfig.strReadWatchDog, CpuConnection.tcClient);
             prgConnWd.Value = iWatchDog;
-            CpuConnection.writeInt(MainSelector.appConfig.strWriteWatchDog, iWatchDog); //"LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
+            CpuConnection.writeInt(MainSelector.appConfig.strWriteWatchDog, iWatchDog);
             CpuConnection.iWatchDog = iWatchDog;
             iWdCheck = iWdCheck + 1;
             if (iWdCheck >= 6)
@@ -211,7 +213,7 @@ namespace MmmConfig.Forms
         #region Operative functions
         public void populateDataGridView()
         {
-            for (int _i = 0; _i <= motionEventLogger.iLastWritePos; _i++)
+            for (int _i = 0; _i < motionEventLogger.iLastWritePos; _i++)
             {
                 astrString[_i, 0] = _i.ToString();
                 astrString[_i, 1] = motionEventLogger.events[_i].uiEventId.ToString();
@@ -531,7 +533,14 @@ namespace MmmConfig.Forms
             }
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                try { if (saveFileDialog.FileName != "") { xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName); } }
+                try 
+                { 
+                    if (saveFileDialog.FileName != "") 
+                    { 
+                        xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName);
+                        MainSelector.appLogger.addLine("File has been succesfully saved with filename: " + saveFileDialog.FileName, AppLogger.eLogLevel.debug);
+                    } 
+                }
                 catch (Exception ex) 
                 { 
                     MessageBox.Show("Error while saving file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -568,17 +577,20 @@ namespace MmmConfig.Forms
             openFileDialog.InitialDirectory = "C:\\";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                try { xmlReader.readXml(openFileDialog.FileName, readLogger); }
+                try 
+                { 
+                    xmlReader.readXml(openFileDialog.FileName, readLogger);
+                    motionEventLogger = readLogger;
+                    cleanDataGridView();
+                    populateDataGridView();
+                    colorateDataGridView();
+                    MainSelector.appLogger.addLine("File name: " + openFileDialog.FileName + " has been succesfully opened.", AppLogger.eLogLevel.debug);
+                }
                 catch (Exception ex) 
                 { 
                     MessageBox.Show("Error while opening xml file: " + ex.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     MainSelector.appLogger.addLine("Error while opening xml file: " + ex.ToString(), AppLogger.eLogLevel.error);
                 }
-
-                motionEventLogger = readLogger;
-                cleanDataGridView();
-                populateDataGridView();
-                colorateDataGridView();
             }
         }
         private void vUpdateConnectedStatus()
