@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xml>
+  <connection>
+    <netId>192.168.193.200.1.1</netId>
+    <port>851</port>
+  </connection>
+  <variablePath>
+    <eventLog>GVL_Hmi.stMotionEventLogger</eventLog>
+    <eventLogSize>LoggerConst.c_iEventSize</eventLogSize>
+    <readWd>LOC_AdsIO.stOutput._Reserve[7]</readWd>
+    <writeWd>LOC_AdsIO.stInput._Reserve[3]</writeWd>
+    <motorCfgWrite>LOC_AdsIO.stInput.Config.astMotorCfg</motorCfgWrite>
+    <motorCfgRead>GVL_Hmi.Config.astMotorCfg</motorCfgRead>
+    <motorStatus>LOC_AdsIO.stOutput.MotorSts</motorStatus>
+	  <motorCommands>LOC_AdsIO.stInput.MotorCmd[</motorCommands>
+  </variablePath>
+</xml>
+
+

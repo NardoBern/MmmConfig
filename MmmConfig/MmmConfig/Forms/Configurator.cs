@@ -316,7 +316,7 @@ namespace MmmConfig
         #endregion
 
         #region Operative Function
-        public void MotStsNotification(object sender, AdsNotificationEventArgs e)
+        private void MotStsNotification(object sender, AdsNotificationEventArgs e)
         {
 
             ReadOnlyMemory<byte> memory = e.Data;

@@ -51,8 +51,6 @@ namespace MmmConfig
             catch (Exception ex)
             {
                 Forms.MainSelector.appLogger.addLine("Error while writing a motor command. Motor Index: " + iMotorIndex.ToString() + " Motor Command: " + iMotorCmd.ToString() + " Exception: " + ex.ToString(), AppLogger.eLogLevel.warning);
-                //MessageBox.Show("Error while writing a motor command. Motor Index: " + iMotorIndex.ToString() + " Motor Command: " + iMotorCmd.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //Console.WriteLine(ex.ToString());
                 return false;
             }
         }
@@ -98,8 +96,6 @@ namespace MmmConfig
             catch (Exception ex)
             {
                 Forms.MainSelector.appLogger.addLine("Error while writing a motor parameter. Motor index: " + iMotorIndex.ToString() + " Motor parameter: " + iParNum.ToString() + " Partial parameter path: " + partialStatusPath + " Exception: " + ex.ToString(), AppLogger.eLogLevel.warning);
-                //MessageBox.Show("Error while writing a motor parameter. Motor index: " + iMotorIndex.ToString() + " Motor parameter: " + iParNum.ToString() + " Partial parameter path: " + partialStatusPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //Console.WriteLine(ex.ToString());
                 return false;
             }
         }
@@ -120,8 +116,6 @@ namespace MmmConfig
             catch (Exception ex)
             {
                 Forms.MainSelector.appLogger.addLine("Error while reading motor status. Motor index: " + iMotorIndex.ToString() + " Partial status path: " + partialStatusPath + " Exception: " + ex.ToString(), AppLogger.eLogLevel.warning);
-                //MessageBox.Show("Error while reading motor status. Motor index: " + iMotorIndex.ToString() + " Partial status path: " + partialStatusPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //Console.WriteLine(ex.ToString());
                 return null;
             }
         }
@@ -139,8 +133,6 @@ namespace MmmConfig
             catch (Exception ex)
             {
                 Forms.MainSelector.appLogger.addLine("Error while reading motor feedback. Motor index: " + iMotorIndex.ToString() + " Partial feedback path: " + partialStatusPath + " Exception: " + ex.ToString(), AppLogger.eLogLevel.warning);
-                //MessageBox.Show("Error while reading motor feedback. Motor index: " + iMotorIndex.ToString() + " Partial feedback path: " + partialStatusPath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //Console.WriteLine(ex.ToString());
                 return null;
             }
         }

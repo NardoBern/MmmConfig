@@ -129,6 +129,7 @@ namespace MmmConfig.Forms
                 {
                     checkThread.Enabled = false;
                     cleanDataGridView();
+                    revertEventsOrder();
                     populateDataGridView();
                     colorateDataGridView();
                     lblInProgress.Text = "Done!!";
@@ -211,7 +212,17 @@ namespace MmmConfig.Forms
         #endregion
 
         #region Operative functions
-        public void populateDataGridView()
+        private void revertEventsOrder()
+        {
+            EventLogger eventLogger = new EventLogger();
+            for (int _i = motionEventLogger.iLastWritePos - 1; _i >= 0; _i--) 
+            {
+                eventLogger.events[motionEventLogger.iLastWritePos - 1 - _i] = motionEventLogger.events[_i];
+            }
+            motionEventLogger.events = eventLogger.events;
+        }
+
+        private void populateDataGridView()
         {
             for (int _i = 0; _i < motionEventLogger.iLastWritePos; _i++)
             {
@@ -243,7 +254,7 @@ namespace MmmConfig.Forms
             }
             for (int _i = 0; _i < 7; _i++) { dgvLogReader.AutoResizeColumn(_i); }        
         }
-        public void colorateDataGridView()
+        private void colorateDataGridView()
         {
             foreach (DataGridViewRow row in dgvLogReader.Rows)
             {
@@ -536,7 +547,8 @@ namespace MmmConfig.Forms
                 try 
                 { 
                     if (saveFileDialog.FileName != "") 
-                    { 
+                    {
+                        revertEventsOrder();
                         xmlCreator.createXmlFile(motionEventLogger, saveFileDialog.FileName);
                         MainSelector.appLogger.addLine("File has been succesfully saved with filename: " + saveFileDialog.FileName, AppLogger.eLogLevel.debug);
                     } 
@@ -582,6 +594,7 @@ namespace MmmConfig.Forms
                     xmlReader.readXml(openFileDialog.FileName, readLogger);
                     motionEventLogger = readLogger;
                     cleanDataGridView();
+                    revertEventsOrder();
                     populateDataGridView();
                     colorateDataGridView();
                     MainSelector.appLogger.addLine("File name: " + openFileDialog.FileName + " has been succesfully opened.", AppLogger.eLogLevel.debug);

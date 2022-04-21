@@ -1114,14 +1114,14 @@ namespace MmmConfig.Forms
             // saveToToolStripMenuItem
             // 
             this.saveToToolStripMenuItem.Name = "saveToToolStripMenuItem";
-            this.saveToToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.saveToToolStripMenuItem.Text = "Save To...";
             this.saveToToolStripMenuItem.Click += new System.EventHandler(this.saveToToolStripMenuItem_Click);
             // 
             // openFromToolStripMenuItem
             // 
             this.openFromToolStripMenuItem.Name = "openFromToolStripMenuItem";
-            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openFromToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.openFromToolStripMenuItem.Text = "Open From...";
             this.openFromToolStripMenuItem.Click += new System.EventHandler(this.openFromToolStripMenuItem_Click);
             // 

@@ -21,8 +21,11 @@ namespace MmmConfig
             try {doc.Load(strFilePath);}
             catch (XmlException ex) 
             {
+                DialogResult _;
                 Forms.MainSelector.appLogger.addLine("Error while loading xml configuration file: " + ex.ToString(), AppLogger.eLogLevel.error);
-                MessageBox.Show("Error while loading xml configuration file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                _ = MessageBox.Show("Error while loading xml configuration file: continue with loading default config? May not work very well...", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if ( _ == DialogResult.Yes) { loadingDefaultValue(appConfig); }
+                else { Form.ActiveForm.Close(); appConfig.xConfigLoaded = false; }
             }
             
             try { 
@@ -78,11 +81,15 @@ namespace MmmConfig
                             break;
                     }
                 }
+                appConfig.xConfigLoaded = true;
             }
             catch (XmlException ex) 
             {
+                DialogResult _;
                 Forms.MainSelector.appLogger.addLine("Error while reading xml config file: " + ex.ToString(), AppLogger.eLogLevel.error);
-                MessageBox.Show("Error while reading xml config file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                _ = MessageBox.Show("Error while loading xml configuration file: continue with loading default config? May not work very well...", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (_ == DialogResult.Yes) { loadingDefaultValue(appConfig); }
+                else { Form.ActiveForm.Close(); appConfig.xConfigLoaded = false; }
             }
         }
         #endregion
@@ -332,13 +339,31 @@ namespace MmmConfig
                         }
                     }
                 }
-                eventLogger.iLastWritePos = iNumOfEvent;
+                eventLogger.iLastWritePos = iNumOfEvent + 1;
             }
             catch (XmlException ex) 
             {
                 Forms.MainSelector.appLogger.addLine("Error while reading xml event file: " + ex.ToString(), AppLogger.eLogLevel.error);
                 MessageBox.Show("Error while reading xml event file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             }
+        }
+        #endregion
+
+        #region Loading default value
+        public void loadingDefaultValue(AppConfig appConfig)
+        {
+            appConfig.strDefaultNetId = "192.168.193.200.1.1";
+            appConfig.iDefaultPort = 851;
+            appConfig.strMotionEventLogPath = "GVL_Hmi.stMotionEventLogger";
+            appConfig.strEventLogSize = "LoggerConst.c_iEventSize";
+            appConfig.strReadWatchDog = "LOC_AdsIO.stOutput._Reserve[7]";
+            appConfig.strWriteWatchDog = "LOC_AdsIO.stInput._Reserve[3]";
+            appConfig.strMotCfgWrite = "LOC_AdsIO.stInput.Config.astMotorCfg";
+            appConfig.strMotCfgRead = "GVL_Hmi.Config.astMotorCfg";
+            appConfig.strMotStatus = "LOC_AdsIO.stOutput.MotorSts";
+            appConfig.strMotCommands = "LOC_AdsIO.stInput.MotorCmd[";
+            appConfig.xConfigLoaded = true;
+            Forms.MainSelector.appLogger.addLine("Loading of default configuration values completed!", AppLogger.eLogLevel.info);
         }
         #endregion
     }
