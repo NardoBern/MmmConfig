@@ -332,7 +332,7 @@ namespace MmmConfig
                         }
                     }
                 }
-                eventLogger.iLastWritePos = iNumOfEvent;
+                eventLogger.iLastWritePos = iNumOfEvent + 1;
             }
             catch (XmlException ex) 
             {
