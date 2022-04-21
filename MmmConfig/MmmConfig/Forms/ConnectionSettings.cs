@@ -30,6 +30,7 @@ namespace MmmConfig.Forms
             strNetId = txtNetId.Text;
             strPort = txtPort.Text;
             DialogResult = DialogResult.OK;
+            MainSelector.appLogger.addLine("Connection settings maybe changed. New NetId: " + strNetId + " New Port: " + strPort, AppLogger.eLogLevel.debug);
             Close();
         }
     }

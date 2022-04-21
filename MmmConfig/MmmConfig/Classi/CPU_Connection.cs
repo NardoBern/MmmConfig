@@ -49,6 +49,7 @@ namespace MmmConfig
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione: " + e.ToString());
                 MessageBox.Show("Connection error: " + e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Connection error: " + e.ToString(), AppLogger.eLogLevel.error);
             }
             
             if (tcClient.IsConnected) { return tcClient; } else { return null;}
@@ -71,8 +72,16 @@ namespace MmmConfig
         /* Check watch-dog value */
         public bool checkWdValue(int iWdValue)
         {
-            if (iWdValue != iWatchDogOld) { connected = true; }
-            else { connected = false; }
+            if (iWdValue != iWatchDogOld) 
+            {
+                if (!(connected)) { Forms.MainSelector.appLogger.addLine("CPU with Net-id: " + tcClient.Address.NetId.ToString() + " has been connected at port: " + tcClient.Address.Port.ToString(), AppLogger.eLogLevel.debug); }
+                connected = true; 
+            }
+            else 
+            {
+                if (connected) { Forms.MainSelector.appLogger.addLine("CPU with Net-id: " + tcClient.Address.NetId.ToString() + " has been disconnected.", AppLogger.eLogLevel.debug); }
+                connected = false; 
+            }
             iWatchDogOld = iWdValue;
             return connected;
         }
@@ -93,9 +102,14 @@ namespace MmmConfig
             }
             catch (TwinCAT.Ads.AdsErrorException e)
             {
-                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
+                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) 
+                { 
+                    iTimeOut = iTimeOut + 1;
+                    Forms.MainSelector.appLogger.addLine("Error while reading integer value: " + strVarName + " Connection time-out", AppLogger.eLogLevel.warning);
+                    if (iTimeOut >= 3) { iTimeOut = 0; connected = false; }
+                }
                 Console.WriteLine("Eccezione durante la lettura di un valore intero " + e.ToString());
-                MessageBox.Show("Error while reading integer value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Error while reading integer value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 
                 return 99;
             }
@@ -122,9 +136,14 @@ namespace MmmConfig
             }
             catch (TwinCAT.Ads.AdsErrorException e)
             {
-                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
+                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) 
+                { 
+                    iTimeOut = iTimeOut + 1;
+                    Forms.MainSelector.appLogger.addLine("Error while reading boolean value: " + strVarName + " Connection time-out", AppLogger.eLogLevel.warning);
+                    if (iTimeOut >= 3) { iTimeOut = 0; connected = false; }
+                }
                 Console.WriteLine("Eccezione durante la lettura di un valore boolean " + e.ToString());
-                MessageBox.Show("Error while reading boolean value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Error while reading boolean value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (System.ObjectDisposedException e)
@@ -188,9 +207,14 @@ namespace MmmConfig
             }
             catch (TwinCAT.Ads.AdsErrorException e)
             {
-                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
+                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) 
+                { 
+                    iTimeOut = iTimeOut + 1;
+                    Forms.MainSelector.appLogger.addLine("Error while reading event: " + iEventNum.ToString() + " Connection time-out", AppLogger.eLogLevel.warning);
+                    if (iTimeOut >= 3) { iTimeOut = 0; connected = false; }
+                }
                 Console.WriteLine("Eccezione durante la lettura di un evento " + e.ToString());
-                MessageBox.Show("Error while reading event: " + iEventNum.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Error while reading event: " + iEventNum.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (System.ObjectDisposedException e)
@@ -219,7 +243,8 @@ namespace MmmConfig
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while reading string operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while reading string operation values: " + ex.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while reading string operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -242,7 +267,8 @@ namespace MmmConfig
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while reading double operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while reading double operation values: " + ex.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while reading double operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -265,7 +291,8 @@ namespace MmmConfig
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while reading integer operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while reading integer operation values: " + ex.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while reading integer operation values: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -287,7 +314,8 @@ namespace MmmConfig
                 return errorId;
             }
             catch (Exception ex) {
-                MessageBox.Show("Error while reading error ID: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while reading error ID: " + ex.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while reading error ID: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -305,7 +333,8 @@ namespace MmmConfig
                 return errorArray;
             }
             catch (Exception ex) {
-                MessageBox.Show("Error while reading error bit array: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while reading error bit array: " + ex.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while reading error bit array: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
         }
@@ -367,7 +396,8 @@ namespace MmmConfig
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while reading error enumerator name: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while reading error enumerator name: " + ex.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while reading error enumerator name: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return enumErrorName.eNoError;
             }
         }
@@ -400,7 +430,8 @@ namespace MmmConfig
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error while reading type of event: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while reading type of event: " + ex.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while reading type of event: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return eTypeOfEvent.Error;
             }
         }
@@ -417,8 +448,9 @@ namespace MmmConfig
             catch (TwinCAT.Ads.AdsErrorException e)
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
-                Console.WriteLine("Eccezione durante la lettura di un evento " + e.ToString());
-                MessageBox.Show("Error while reading a string: " + e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //Console.WriteLine("Eccezione durante la lettura di un evento " + e.ToString());
+                Forms.MainSelector.appLogger.addLine("Error while reading a string: " + e.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while reading a string: " + e.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "Error";
             }
             catch (System.ObjectDisposedException e)
@@ -448,7 +480,8 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la scrittura di un valore intero " + e.ToString());
-                MessageBox.Show("Error while writing an integer value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while writing an integer value: " + strVarName + " " + e.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while writing an integer value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (System.ObjectDisposedException e)
@@ -475,7 +508,8 @@ namespace MmmConfig
             {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione durante la scrittura di un valore boolean " + e.ToString());
-                MessageBox.Show("Error while writing a boolean value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while writing a boolean value: " + strVarName + " " + e.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while writing a boolean value: " + strVarName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (System.ObjectDisposedException e)
@@ -502,7 +536,8 @@ namespace MmmConfig
                 return hTest;
             }
             catch (Exception ex) {
-                MessageBox.Show("Error while adding notification to variable: " + strVariableName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while adding notification to variable: " + strVariableName + " " + ex.ToString(), AppLogger.eLogLevel.warning);
+                //MessageBox.Show("Error while adding notification to variable: " + strVariableName, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return 99999;
             }
             
@@ -512,6 +547,7 @@ namespace MmmConfig
         #region Error Manager
         private void ErrorManagement(Exception e)
         {
+            Forms.MainSelector.appLogger.addLine("CPU Connection is not valid: " + e.ToString(), AppLogger.eLogLevel.fatal);
             MessageBox.Show("CPU Connection is not valid: " + e.ToString(), "ERROR!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Application.Exit();
         }

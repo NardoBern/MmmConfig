@@ -39,7 +39,8 @@ namespace MmmConfig
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            try { 
+            try 
+            { 
                 CpuConnection = new CPU_Connection();
                 motor = new Motor[4];
                 motor[0] = new Motor();
@@ -48,22 +49,26 @@ namespace MmmConfig
                 motor[3] = new Motor();
                 motionEventLogger = new EventLogger();
                 motionEventLogger.events = new Event[1000];
-                for (int _i = 0; _i < 1000; _i++) { 
+                for (int _i = 0; _i < 1000; _i++) 
+                { 
                     motionEventLogger.events[_i] = new Event();
                     motionEventLogger.events[_i].error = new Error();
                     motionEventLogger.events[_i].operationLog = new OperationLog();
                 }
+                if (CpuConnection.connected)
+                {
+                    vUpdateConnectedStatus();
+                }
+                else
+                {
+                    vUpdateDisconnectedStatus();
+                }
+                Forms.MainSelector.appLogger.addLine("Configurator app has been succesfully uploaded.", AppLogger.eLogLevel.debug);
             }
-            catch (Exception ex) { MessageBox.Show("Error while loading configurator app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Dispose();}
-
-            if (CpuConnection.connected)
-            {
-                vUpdateConnectedStatus();
-
-            }
-            else
-            {
-                vUpdateDisconnectedStatus();
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading configurator app: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Dispose();
+                Forms.MainSelector.appLogger.addLine("Error while loading configurator app: " + ex.ToString(), AppLogger.eLogLevel.error);
             }
         }
         private void Form1_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -173,10 +178,9 @@ namespace MmmConfig
         #region Timers
         private void tWdTimer_Tick(object sender, EventArgs e)
         {
-            int iWatchDog = CpuConnection.readInt(Forms.MainSelector.appConfig.strReadWatchDog, CpuConnection.tcClient);     //("LOC_AdsIO.stOutput._Reserve[7]", CpuConnection.tcClient);
-            //lblTest.Text = iWatchDog.ToString();
+            int iWatchDog = CpuConnection.readInt(Forms.MainSelector.appConfig.strReadWatchDog, CpuConnection.tcClient);
             prgConnWd.Value = iWatchDog;
-            CpuConnection.writeInt(Forms.MainSelector.appConfig.strWriteWatchDog, iWatchDog);         //("LOC_AdsIO.stInput._Reserve[3]", iWatchDog);
+            CpuConnection.writeInt(Forms.MainSelector.appConfig.strWriteWatchDog, iWatchDog);
             CpuConnection.iWatchDog = iWatchDog;
             iWdCheck = iWdCheck + 1;
             if (iWdCheck >= 6)
@@ -337,7 +341,11 @@ namespace MmmConfig
         {
             lblConnStatus.Text = "Connected";
             try {btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connected.png");}
-            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
             tWdTimer.Enabled = true;
             if (!(motor[0].motorStatus.xEventEnabled)) { 
                 ReadMotorSts();
@@ -351,10 +359,15 @@ namespace MmmConfig
         }
         private void vUpdateDisconnectedStatus()
         {
+            if (CpuConnection.connected) { Forms.MainSelector.appLogger.addLine("CPU with Net-id: " + CpuConnection.tcClient.Address.NetId.ToString() + " has been disconnected.", AppLogger.eLogLevel.debug); }
             CpuConnection.connected = false;
             lblConnStatus.Text = "No connection";
             try {btnConnect.BackgroundImage = Image.FromFile(Environment.CurrentDirectory.ToString() + "\\Img\\connect.png");}
-            catch (Exception ex) { MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) 
+            { 
+                MessageBox.Show("Error while loading image file: " + ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Forms.MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
+            }
             tWdTimer.Enabled = false;
         }
 
@@ -424,14 +437,6 @@ namespace MmmConfig
             }
         }
 
-        private void vAddEventLoggerNotification(MmmConfig.EventLogger eventLogger, MmmConfig.CPU_Connection cPU_Connection, string partialPath)
-        {
-            if (!eventLogger.xEventEnabled) { 
-                eventLogger.uiVarHandle = cPU_Connection.AddNotification(cPU_Connection.tcClient, partialPath + ".iLastWritePos");
-                eventLogger.xEventEnabled = true;
-                Console.WriteLine("Added status notification to event logger");
-            }
-        }
         #endregion
 
         private void btnMain_Click(object sender, EventArgs e)
