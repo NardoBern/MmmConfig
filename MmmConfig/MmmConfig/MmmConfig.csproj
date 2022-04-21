@@ -318,6 +318,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ExampleFiles\configExample.xml" />
     <Content Include="ExampleFiles\diagnosticExample.xml" />
     <Content Include="Img\768px-Settings_%28iOS%29.png" />

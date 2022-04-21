@@ -9,6 +9,7 @@ namespace MmmConfig
     public class AppConfig
     {
         #region Variable declaration
+        public bool xConfigLoaded;
         public string strDefaultNetId;
         public int iDefaultPort;
         public string strMotionEventLogPath;

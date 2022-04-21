@@ -64,21 +64,30 @@ namespace MmmConfig.Forms
             XmlExtractor xmlExtractor = new XmlExtractor();
             string strCurrentDir;
             string strCfgFilePath;
-            try
-            {
-                strCurrentDir = Directory.GetCurrentDirectory();
-                strCfgFilePath = strCurrentDir + "\\config.xml";
-                xmlExtractor.readConfiguration(strCfgFilePath, appConfig);
-            }
-            catch (UnauthorizedAccessException ue) 
+            if (!(appConfig.xConfigLoaded))
             { 
-                MessageBox.Show("Access to folder is not authorized: " + ue.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                appLogger.addLine("Access to folder of config file is not authorized: " + ue.ToString(), AppLogger.eLogLevel.error);
-            }
-            catch (FileNotFoundException ue) 
-            { 
-                MessageBox.Show("File not found: " + ue.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                appLogger.addLine("App configuration file hasn't been found: " + ue.ToString(), AppLogger.eLogLevel.error);
+                try
+                {
+                    strCurrentDir = Directory.GetCurrentDirectory();
+                    strCfgFilePath = strCurrentDir + "\\config.xml";
+                    xmlExtractor.readConfiguration(strCfgFilePath, appConfig);
+                }
+                catch (UnauthorizedAccessException ue) 
+                {
+                    DialogResult _;
+                    _ = MessageBox.Show("Error while loading xml configuration file: continue with loading default config? May not work very well...", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    if (_ == DialogResult.Yes) { xmlExtractor.loadingDefaultValue(appConfig); }
+                    else {this.Close(); }
+                    appLogger.addLine("Access to folder of config file is not authorized: " + ue.ToString(), AppLogger.eLogLevel.error);
+                }
+                catch (FileNotFoundException ue) 
+                {
+                    DialogResult _;
+                    _ = MessageBox.Show("Xml configuration file not found: continue with loading default config? May not work very well...", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    if (_ == DialogResult.Yes) { xmlExtractor.loadingDefaultValue(appConfig); }
+                    else { this.Close(); }
+                    appLogger.addLine("App configuration file hasn't been found: " + ue.ToString(), AppLogger.eLogLevel.error);
+                }
             }
         }
         #endregion
