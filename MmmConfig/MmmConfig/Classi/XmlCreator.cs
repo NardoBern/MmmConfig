@@ -86,7 +86,7 @@ namespace MmmConfig
             xmlWriter.WriteElementString("device", @event.strDeviceName);
             xmlWriter.WriteElementString("message", @event.strMessage);
             xmlWriter.WriteElementString("alert", @event.strAlert);
-            //xmlWriter.WriteStartElement("operation");
+            
             xmlWriter.WriteElementString("OperationDescription", @event.operationLog.strOperationDescr);
             xmlWriter.WriteElementString("valueString1", @event.operationLog.astrOpValue[0]);
             xmlWriter.WriteElementString("valueString2", @event.operationLog.astrOpValue[1]);
@@ -100,8 +100,7 @@ namespace MmmConfig
             xmlWriter.WriteElementString("valueReal2", @event.operationLog.arOpValue[1].ToString("F0"));
             xmlWriter.WriteElementString("valueReal3", @event.operationLog.arOpValue[2].ToString("F0"));
             xmlWriter.WriteElementString("valueReal4", @event.operationLog.arOpValue[3].ToString("F0"));
-            //xmlWriter.WriteEndElement();
-            //xmlWriter.WriteStartElement("error");
+            
             xmlWriter.WriteElementString("errorGlobal", @event.error.xErrorGlobal.ToString());
             string strErrorDescription;
             switch (@event.error.enumErrorName)
@@ -183,7 +182,6 @@ namespace MmmConfig
             xmlWriter.WriteElementString("errorCode14", @event.error.audiErrId[14].ToString());
             xmlWriter.WriteElementString("errorCode15", @event.error.audiErrId[15].ToString());
             xmlWriter.WriteEndElement();
-            //xmlWriter.WriteEndElement();
         }
     }
 }
