@@ -195,6 +195,7 @@ namespace MmmConfig
                     else
                     {
                         vUpdateDisconnectedStatus();
+                        //CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
                         MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     iWdCheck = 0;
@@ -203,7 +204,12 @@ namespace MmmConfig
             else
             {
                 CpuConnection.iCommErr++;
-                if (CpuConnection.iCommErr > 5) { vUpdateDisconnectedStatus(); MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+                if (CpuConnection.iCommErr > 5) 
+                { 
+                    vUpdateDisconnectedStatus();
+                    //CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
+                    MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
+                }
             }
         }
         #endregion
@@ -379,6 +385,7 @@ namespace MmmConfig
                 Forms.MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
             }
             tWdTimer.Enabled = false;
+            
         }
 
         private void ReadMotorSts()
