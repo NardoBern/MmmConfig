@@ -161,7 +161,8 @@ namespace MmmConfig.Forms
             else
             {
                 CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
-                tWdTimer.Enabled = true;
+                if (CpuConnection.tcClient != null) { tWdTimer.Enabled = true; }
+                else { MessageBox.Show("Connection not started.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
             }
         }
         private void tWdTimer_Tick(object sender, EventArgs e)
