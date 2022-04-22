@@ -181,6 +181,7 @@ namespace MmmConfig.Forms
                 else
                 {
                     vUpdateDisconnectedStatus();
+                    MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 iWdCheck = 0;
             }
@@ -631,6 +632,7 @@ namespace MmmConfig.Forms
             }
             tWdTimer.Enabled = false;
             btnRefresh.Enabled = false;
+            
         }
         #endregion
     }
