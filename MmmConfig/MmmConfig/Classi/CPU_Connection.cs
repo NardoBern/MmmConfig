@@ -27,6 +27,7 @@ namespace MmmConfig
         public int iWatchDog = 0;
         public int iWatchDogOld = 0;
         public int iTimeOut = 0;
+        public int iCommErr = 0;
         public Motor Motors;
         public MemoryStream datastream;
         #endregion
@@ -121,16 +122,16 @@ namespace MmmConfig
                     if (iTimeOut >= 3) { iTimeOut = 0; connected = false; }
                 }
                 Console.WriteLine("Eccezione durante la lettura di un valore intero " + e.ToString());
-                return 99;
+                return 999999;
             }
             catch (System.ObjectDisposedException e) {
                 ErrorManagement(e);
-                return 99;
+                return 999999;
             }
             catch (System.NullReferenceException e)
             {
                 ErrorManagement(e);
-                return 99;
+                return 999999;
             }
         }
         /* Read boolean value */
