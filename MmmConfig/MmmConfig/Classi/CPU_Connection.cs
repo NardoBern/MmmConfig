@@ -7,6 +7,7 @@ using TwinCAT.Ads;
 using TwinCAT.Ams;
 using TwinCAT.Ads.TcpRouter;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -36,15 +37,26 @@ namespace MmmConfig
         {
             AdsClientSettings tcClientSettings = new AdsClientSettings(5000);
             AdsClient tcClient = new AdsClient();
-                    
-            var tcpRouter = new TwinCAT.Ads.TcpRouter.AmsTcpIpRouter(AmsNetId.Parse("192.168.193.70.1.1"));
-            tcpRouter.AddRoute(new Route("CX-50CAF6", new AmsNetId("192.168.193.200.1.1"), new IPAddress[] { IPAddress.Parse("192.168.193.200") }));
+            string pcNetId = "";
+            IPAddress iPAddress;
+            
+            iPAddress = getIpAddress();
+            if (iPAddress != null) 
+            {
+                if (checkIpAddress(iPAddress, strNetId)) { pcNetId = iPAddress.ToString() + ".1.1"; }
+                else { MessageBox.Show("Your PC address is not in the same Subnet of the controller.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
+            }
+            else { MessageBox.Show("It seems that you haven't an active network connection.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
+            
+            
+            var tcpRouter = new TwinCAT.Ads.TcpRouter.AmsTcpIpRouter(AmsNetId.Parse(pcNetId));
+            tcpRouter.AddRoute(new Route("CX-50CAF6", new AmsNetId(strNetId), new IPAddress[] { IPAddress.Parse(strNetId.Remove(strNetId.Length - 4))}));
 
             var routerTask = tcpRouter.StartAsync(System.Threading.CancellationToken.None);
 
             tcClient.Timeout = 5000;
 
-            try { tcClient.Connect(strNetId, 851); }
+            try { tcClient.Connect(strNetId, iport); }
             catch (TwinCAT.Ads.AdsErrorException e) {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione: " + e.ToString());
@@ -532,5 +544,34 @@ namespace MmmConfig
             Application.Exit();
         }
         #endregion
+
+        #region Auxiliary functions
+        public IPAddress getIpAddress()
+        {
+            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    foreach(UnicastIPAddressInformation ip in nic.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork) {return ip.Address;}
+                    }
+                }
+                else { return null; }
+            }
+            return null;
+        }
+        public bool checkIpAddress(IPAddress iPAddress, string strCpuNetId)
+        {
+            byte[] addressOctets = iPAddress.GetAddressBytes();
+            IPAddress cpuIpAddress = IPAddress.Parse(strCpuNetId.Remove(strCpuNetId.Length - 4));
+            byte[] CpuAdrOctets = cpuIpAddress.GetAddressBytes();
+
+            return ((addressOctets[0] == CpuAdrOctets[0]) && (addressOctets[1] == CpuAdrOctets[1]) && (addressOctets[2] == CpuAdrOctets[2]));
+        }
+
+
+        #endregion
+
     }
 }
