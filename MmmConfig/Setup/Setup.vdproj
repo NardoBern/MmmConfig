@@ -3106,12 +3106,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C5F990BA2AF54EFF80E956071144D35C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EF25B113E87E4741A34B15BB0F9B7113"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -3979,6 +3973,12 @@
         "OwnerKey" = "8:_AFE3750669BD9333CA5D831C61F91D71"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C5F990BA2AF54EFF80E956071144D35C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -3997,6 +3997,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -4013,6 +4021,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -11506,15 +11530,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MmmConfAndDiag"
-        "ProductCode" = "8:{E0E4E4D5-7217-4B15-A210-220031BC7A90}"
-        "PackageCode" = "8:{6E0D814F-A303-4C59-AC8F-FFC8C3FEBF1B}"
+        "ProductCode" = "8:{1237F209-6C01-4A51-A659-D3436FB11B5D}"
+        "PackageCode" = "8:{AAE6B96C-C9FC-423E-B927-EF9C3A31A7E2}"
         "UpgradeCode" = "8:{020D2A62-90E8-41DE-9C18-FDF7C1C197AF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:Arol S.p.A."
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -12056,7 +12080,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_EF25B113E87E4741A34B15BB0F9B7113"
             {
-            "SourcePath" = "8:..\\MmmConfig\\obj\\Debug\\MmmConfig.exe"
+            "SourcePath" = "8:..\\MmmConfig\\obj\\Release\\MmmConfig.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_08067222F8D64BC3A3BD222D95AA53AF"
