@@ -81,6 +81,13 @@ namespace MmmConfig.Forms
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            for (int _i = 0; _i < 1000; _i++)
+            {
+                motionEventLogger.events[_i] = new Event();
+                motionEventLogger.events[_i].error = new Error();
+                motionEventLogger.events[_i].operationLog = new OperationLog();
+            }
+            cleanDataGridView();
             int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
             prgBarGetInfo.Maximum = iNumOfEventToRead;
             motionEventLogger.iLastWritePos = iNumOfEventToRead;
@@ -129,12 +136,20 @@ namespace MmmConfig.Forms
                 {
                     checkThread.Enabled = false;
                     cleanDataGridView();
-                    revertEventsOrder();
-                    populateDataGridView();
-                    colorateDataGridView();
-                    lblInProgress.Text = "Done!!";
+                    if (CpuConnection.connected) {
+                        revertEventsOrder();
+                        populateDataGridView();
+                        colorateDataGridView();
+                        lblInProgress.Text = "Done!!";
+                        MainSelector.appLogger.addLine("Updating of the logger has been done.", AppLogger.eLogLevel.debug);
+                    }
+                    else
+                    {
+                        trd.Abort();
+                        lblInProgress.Text = "Failed";
+                        MainSelector.appLogger.addLine("Updating of the logger failed. Connection has been lost.", AppLogger.eLogLevel.error);
+                    }
                     btnStopRefresh.Enabled = false;
-                    MainSelector.appLogger.addLine("Updating of the logger has been done.", AppLogger.eLogLevel.debug);
                 }
             }
             catch (Exception _e) 
@@ -528,11 +543,17 @@ namespace MmmConfig.Forms
         }
         private void readEvent()
         {
-            int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
-            for (_i = 0; _i < iNumOfEventToRead; _i++)
+            if (CpuConnection != null)
             {
-                CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]);
+                int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
+                for (_i = 0; _i < iNumOfEventToRead; _i++)
+                {
+                    if (CpuConnection != null) { CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]); }
+                    else { MessageBox.Show("Cpu Connection is not valid. Try to restart the application.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);break; }
+                    
+                }
             }
+            else { MessageBox.Show("Cpu Connection is not valid. Try to restart the application.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
         private void saveToFile()
         {
