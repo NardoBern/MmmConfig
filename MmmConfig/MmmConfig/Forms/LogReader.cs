@@ -14,17 +14,16 @@ namespace MmmConfig.Forms
     public partial class LogReader : Form
     {
         #region Variable declarations
-        public static CPU_Connection CpuConnection;
-        public Motor[] motor;
+        private CPU_Connection CpuConnection;
         private int iWdCheck = 0;
         
-        public static EventLogger motionEventLogger;
-        public string c_strMotionEventLogPath = MainSelector.appConfig.strMotionEventLogPath;
+        private EventLogger motionEventLogger;
+        private string c_strMotionEventLogPath = MainSelector.appConfig.strMotionEventLogPath;
         string[,] astrString = new string[1000,7];
-        public Thread trd;
+        private Thread trd;
         private int _i;
-        public string strNetId = MainSelector.appConfig.strDefaultNetId;
-        public string strPort = MainSelector.appConfig.iDefaultPort.ToString();
+        private string strNetId = MainSelector.appConfig.strDefaultNetId;
+        private string strPort = MainSelector.appConfig.iDefaultPort.ToString();
         
         #endregion
 
