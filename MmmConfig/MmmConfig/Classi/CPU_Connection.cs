@@ -7,6 +7,7 @@ using TwinCAT.Ads;
 using TwinCAT.Ams;
 using TwinCAT.Ads.TcpRouter;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace MmmConfig
         public int iWatchDog = 0;
         public int iWatchDogOld = 0;
         public int iTimeOut = 0;
+        public int iCommErr = 0;
         public Motor Motors;
         public MemoryStream datastream;
         #endregion
@@ -36,15 +38,26 @@ namespace MmmConfig
         {
             AdsClientSettings tcClientSettings = new AdsClientSettings(5000);
             AdsClient tcClient = new AdsClient();
-                    
-            var tcpRouter = new TwinCAT.Ads.TcpRouter.AmsTcpIpRouter(AmsNetId.Parse("192.168.193.70.1.1"));
-            tcpRouter.AddRoute(new Route("CX-50CAF6", new AmsNetId("192.168.193.200.1.1"), new IPAddress[] { IPAddress.Parse("192.168.193.200") }));
+            string pcNetId = "";
+            IPAddress iPAddress;
+            
+            iPAddress = getIpAddress();
+            if (iPAddress != null) 
+            {
+                if (checkIpAddress(iPAddress, strNetId)) { pcNetId = iPAddress.ToString() + ".1.1"; }
+                else { MessageBox.Show("Your PC address is not in the same Subnet of the controller.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
+            }
+            else { MessageBox.Show("It seems that you haven't an active network connection.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
+            
+            
+            var tcpRouter = new TwinCAT.Ads.TcpRouter.AmsTcpIpRouter(AmsNetId.Parse(pcNetId));
+            tcpRouter.AddRoute(new Route("CX-50CAF6", new AmsNetId(strNetId), new IPAddress[] { IPAddress.Parse(strNetId.Remove(strNetId.Length - 4))}));
 
             var routerTask = tcpRouter.StartAsync(System.Threading.CancellationToken.None);
 
             tcClient.Timeout = 5000;
 
-            try { tcClient.Connect(strNetId, 851); }
+            try { tcClient.Connect(strNetId, iport); }
             catch (TwinCAT.Ads.AdsErrorException e) {
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) { iTimeOut = iTimeOut + 1; }
                 Console.WriteLine("Eccezione: " + e.ToString());
@@ -105,20 +118,19 @@ namespace MmmConfig
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) 
                 { 
                     iTimeOut = iTimeOut + 1;
-                    Forms.MainSelector.appLogger.addLine("Error while reading integer value: " + strVarName + " Connection time-out", AppLogger.eLogLevel.warning);
-                    if (iTimeOut >= 3) { iTimeOut = 0; connected = false; }
+                    if (iTimeOut >= 3) { iTimeOut = 0; connected = false; Forms.MainSelector.appLogger.addLine("Error while reading integer value: " + strVarName + " Connection time-out", AppLogger.eLogLevel.warning); }
                 }
                 Console.WriteLine("Eccezione durante la lettura di un valore intero " + e.ToString());
-                return 99;
+                return 999999;
             }
             catch (System.ObjectDisposedException e) {
                 ErrorManagement(e);
-                return 99;
+                return 999999;
             }
             catch (System.NullReferenceException e)
             {
                 ErrorManagement(e);
-                return 99;
+                return 999999;
             }
         }
         /* Read boolean value */
@@ -180,26 +192,30 @@ namespace MmmConfig
                 uiHandle[17] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[3]");
                 uiHandle[18] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[4]");
 
-                @event.uiEventId = (uint)adsClient.ReadAny(uiHandle[0], typeof(uint));
-                @event.strDeviceName = readString(uiHandle[1], adsClient);
-                @event.eTypeOfEvent = readTypeOfEvent(uiHandle[2], adsClient);
-                @event.strTimeStamp = readString(uiHandle[3], adsClient);
-                @event.xWrite = (bool)adsClient.ReadAny(uiHandle[4], typeof(bool));
-                @event.strMessage = readString(uiHandle[5], adsClient);
-                @event.strAlert = readString(uiHandle[6], adsClient);
-                @event.error.axErrBit = readErrorBit(uiHandle[7],adsClient);
-                @event.error.xErrorGlobal = (bool)adsClient.ReadAny(uiHandle[8], typeof(bool));
-                @event.error.enumErrorName = readErrorName(uiHandle[9], adsClient);
-                @event.error.audiErrId = readErrorId(uiHandle[10], adsClient);
-                @event.operationLog.strOperationDescr = readString(uiHandle[11], adsClient);
-                @event.operationLog.aiOpValue = readIntOpValues(uiHandle[12], adsClient);
-                @event.operationLog.arOpValue = readDoubleOpValues(uiHandle[13], adsClient);
-                uint[] strHandles = new uint[5] { uiHandle[14], uiHandle[15], uiHandle[16], uiHandle[17], uiHandle[18] }; 
-                @event.operationLog.astrOpValue = readStringOpValues(strHandles, adsClient);
+                if (adsClient != null && @event != null) 
+                {                 
+                    @event.uiEventId = (uint)adsClient.ReadAny(uiHandle[0], typeof(uint));
+                    @event.strDeviceName = readString(uiHandle[1], adsClient);
+                    @event.eTypeOfEvent = readTypeOfEvent(uiHandle[2], adsClient);
+                    @event.strTimeStamp = readString(uiHandle[3], adsClient);
+                    @event.xWrite = (bool)adsClient.ReadAny(uiHandle[4], typeof(bool));
+                    @event.strMessage = readString(uiHandle[5], adsClient);
+                    @event.strAlert = readString(uiHandle[6], adsClient);
+                    @event.error.axErrBit = readErrorBit(uiHandle[7],adsClient);
+                    @event.error.xErrorGlobal = (bool)adsClient.ReadAny(uiHandle[8], typeof(bool));
+                    @event.error.enumErrorName = readErrorName(uiHandle[9], adsClient);
+                    @event.error.audiErrId = readErrorId(uiHandle[10], adsClient);
+                    @event.operationLog.strOperationDescr = readString(uiHandle[11], adsClient);
+                    @event.operationLog.aiOpValue = readIntOpValues(uiHandle[12], adsClient);
+                    @event.operationLog.arOpValue = readDoubleOpValues(uiHandle[13], adsClient);
+                    uint[] strHandles = new uint[5] { uiHandle[14], uiHandle[15], uiHandle[16], uiHandle[17], uiHandle[18] }; 
+                    @event.operationLog.astrOpValue = readStringOpValues(strHandles, adsClient);
 
-                for (int _i = 0; _i < uiHandle.Length; _i++) { adsClient.DeleteVariableHandle(uiHandle[_i]); }
+                    for (int _i = 0; _i < uiHandle.Length; _i++) { adsClient.DeleteVariableHandle(uiHandle[_i]); }
                 
-                return true;
+                    return true;
+                }
+                else { return false; MessageBox.Show("AdsClient or @Event was null", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information); }
 
             }
             catch (TwinCAT.Ads.AdsErrorException e)
@@ -532,5 +548,34 @@ namespace MmmConfig
             Application.Exit();
         }
         #endregion
+
+        #region Auxiliary functions
+        public IPAddress getIpAddress()
+        {
+            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (nic.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    foreach(UnicastIPAddressInformation ip in nic.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork) {return ip.Address;}
+                    }
+                }
+                else { return null; }
+            }
+            return null;
+        }
+        public bool checkIpAddress(IPAddress iPAddress, string strCpuNetId)
+        {
+            byte[] addressOctets = iPAddress.GetAddressBytes();
+            IPAddress cpuIpAddress = IPAddress.Parse(strCpuNetId.Remove(strCpuNetId.Length - 4));
+            byte[] CpuAdrOctets = cpuIpAddress.GetAddressBytes();
+
+            return ((addressOctets[0] == CpuAdrOctets[0]) && (addressOctets[1] == CpuAdrOctets[1]) && (addressOctets[2] == CpuAdrOctets[2]));
+        }
+
+
+        #endregion
+
     }
 }

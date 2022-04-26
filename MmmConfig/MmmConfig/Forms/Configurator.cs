@@ -20,13 +20,13 @@ namespace MmmConfig
     public partial class Form1 : Form
     {
         #region Variable declarations
-        public static CPU_Connection CpuConnection;
-        public Motor[] motor;
+        private CPU_Connection CpuConnection;
+        private Motor[] motor;
         private int iWdCheck = 0;
-        public string c_strMotionEventLogPath = Forms.MainSelector.appConfig.strMotionEventLogPath;  
-        public static EventLogger motionEventLogger;
-        public string strNetId =  Forms.MainSelector.appConfig.strDefaultNetId; 
-        public string strPort = Forms.MainSelector.appConfig.iDefaultPort.ToString();
+        private string c_strMotionEventLogPath = Forms.MainSelector.appConfig.strMotionEventLogPath;  
+        private EventLogger motionEventLogger;
+        private string strNetId =  Forms.MainSelector.appConfig.strDefaultNetId; 
+        private string strPort = Forms.MainSelector.appConfig.iDefaultPort.ToString();
         #endregion
 
         #region Form related function
@@ -179,21 +179,37 @@ namespace MmmConfig
         private void tWdTimer_Tick(object sender, EventArgs e)
         {
             int iWatchDog = CpuConnection.readInt(Forms.MainSelector.appConfig.strReadWatchDog, CpuConnection.tcClient);
-            prgConnWd.Value = iWatchDog;
-            CpuConnection.writeInt(Forms.MainSelector.appConfig.strWriteWatchDog, iWatchDog);
-            CpuConnection.iWatchDog = iWatchDog;
-            iWdCheck = iWdCheck + 1;
-            if (iWdCheck >= 6)
+            if (iWatchDog != 999999) 
             {
-                if (CpuConnection.checkWdValue(iWatchDog))
+                CpuConnection.iCommErr = 0;
+                prgConnWd.Value = iWatchDog;
+                CpuConnection.writeInt(Forms.MainSelector.appConfig.strWriteWatchDog, iWatchDog);
+                CpuConnection.iWatchDog = iWatchDog;
+                iWdCheck = iWdCheck + 1;
+                if (iWdCheck >= 6)
                 {
-                    vUpdateConnectedStatus();
+                    if (CpuConnection.checkWdValue(iWatchDog))
+                    {
+                        vUpdateConnectedStatus();
+                    }
+                    else
+                    {
+                        vUpdateDisconnectedStatus();
+                        //CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
+                        MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    iWdCheck = 0;
                 }
-                else
-                {
+            }
+            else
+            {
+                CpuConnection.iCommErr++;
+                if (CpuConnection.iCommErr > 5) 
+                { 
                     vUpdateDisconnectedStatus();
+                    //CpuConnection.tcClient.AdsNotification -= new EventHandler<AdsNotificationEventArgs>(MotStsNotification);
+                    MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
                 }
-                iWdCheck = 0;
             }
         }
         #endregion
@@ -369,6 +385,7 @@ namespace MmmConfig
                 Forms.MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
             }
             tWdTimer.Enabled = false;
+            
         }
 
         private void ReadMotorSts()

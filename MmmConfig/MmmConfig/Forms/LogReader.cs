@@ -14,17 +14,17 @@ namespace MmmConfig.Forms
     public partial class LogReader : Form
     {
         #region Variable declarations
-        public static CPU_Connection CpuConnection;
-        public Motor[] motor;
+        private CPU_Connection CpuConnection;
         private int iWdCheck = 0;
         
-        public static EventLogger motionEventLogger;
-        public string c_strMotionEventLogPath = MainSelector.appConfig.strMotionEventLogPath;
+        private EventLogger motionEventLogger;
+        private string c_strMotionEventLogPath = MainSelector.appConfig.strMotionEventLogPath;
         string[,] astrString = new string[1000,7];
-        public Thread trd;
+        private Thread trd;
         private int _i;
-        public string strNetId = MainSelector.appConfig.strDefaultNetId;
-        public string strPort = MainSelector.appConfig.iDefaultPort.ToString();
+        private string strNetId = MainSelector.appConfig.strDefaultNetId;
+        private string strPort = MainSelector.appConfig.iDefaultPort.ToString();
+        
         #endregion
 
         #region Form related functions
@@ -81,6 +81,13 @@ namespace MmmConfig.Forms
         }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            for (int _i = 0; _i < 1000; _i++)
+            {
+                motionEventLogger.events[_i] = new Event();
+                motionEventLogger.events[_i].error = new Error();
+                motionEventLogger.events[_i].operationLog = new OperationLog();
+            }
+            cleanDataGridView();
             int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
             prgBarGetInfo.Maximum = iNumOfEventToRead;
             motionEventLogger.iLastWritePos = iNumOfEventToRead;
@@ -129,12 +136,20 @@ namespace MmmConfig.Forms
                 {
                     checkThread.Enabled = false;
                     cleanDataGridView();
-                    revertEventsOrder();
-                    populateDataGridView();
-                    colorateDataGridView();
-                    lblInProgress.Text = "Done!!";
+                    if (CpuConnection.connected) {
+                        revertEventsOrder();
+                        populateDataGridView();
+                        colorateDataGridView();
+                        lblInProgress.Text = "Done!!";
+                        MainSelector.appLogger.addLine("Updating of the logger has been done.", AppLogger.eLogLevel.debug);
+                    }
+                    else
+                    {
+                        trd.Abort();
+                        lblInProgress.Text = "Failed";
+                        MainSelector.appLogger.addLine("Updating of the logger failed. Connection has been lost.", AppLogger.eLogLevel.error);
+                    }
                     btnStopRefresh.Enabled = false;
-                    MainSelector.appLogger.addLine("Updating of the logger has been done.", AppLogger.eLogLevel.debug);
                 }
             }
             catch (Exception _e) 
@@ -161,27 +176,38 @@ namespace MmmConfig.Forms
             else
             {
                 CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
-                tWdTimer.Enabled = true;
+                if (CpuConnection.tcClient != null) { tWdTimer.Enabled = true; }
+                else { MessageBox.Show("Connection not started.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
             }
         }
         private void tWdTimer_Tick(object sender, EventArgs e)
         {
             int iWatchDog = CpuConnection.readInt(MainSelector.appConfig.strReadWatchDog, CpuConnection.tcClient);
-            prgConnWd.Value = iWatchDog;
-            CpuConnection.writeInt(MainSelector.appConfig.strWriteWatchDog, iWatchDog);
-            CpuConnection.iWatchDog = iWatchDog;
-            iWdCheck = iWdCheck + 1;
-            if (iWdCheck >= 6)
+            if (iWatchDog != 999999) 
             {
-                if (CpuConnection.checkWdValue(iWatchDog))
+                CpuConnection.iCommErr = 0;
+                prgConnWd.Value = iWatchDog;
+                CpuConnection.writeInt(MainSelector.appConfig.strWriteWatchDog, iWatchDog);
+                CpuConnection.iWatchDog = iWatchDog;
+                iWdCheck = iWdCheck + 1;
+                if (iWdCheck >= 6)
                 {
-                    vUpdateConnectedStatus();
+                    if (CpuConnection.checkWdValue(iWatchDog))
+                    {
+                        vUpdateConnectedStatus();
+                    }
+                    else
+                    {
+                        vUpdateDisconnectedStatus();
+                        MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    iWdCheck = 0;
                 }
-                else
-                {
-                    vUpdateDisconnectedStatus();
-                }
-                iWdCheck = 0;
+            }
+            else
+            {
+                CpuConnection.iCommErr++;
+                if (CpuConnection.iCommErr > 5) { vUpdateDisconnectedStatus(); MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             }
         }
         private void btnMain_Click(object sender, EventArgs e)
@@ -517,11 +543,17 @@ namespace MmmConfig.Forms
         }
         private void readEvent()
         {
-            int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
-            for (_i = 0; _i < iNumOfEventToRead; _i++)
+            if (CpuConnection != null)
             {
-                CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]);
+                int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
+                for (_i = 0; _i < iNumOfEventToRead; _i++)
+                {
+                    if (CpuConnection != null) { CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]); }
+                    else { MessageBox.Show("Cpu Connection is not valid. Try to restart the application.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);break; }
+                    
+                }
             }
+            else { MessageBox.Show("Cpu Connection is not valid. Try to restart the application.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
         private void saveToFile()
         {
@@ -616,7 +648,13 @@ namespace MmmConfig.Forms
                 MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
             }
             tWdTimer.Enabled = true;
-            btnRefresh.Enabled = true;
+            if (trd != null)
+            {
+                if (!trd.IsAlive) { btnRefresh.Enabled = true; }
+                else { btnRefresh.Enabled = false; }
+            }
+            else { btnRefresh.Enabled = true; }
+            
         }
         private void vUpdateDisconnectedStatus()
         {
@@ -630,6 +668,7 @@ namespace MmmConfig.Forms
             }
             tWdTimer.Enabled = false;
             btnRefresh.Enabled = false;
+            
         }
         #endregion
     }
