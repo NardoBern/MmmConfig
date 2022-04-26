@@ -25,6 +25,7 @@ namespace MmmConfig.Forms
         private int _i;
         public string strNetId = MainSelector.appConfig.strDefaultNetId;
         public string strPort = MainSelector.appConfig.iDefaultPort.ToString();
+        
         #endregion
 
         #region Form related functions
@@ -648,7 +649,13 @@ namespace MmmConfig.Forms
                 MainSelector.appLogger.addLine("Error while loading image file: " + ex.ToString(), AppLogger.eLogLevel.error);
             }
             tWdTimer.Enabled = true;
-            btnRefresh.Enabled = true;
+            if (trd != null)
+            {
+                if (!trd.IsAlive) { btnRefresh.Enabled = true; }
+                else { btnRefresh.Enabled = false; }
+            }
+            else { btnRefresh.Enabled = true; }
+            
         }
         private void vUpdateDisconnectedStatus()
         {
