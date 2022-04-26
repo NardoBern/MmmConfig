@@ -118,8 +118,7 @@ namespace MmmConfig
                 if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) 
                 { 
                     iTimeOut = iTimeOut + 1;
-                    Forms.MainSelector.appLogger.addLine("Error while reading integer value: " + strVarName + " Connection time-out", AppLogger.eLogLevel.warning);
-                    if (iTimeOut >= 3) { iTimeOut = 0; connected = false; }
+                    if (iTimeOut >= 3) { iTimeOut = 0; connected = false; Forms.MainSelector.appLogger.addLine("Error while reading integer value: " + strVarName + " Connection time-out", AppLogger.eLogLevel.warning); }
                 }
                 Console.WriteLine("Eccezione durante la lettura di un valore intero " + e.ToString());
                 return 999999;
@@ -193,26 +192,30 @@ namespace MmmConfig
                 uiHandle[17] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[3]");
                 uiHandle[18] = adsClient.CreateVariableHandle(strEventLoggerPath + ".astEvent[" + iEventNum.ToString() + "].stOperationLog.astrOpValue[4]");
 
-                @event.uiEventId = (uint)adsClient.ReadAny(uiHandle[0], typeof(uint));
-                @event.strDeviceName = readString(uiHandle[1], adsClient);
-                @event.eTypeOfEvent = readTypeOfEvent(uiHandle[2], adsClient);
-                @event.strTimeStamp = readString(uiHandle[3], adsClient);
-                @event.xWrite = (bool)adsClient.ReadAny(uiHandle[4], typeof(bool));
-                @event.strMessage = readString(uiHandle[5], adsClient);
-                @event.strAlert = readString(uiHandle[6], adsClient);
-                @event.error.axErrBit = readErrorBit(uiHandle[7],adsClient);
-                @event.error.xErrorGlobal = (bool)adsClient.ReadAny(uiHandle[8], typeof(bool));
-                @event.error.enumErrorName = readErrorName(uiHandle[9], adsClient);
-                @event.error.audiErrId = readErrorId(uiHandle[10], adsClient);
-                @event.operationLog.strOperationDescr = readString(uiHandle[11], adsClient);
-                @event.operationLog.aiOpValue = readIntOpValues(uiHandle[12], adsClient);
-                @event.operationLog.arOpValue = readDoubleOpValues(uiHandle[13], adsClient);
-                uint[] strHandles = new uint[5] { uiHandle[14], uiHandle[15], uiHandle[16], uiHandle[17], uiHandle[18] }; 
-                @event.operationLog.astrOpValue = readStringOpValues(strHandles, adsClient);
+                if (adsClient != null && @event != null) 
+                {                 
+                    @event.uiEventId = (uint)adsClient.ReadAny(uiHandle[0], typeof(uint));
+                    @event.strDeviceName = readString(uiHandle[1], adsClient);
+                    @event.eTypeOfEvent = readTypeOfEvent(uiHandle[2], adsClient);
+                    @event.strTimeStamp = readString(uiHandle[3], adsClient);
+                    @event.xWrite = (bool)adsClient.ReadAny(uiHandle[4], typeof(bool));
+                    @event.strMessage = readString(uiHandle[5], adsClient);
+                    @event.strAlert = readString(uiHandle[6], adsClient);
+                    @event.error.axErrBit = readErrorBit(uiHandle[7],adsClient);
+                    @event.error.xErrorGlobal = (bool)adsClient.ReadAny(uiHandle[8], typeof(bool));
+                    @event.error.enumErrorName = readErrorName(uiHandle[9], adsClient);
+                    @event.error.audiErrId = readErrorId(uiHandle[10], adsClient);
+                    @event.operationLog.strOperationDescr = readString(uiHandle[11], adsClient);
+                    @event.operationLog.aiOpValue = readIntOpValues(uiHandle[12], adsClient);
+                    @event.operationLog.arOpValue = readDoubleOpValues(uiHandle[13], adsClient);
+                    uint[] strHandles = new uint[5] { uiHandle[14], uiHandle[15], uiHandle[16], uiHandle[17], uiHandle[18] }; 
+                    @event.operationLog.astrOpValue = readStringOpValues(strHandles, adsClient);
 
-                for (int _i = 0; _i < uiHandle.Length; _i++) { adsClient.DeleteVariableHandle(uiHandle[_i]); }
+                    for (int _i = 0; _i < uiHandle.Length; _i++) { adsClient.DeleteVariableHandle(uiHandle[_i]); }
                 
-                return true;
+                    return true;
+                }
+                else { return false; MessageBox.Show("AdsClient or @Event was null", "Debug", MessageBoxButtons.OK, MessageBoxIcon.Information); }
 
             }
             catch (TwinCAT.Ads.AdsErrorException e)
