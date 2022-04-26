@@ -20,13 +20,13 @@ namespace MmmConfig
     public partial class Form1 : Form
     {
         #region Variable declarations
-        public static CPU_Connection CpuConnection;
-        public Motor[] motor;
+        private CPU_Connection CpuConnection;
+        private Motor[] motor;
         private int iWdCheck = 0;
-        public string c_strMotionEventLogPath = Forms.MainSelector.appConfig.strMotionEventLogPath;  
-        public static EventLogger motionEventLogger;
-        public string strNetId =  Forms.MainSelector.appConfig.strDefaultNetId; 
-        public string strPort = Forms.MainSelector.appConfig.iDefaultPort.ToString();
+        private string c_strMotionEventLogPath = Forms.MainSelector.appConfig.strMotionEventLogPath;  
+        private EventLogger motionEventLogger;
+        private string strNetId =  Forms.MainSelector.appConfig.strDefaultNetId; 
+        private string strPort = Forms.MainSelector.appConfig.iDefaultPort.ToString();
         #endregion
 
         #region Form related function
