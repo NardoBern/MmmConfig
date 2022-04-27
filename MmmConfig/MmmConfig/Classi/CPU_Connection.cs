@@ -44,8 +44,9 @@ namespace MmmConfig
             iPAddress = getIpAddress();
             if (iPAddress != null) 
             {
-                if (checkIpAddress(iPAddress, strNetId)) { pcNetId = iPAddress.ToString() + ".1.1"; }
-                else { MessageBox.Show("Your PC address is not in the same Subnet of the controller.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
+                //if (checkIpAddress(iPAddress, strNetId)) { pcNetId = iPAddress.ToString() + ".1.1"; }
+                //else { MessageBox.Show("Your PC address is not in the same Subnet of the controller.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
+                pcNetId = iPAddress.ToString() + ".1.1";
             }
             else { MessageBox.Show("It seems that you haven't an active network connection.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
             
@@ -558,7 +559,11 @@ namespace MmmConfig
                 {
                     foreach(UnicastIPAddressInformation ip in nic.GetIPProperties().UnicastAddresses)
                     {
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && nic.OperationalStatus == OperationalStatus.Up) {return ip.Address;}
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && nic.OperationalStatus == OperationalStatus.Up) 
+                        {
+                            if (verifyPcIpAddress(ip.Address, "192.168.193.70")) { return ip.Address; }
+                            else { MessageBox.Show("Your PC address is not the one defined in the ADS route of the controller", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
+                        }
                     }
                 }
                 else { return null; }
@@ -574,7 +579,14 @@ namespace MmmConfig
             return ((addressOctets[0] == CpuAdrOctets[0]) && (addressOctets[1] == CpuAdrOctets[1]) && (addressOctets[2] == CpuAdrOctets[2]));
         }
 
+        public bool verifyPcIpAddress(IPAddress iPAddress, string strAdsRouteIpAdr)
+        {
+            byte[] addressOctets = iPAddress.GetAddressBytes();
+            IPAddress pcIpAddress = IPAddress.Parse(strAdsRouteIpAdr);
+            byte[] pcAdressOctets = pcIpAddress.GetAddressBytes();
 
+            return ((addressOctets[0] == pcAdressOctets[0]) && (addressOctets[1] == pcAdressOctets[1]) && (addressOctets[2] == pcAdressOctets[2]) && (addressOctets[3] == pcAdressOctets[3]));
+        }
         #endregion
 
     }
