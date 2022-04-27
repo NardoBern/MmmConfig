@@ -558,7 +558,7 @@ namespace MmmConfig
                 {
                     foreach(UnicastIPAddressInformation ip in nic.GetIPProperties().UnicastAddresses)
                     {
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork) {return ip.Address;}
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && nic.OperationalStatus == OperationalStatus.Up) {return ip.Address;}
                     }
                 }
                 else { return null; }
