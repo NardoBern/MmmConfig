@@ -15,6 +15,8 @@ using TwinCAT.Ads.TypeSystem;
 using TwinCAT;
 using System.Collections.Generic;
 using TwinCAT.Ads.AdsRouterService;
+using System.Diagnostics;
+using System.Reflection;
 namespace MmmConfig
 {
     public partial class Form1 : Form
@@ -224,7 +226,7 @@ namespace MmmConfig
             }
             else
             {
-                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
+                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort), Forms.MainSelector.appConfig.strAdsRoute);
                 tWdTimer.Enabled = true;
             }
         }
@@ -256,7 +258,15 @@ namespace MmmConfig
         private void btnSetPosMot2_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot2, 2, 4, CpuConnection); }
         private void btnSetPosMot3_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot3, 3, 4, CpuConnection); }
         private void btnSetPosMot4_Click(object sender, EventArgs e) { btnClickEvent(btnSetPosMot4, 4, 4, CpuConnection); }
-        
+        private void btnMain_Click(object sender, EventArgs e)
+        {
+            CpuConnection.disconnect(CpuConnection.tcClient);
+            vUpdateDisconnectedStatus();
+            this.Hide();
+            Forms.MainSelector mainSelector = new Forms.MainSelector();
+            mainSelector.ShowDialog();
+            this.Close();
+        }
         #endregion
 
         #region Numeric selectors
@@ -328,7 +338,30 @@ namespace MmmConfig
         private void txtCurrLimitM3_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM3, 3, 10, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
         private void txtCurrLimitM4_TextChanged(object sender, EventArgs e) { txtParameterChanged(txtCurrLimitM4, 4, 10, CpuConnection, Forms.MainSelector.appConfig.strMotCfgWrite); }
         #endregion
-        
+
+        #region Menu bar
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string fileVersion = ((AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyFileVersionAttribute), false)).Version.ToString();
+            string company = ((AssemblyCompanyAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCompanyAttribute), false)).Company.ToString();
+            string dateOfRelease = ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyDescriptionAttribute), false)).Description.ToString();
+            string appTitle = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyTitleAttribute), false)).Title.ToString();
+            MessageBox.Show(appTitle + "\n\n" + "Installed version is: " + fileVersion + "\n\n" + dateOfRelease + "\n\n" + "Property of: " + company, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Forms.ConnectionSettings connectionSettings = new Forms.ConnectionSettings();
+            connectionSettings.strNetId = strNetId;
+            connectionSettings.strPort = strPort;
+            var result = connectionSettings.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                strNetId = connectionSettings.strNetId;
+                strPort = connectionSettings.strPort;
+            }
+        }
+
+        #endregion
         #endregion
 
         #region Operative Function
@@ -456,27 +489,5 @@ namespace MmmConfig
 
         #endregion
 
-        private void btnMain_Click(object sender, EventArgs e)
-        {
-            CpuConnection.disconnect(CpuConnection.tcClient);
-            vUpdateDisconnectedStatus();
-            this.Hide();
-            Forms.MainSelector mainSelector = new Forms.MainSelector();
-            mainSelector.ShowDialog();
-            this.Close();
-        }
-
-        private void connectionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.ConnectionSettings connectionSettings = new Forms.ConnectionSettings();
-            connectionSettings.strNetId = strNetId;
-            connectionSettings.strPort = strPort;
-            var result = connectionSettings.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                strNetId = connectionSettings.strNetId;
-                strPort = connectionSettings.strPort;
-            }
-        }
     }
 }
