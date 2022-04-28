@@ -43,7 +43,7 @@ namespace MmmConfig
             
             iPAddress = getIpAddress(strAdsRoute);
             if (iPAddress != null) { pcNetId = iPAddress.ToString() + ".1.1";}
-            else { return null; }
+            else { MessageBox.Show("Your have to set your PC ip-address equal to: " + strAdsRoute, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
             
             var tcpRouter = new TwinCAT.Ads.TcpRouter.AmsTcpIpRouter(AmsNetId.Parse(pcNetId));
             tcpRouter.AddRoute(new Route("CX-50CAF6", new AmsNetId(strNetId), new IPAddress[] { IPAddress.Parse(strNetId.Remove(strNetId.Length - 4))}));
@@ -556,7 +556,6 @@ namespace MmmConfig
                         if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && nic.OperationalStatus == OperationalStatus.Up) 
                         {
                             if (verifyPcIpAddress(ip.Address, strAdsRoute)) { return ip.Address; }
-                            else { MessageBox.Show("Your have to set your PC ip-address equal to: " + strAdsRoute , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
                         }
                     }
                 }
