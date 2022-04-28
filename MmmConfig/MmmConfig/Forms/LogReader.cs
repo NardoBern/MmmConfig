@@ -175,7 +175,7 @@ namespace MmmConfig.Forms
             }
             else
             {
-                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
+                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort), Forms.MainSelector.appConfig.strAdsRoute);
                 if (CpuConnection.tcClient != null) { tWdTimer.Enabled = true; }
                 else { MessageBox.Show("Connection not started.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); this.Close(); }
             }

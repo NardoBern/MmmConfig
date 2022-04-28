@@ -224,7 +224,7 @@ namespace MmmConfig
             }
             else
             {
-                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort));
+                CpuConnection.tcClient = CpuConnection.connect(strNetId, int.Parse(strPort), Forms.MainSelector.appConfig.strAdsRoute);
                 tWdTimer.Enabled = true;
             }
         }

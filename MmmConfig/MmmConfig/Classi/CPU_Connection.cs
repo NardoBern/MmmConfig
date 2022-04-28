@@ -34,21 +34,16 @@ namespace MmmConfig
 
         #region Connection methods
         /* Connection function */
-        public AdsClient connect(string strNetId, int iport)
+        public AdsClient connect(string strNetId, int iport, string strAdsRoute)
         {
             AdsClientSettings tcClientSettings = new AdsClientSettings(5000);
             AdsClient tcClient = new AdsClient();
             string pcNetId = "";
             IPAddress iPAddress;
             
-            iPAddress = getIpAddress();
-            if (iPAddress != null) 
-            {
-                if (checkIpAddress(iPAddress, strNetId)) { pcNetId = iPAddress.ToString() + ".1.1"; }
-                else { MessageBox.Show("Your PC address is not in the same Subnet of the controller.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
-            }
-            else { MessageBox.Show("It seems that you haven't an active network connection.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
-            
+            iPAddress = getIpAddress(strAdsRoute);
+            if (iPAddress != null) { pcNetId = iPAddress.ToString() + ".1.1";}
+            else { MessageBox.Show("Your have to set your PC ip-address equal to: " + strAdsRoute, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); return null; }
             
             var tcpRouter = new TwinCAT.Ads.TcpRouter.AmsTcpIpRouter(AmsNetId.Parse(pcNetId));
             tcpRouter.AddRoute(new Route("CX-50CAF6", new AmsNetId(strNetId), new IPAddress[] { IPAddress.Parse(strNetId.Remove(strNetId.Length - 4))}));
@@ -550,7 +545,7 @@ namespace MmmConfig
         #endregion
 
         #region Auxiliary functions
-        public IPAddress getIpAddress()
+        public IPAddress getIpAddress(string strAdsRoute)
         {
             foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
             {
@@ -558,7 +553,10 @@ namespace MmmConfig
                 {
                     foreach(UnicastIPAddressInformation ip in nic.GetIPProperties().UnicastAddresses)
                     {
-                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && nic.OperationalStatus == OperationalStatus.Up) {return ip.Address;}
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork && nic.OperationalStatus == OperationalStatus.Up) 
+                        {
+                            if (verifyPcIpAddress(ip.Address, strAdsRoute)) { return ip.Address; }
+                        }
                     }
                 }
                 else { return null; }
@@ -574,7 +572,14 @@ namespace MmmConfig
             return ((addressOctets[0] == CpuAdrOctets[0]) && (addressOctets[1] == CpuAdrOctets[1]) && (addressOctets[2] == CpuAdrOctets[2]));
         }
 
+        public bool verifyPcIpAddress(IPAddress iPAddress, string strAdsRouteIpAdr)
+        {
+            byte[] addressOctets = iPAddress.GetAddressBytes();
+            IPAddress pcIpAddress = IPAddress.Parse(strAdsRouteIpAdr);
+            byte[] pcAdressOctets = pcIpAddress.GetAddressBytes();
 
+            return ((addressOctets[0] == pcAdressOctets[0]) && (addressOctets[1] == pcAdressOctets[1]) && (addressOctets[2] == pcAdressOctets[2]) && (addressOctets[3] == pcAdressOctets[3]));
+        }
         #endregion
 
     }

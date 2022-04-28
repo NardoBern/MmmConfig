@@ -12,6 +12,7 @@ namespace MmmConfig
         public bool xConfigLoaded;
         public string strDefaultNetId;
         public int iDefaultPort;
+        public string strAdsRoute;
         public string strMotionEventLogPath;
         public string strEventLogSize;
         public string strReadWatchDog;
@@ -27,6 +28,7 @@ namespace MmmConfig
         {
             string strDefaultNetId = "192.168.193.200.1.1";
             int iDefaultPort = 851;
+            string strAdsRoute;
             string strMotionEventLogPath;
             string strEventLogSize;
             string strReadWatchDog;

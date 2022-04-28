@@ -44,6 +44,9 @@ namespace MmmConfig
                                     case "port":
                                         appConfig.iDefaultPort = Convert.ToInt32(secondLevelNode.InnerText);
                                         break;
+                                    case "adsRoute":
+                                        appConfig.strAdsRoute = secondLevelNode.InnerText;
+                                        break;
                                 }
                             }
                             break;
