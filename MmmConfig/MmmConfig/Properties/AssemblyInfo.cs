@@ -5,14 +5,15 @@ using System.Runtime.InteropServices;
 // Le informazioni generali relative a un assembly sono controllate dal seguente 
 // set di attributi. Modificare i valori di questi attributi per modificare le informazioni
 // associate a un assembly.
-[assembly: AssemblyTitle("MmmConfig")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Arol Multi Motor Manager Configurator and Diagnostic")]
+[assembly: AssemblyDescription("Released on: 28/04/2022")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MmmConfig")]
+[assembly: AssemblyCompany("Arol S.p.A.")]
+[assembly: AssemblyProduct("MmmConfig and Diagnostic")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
 
 // Se si imposta ComVisible su false, i tipi in questo assembly non saranno visibili
 // ai componenti COM. Se è necessario accedere a un tipo in questo assembly da

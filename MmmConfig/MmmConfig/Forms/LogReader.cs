@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace MmmConfig.Forms
 {
@@ -234,6 +235,14 @@ namespace MmmConfig.Forms
         }
         private void btnSaveToFile_Click(object sender, EventArgs e) {saveToFile();}
         private void btnOpenFile_Click(object sender, EventArgs e) {openFile();}
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string fileVersion = ((AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyFileVersionAttribute), false)).Version.ToString();
+            string company = ((AssemblyCompanyAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCompanyAttribute), false)).Company.ToString();
+            string dateOfRelease = ((AssemblyDescriptionAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyDescriptionAttribute), false)).Description.ToString();
+            string appTitle = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyTitleAttribute), false)).Title.ToString();
+            MessageBox.Show(appTitle + "\n\n" + "Installed version is: " + fileVersion + "\n\n" + dateOfRelease + "\n\n" + "Property of: " + company, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         #endregion
 
@@ -671,5 +680,6 @@ namespace MmmConfig.Forms
             
         }
         #endregion
+
     }
 }
