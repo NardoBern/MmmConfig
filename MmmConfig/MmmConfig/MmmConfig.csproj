@@ -241,10 +241,14 @@
   <ItemGroup>
     <Compile Include="Classi\AppConfig.cs" />
     <Compile Include="Classi\AppLogger.cs" />
+    <Compile Include="Classi\AxisData.cs" />
+    <Compile Include="Classi\CpuData.cs" />
     <Compile Include="Classi\CPU_Connection.cs" />
+    <Compile Include="Classi\EcatNetwork.cs" />
     <Compile Include="Classi\Error.cs" />
     <Compile Include="Classi\Event.cs" />
     <Compile Include="Classi\EventLogger.cs" />
+    <Compile Include="Classi\MasterEncoder.cs" />
     <Compile Include="Classi\Motor.cs" />
     <Compile Include="Classi\MotorConfig.cs" />
     <Compile Include="Classi\MotorStatus.cs" />
