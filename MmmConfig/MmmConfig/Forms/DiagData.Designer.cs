@@ -31,7 +31,6 @@ namespace MmmConfig.Forms
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCpuData = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.grpUserManagement = new System.Windows.Forms.GroupBox();
             this.lblValue56 = new System.Windows.Forms.Label();
             this.lblParameter56 = new System.Windows.Forms.Label();
@@ -157,6 +156,60 @@ namespace MmmConfig.Forms
             this.lblValue0 = new System.Windows.Forms.Label();
             this.lblParameter1 = new System.Windows.Forms.Label();
             this.lblParameter0 = new System.Windows.Forms.Label();
+            this.tabEncoderData = new System.Windows.Forms.TabPage();
+            this.grpConnection = new System.Windows.Forms.GroupBox();
+            this.lblEncVal3 = new System.Windows.Forms.Label();
+            this.lblEncVal2 = new System.Windows.Forms.Label();
+            this.lblEncVal1 = new System.Windows.Forms.Label();
+            this.lblEncPar3 = new System.Windows.Forms.Label();
+            this.lblEncPar2 = new System.Windows.Forms.Label();
+            this.lblEncVal0 = new System.Windows.Forms.Label();
+            this.lblEncPar1 = new System.Windows.Forms.Label();
+            this.lblEncPar0 = new System.Windows.Forms.Label();
+            this.grpValue = new System.Windows.Forms.GroupBox();
+            this.lblEncVal12 = new System.Windows.Forms.Label();
+            this.lblEncVal11 = new System.Windows.Forms.Label();
+            this.lblEncVal10 = new System.Windows.Forms.Label();
+            this.lblEncVal9 = new System.Windows.Forms.Label();
+            this.lblEncVal8 = new System.Windows.Forms.Label();
+            this.lblEncVal7 = new System.Windows.Forms.Label();
+            this.lblEncVal6 = new System.Windows.Forms.Label();
+            this.lblEncVal5 = new System.Windows.Forms.Label();
+            this.lblEncVal4 = new System.Windows.Forms.Label();
+            this.lblEncPar12 = new System.Windows.Forms.Label();
+            this.lblEncPar11 = new System.Windows.Forms.Label();
+            this.lblEncPar10 = new System.Windows.Forms.Label();
+            this.lblEncPar9 = new System.Windows.Forms.Label();
+            this.lblEncPar8 = new System.Windows.Forms.Label();
+            this.lblEncPar7 = new System.Windows.Forms.Label();
+            this.lblEncPar6 = new System.Windows.Forms.Label();
+            this.lblEncPar5 = new System.Windows.Forms.Label();
+            this.lblEncPar4 = new System.Windows.Forms.Label();
+            this.grpParameter = new System.Windows.Forms.GroupBox();
+            this.lblEncVal22 = new System.Windows.Forms.Label();
+            this.lblEncVal21 = new System.Windows.Forms.Label();
+            this.lblEncVal20 = new System.Windows.Forms.Label();
+            this.lblEncVal19 = new System.Windows.Forms.Label();
+            this.lblEncVal18 = new System.Windows.Forms.Label();
+            this.lblEncVal17 = new System.Windows.Forms.Label();
+            this.lblEncVal16 = new System.Windows.Forms.Label();
+            this.lblEncVal15 = new System.Windows.Forms.Label();
+            this.lblEncVal14 = new System.Windows.Forms.Label();
+            this.lblEncVal13 = new System.Windows.Forms.Label();
+            this.lblEncPar22 = new System.Windows.Forms.Label();
+            this.lblEncPar21 = new System.Windows.Forms.Label();
+            this.lblEncPar20 = new System.Windows.Forms.Label();
+            this.lblEncPar19 = new System.Windows.Forms.Label();
+            this.lblEncPar18 = new System.Windows.Forms.Label();
+            this.lblEncPar17 = new System.Windows.Forms.Label();
+            this.lblEncPar16 = new System.Windows.Forms.Label();
+            this.lblEncPar15 = new System.Windows.Forms.Label();
+            this.lblEncPar14 = new System.Windows.Forms.Label();
+            this.lblEncPar13 = new System.Windows.Forms.Label();
+            this.lblEncVal24 = new System.Windows.Forms.Label();
+            this.lblEncVal23 = new System.Windows.Forms.Label();
+            this.lblEncPar24 = new System.Windows.Forms.Label();
+            this.lblEncPar23 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabCpuData.SuspendLayout();
             this.grpUserManagement.SuspendLayout();
@@ -170,12 +223,16 @@ namespace MmmConfig.Forms
             this.grpHardwareData.SuspendLayout();
             this.grpOperationData.SuspendLayout();
             this.grpIdentityCard.SuspendLayout();
+            this.tabEncoderData.SuspendLayout();
+            this.grpConnection.SuspendLayout();
+            this.grpValue.SuspendLayout();
+            this.grpParameter.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabCpuData);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabEncoderData);
             this.tabControl1.Location = new System.Drawing.Point(13, 13);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -203,16 +260,6 @@ namespace MmmConfig.Forms
             this.tabCpuData.TabIndex = 0;
             this.tabCpuData.Text = "CpuData";
             this.tabCpuData.Click += new System.EventHandler(this.tabCpuData_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1191, 655);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // grpUserManagement
             // 
@@ -1530,6 +1577,575 @@ namespace MmmConfig.Forms
             this.lblParameter0.TabIndex = 0;
             this.lblParameter0.Text = "Type:";
             // 
+            // tabEncoderData
+            // 
+            this.tabEncoderData.BackColor = System.Drawing.Color.Gainsboro;
+            this.tabEncoderData.Controls.Add(this.grpParameter);
+            this.tabEncoderData.Controls.Add(this.grpValue);
+            this.tabEncoderData.Controls.Add(this.grpConnection);
+            this.tabEncoderData.Location = new System.Drawing.Point(4, 22);
+            this.tabEncoderData.Name = "tabEncoderData";
+            this.tabEncoderData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEncoderData.Size = new System.Drawing.Size(1191, 655);
+            this.tabEncoderData.TabIndex = 1;
+            this.tabEncoderData.Text = "EncoderData";
+            // 
+            // grpConnection
+            // 
+            this.grpConnection.BackColor = System.Drawing.Color.DarkGray;
+            this.grpConnection.Controls.Add(this.lblEncVal3);
+            this.grpConnection.Controls.Add(this.lblEncVal2);
+            this.grpConnection.Controls.Add(this.lblEncVal1);
+            this.grpConnection.Controls.Add(this.lblEncPar3);
+            this.grpConnection.Controls.Add(this.lblEncPar2);
+            this.grpConnection.Controls.Add(this.lblEncVal0);
+            this.grpConnection.Controls.Add(this.lblEncPar1);
+            this.grpConnection.Controls.Add(this.lblEncPar0);
+            this.grpConnection.Location = new System.Drawing.Point(6, 16);
+            this.grpConnection.Name = "grpConnection";
+            this.grpConnection.Size = new System.Drawing.Size(274, 128);
+            this.grpConnection.TabIndex = 12;
+            this.grpConnection.TabStop = false;
+            this.grpConnection.Text = "Connection";
+            // 
+            // lblEncVal3
+            // 
+            this.lblEncVal3.AutoSize = true;
+            this.lblEncVal3.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal3.Location = new System.Drawing.Point(138, 95);
+            this.lblEncVal3.Name = "lblEncVal3";
+            this.lblEncVal3.Size = new System.Drawing.Size(82, 13);
+            this.lblEncVal3.TabIndex = 9;
+            this.lblEncVal3.Text = "5.135.24.23.1.1";
+            // 
+            // lblEncVal2
+            // 
+            this.lblEncVal2.AutoSize = true;
+            this.lblEncVal2.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal2.Location = new System.Drawing.Point(138, 70);
+            this.lblEncVal2.Name = "lblEncVal2";
+            this.lblEncVal2.Size = new System.Drawing.Size(48, 13);
+            this.lblEncVal2.TabIndex = 8;
+            this.lblEncVal2.Text = "STRING";
+            // 
+            // lblEncVal1
+            // 
+            this.lblEncVal1.AutoSize = true;
+            this.lblEncVal1.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal1.Location = new System.Drawing.Point(138, 45);
+            this.lblEncVal1.Name = "lblEncVal1";
+            this.lblEncVal1.Size = new System.Drawing.Size(58, 13);
+            this.lblEncVal1.TabIndex = 7;
+            this.lblEncVal1.Text = "HEX value";
+            // 
+            // lblEncPar3
+            // 
+            this.lblEncPar3.AutoSize = true;
+            this.lblEncPar3.Location = new System.Drawing.Point(60, 95);
+            this.lblEncPar3.Name = "lblEncPar3";
+            this.lblEncPar3.Size = new System.Drawing.Size(61, 13);
+            this.lblEncPar3.TabIndex = 4;
+            this.lblEncPar3.Text = "AMS Netld:";
+            // 
+            // lblEncPar2
+            // 
+            this.lblEncPar2.AutoSize = true;
+            this.lblEncPar2.Location = new System.Drawing.Point(58, 70);
+            this.lblEncPar2.Name = "lblEncPar2";
+            this.lblEncPar2.Size = new System.Drawing.Size(63, 13);
+            this.lblEncPar2.TabIndex = 3;
+            this.lblEncPar2.Text = "Detail state:";
+            // 
+            // lblEncVal0
+            // 
+            this.lblEncVal0.AutoSize = true;
+            this.lblEncVal0.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal0.Location = new System.Drawing.Point(138, 20);
+            this.lblEncVal0.Name = "lblEncVal0";
+            this.lblEncVal0.Size = new System.Drawing.Size(75, 13);
+            this.lblEncVal0.TabIndex = 2;
+            this.lblEncVal0.Text = "TRUE/FALSE";
+            // 
+            // lblEncPar1
+            // 
+            this.lblEncPar1.AutoSize = true;
+            this.lblEncPar1.Location = new System.Drawing.Point(58, 45);
+            this.lblEncPar1.Name = "lblEncPar1";
+            this.lblEncPar1.Size = new System.Drawing.Size(63, 13);
+            this.lblEncPar1.TabIndex = 1;
+            this.lblEncPar1.Text = "Detail state:";
+            // 
+            // lblEncPar0
+            // 
+            this.lblEncPar0.AutoSize = true;
+            this.lblEncPar0.Location = new System.Drawing.Point(86, 20);
+            this.lblEncPar0.Name = "lblEncPar0";
+            this.lblEncPar0.Size = new System.Drawing.Size(35, 13);
+            this.lblEncPar0.TabIndex = 0;
+            this.lblEncPar0.Text = "State:";
+            // 
+            // grpValue
+            // 
+            this.grpValue.BackColor = System.Drawing.Color.DarkGray;
+            this.grpValue.Controls.Add(this.lblEncVal12);
+            this.grpValue.Controls.Add(this.lblEncVal11);
+            this.grpValue.Controls.Add(this.lblEncVal10);
+            this.grpValue.Controls.Add(this.lblEncVal9);
+            this.grpValue.Controls.Add(this.lblEncVal8);
+            this.grpValue.Controls.Add(this.lblEncVal7);
+            this.grpValue.Controls.Add(this.lblEncVal6);
+            this.grpValue.Controls.Add(this.lblEncVal5);
+            this.grpValue.Controls.Add(this.lblEncVal4);
+            this.grpValue.Controls.Add(this.lblEncPar12);
+            this.grpValue.Controls.Add(this.lblEncPar11);
+            this.grpValue.Controls.Add(this.lblEncPar10);
+            this.grpValue.Controls.Add(this.lblEncPar9);
+            this.grpValue.Controls.Add(this.lblEncPar8);
+            this.grpValue.Controls.Add(this.lblEncPar7);
+            this.grpValue.Controls.Add(this.lblEncPar6);
+            this.grpValue.Controls.Add(this.lblEncPar5);
+            this.grpValue.Controls.Add(this.lblEncPar4);
+            this.grpValue.Location = new System.Drawing.Point(332, 16);
+            this.grpValue.Name = "grpValue";
+            this.grpValue.Size = new System.Drawing.Size(274, 238);
+            this.grpValue.TabIndex = 14;
+            this.grpValue.TabStop = false;
+            this.grpValue.Text = "Value";
+            // 
+            // lblEncVal12
+            // 
+            this.lblEncVal12.AutoSize = true;
+            this.lblEncVal12.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal12.Location = new System.Drawing.Point(166, 212);
+            this.lblEncVal12.Name = "lblEncVal12";
+            this.lblEncVal12.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal12.TabIndex = 18;
+            this.lblEncVal12.Text = "-";
+            // 
+            // lblEncVal11
+            // 
+            this.lblEncVal11.AutoSize = true;
+            this.lblEncVal11.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal11.Location = new System.Drawing.Point(166, 188);
+            this.lblEncVal11.Name = "lblEncVal11";
+            this.lblEncVal11.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal11.TabIndex = 17;
+            this.lblEncVal11.Text = "-";
+            // 
+            // lblEncVal10
+            // 
+            this.lblEncVal10.AutoSize = true;
+            this.lblEncVal10.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal10.Location = new System.Drawing.Point(166, 164);
+            this.lblEncVal10.Name = "lblEncVal10";
+            this.lblEncVal10.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal10.TabIndex = 16;
+            this.lblEncVal10.Text = "-";
+            // 
+            // lblEncVal9
+            // 
+            this.lblEncVal9.AutoSize = true;
+            this.lblEncVal9.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal9.Location = new System.Drawing.Point(166, 140);
+            this.lblEncVal9.Name = "lblEncVal9";
+            this.lblEncVal9.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal9.TabIndex = 15;
+            this.lblEncVal9.Text = "-";
+            // 
+            // lblEncVal8
+            // 
+            this.lblEncVal8.AutoSize = true;
+            this.lblEncVal8.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal8.Location = new System.Drawing.Point(166, 116);
+            this.lblEncVal8.Name = "lblEncVal8";
+            this.lblEncVal8.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal8.TabIndex = 14;
+            this.lblEncVal8.Text = "-";
+            // 
+            // lblEncVal7
+            // 
+            this.lblEncVal7.AutoSize = true;
+            this.lblEncVal7.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal7.Location = new System.Drawing.Point(166, 92);
+            this.lblEncVal7.Name = "lblEncVal7";
+            this.lblEncVal7.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal7.TabIndex = 13;
+            this.lblEncVal7.Text = "-";
+            // 
+            // lblEncVal6
+            // 
+            this.lblEncVal6.AutoSize = true;
+            this.lblEncVal6.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal6.Location = new System.Drawing.Point(166, 68);
+            this.lblEncVal6.Name = "lblEncVal6";
+            this.lblEncVal6.Size = new System.Drawing.Size(19, 13);
+            this.lblEncVal6.TabIndex = 12;
+            this.lblEncVal6.Text = "48";
+            // 
+            // lblEncVal5
+            // 
+            this.lblEncVal5.AutoSize = true;
+            this.lblEncVal5.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal5.Location = new System.Drawing.Point(166, 44);
+            this.lblEncVal5.Name = "lblEncVal5";
+            this.lblEncVal5.Size = new System.Drawing.Size(52, 13);
+            this.lblEncVal5.TabIndex = 11;
+            this.lblEncVal5.Text = "0 to 3600";
+            // 
+            // lblEncVal4
+            // 
+            this.lblEncVal4.AutoSize = true;
+            this.lblEncVal4.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal4.Location = new System.Drawing.Point(166, 20);
+            this.lblEncVal4.Name = "lblEncVal4";
+            this.lblEncVal4.Size = new System.Drawing.Size(89, 13);
+            this.lblEncVal4.TabIndex = 10;
+            this.lblEncVal4.Text = "13 or 16 bit value";
+            // 
+            // lblEncPar12
+            // 
+            this.lblEncPar12.AutoSize = true;
+            this.lblEncPar12.Location = new System.Drawing.Point(49, 212);
+            this.lblEncPar12.Name = "lblEncPar12";
+            this.lblEncPar12.Size = new System.Drawing.Size(98, 13);
+            this.lblEncPar12.TabIndex = 8;
+            this.lblEncPar12.Text = "Difference position:";
+            // 
+            // lblEncPar11
+            // 
+            this.lblEncPar11.AutoSize = true;
+            this.lblEncPar11.Location = new System.Drawing.Point(14, 188);
+            this.lblEncPar11.Name = "lblEncPar11";
+            this.lblEncPar11.Size = new System.Drawing.Size(133, 13);
+            this.lblEncPar11.TabIndex = 7;
+            this.lblEncPar11.Text = "Average acquired position:";
+            // 
+            // lblEncPar10
+            // 
+            this.lblEncPar10.AutoSize = true;
+            this.lblEncPar10.Location = new System.Drawing.Point(41, 164);
+            this.lblEncPar10.Name = "lblEncPar10";
+            this.lblEncPar10.Size = new System.Drawing.Size(106, 13);
+            this.lblEncPar10.TabIndex = 6;
+            this.lblEncPar10.Text = "Last acquired speed:";
+            // 
+            // lblEncPar9
+            // 
+            this.lblEncPar9.AutoSize = true;
+            this.lblEncPar9.Location = new System.Drawing.Point(34, 140);
+            this.lblEncPar9.Name = "lblEncPar9";
+            this.lblEncPar9.Size = new System.Drawing.Size(113, 13);
+            this.lblEncPar9.TabIndex = 5;
+            this.lblEncPar9.Text = "Last acquired position:";
+            // 
+            // lblEncPar8
+            // 
+            this.lblEncPar8.AutoSize = true;
+            this.lblEncPar8.Location = new System.Drawing.Point(70, 116);
+            this.lblEncPar8.Name = "lblEncPar8";
+            this.lblEncPar8.Size = new System.Drawing.Size(77, 13);
+            this.lblEncPar8.TabIndex = 4;
+            this.lblEncPar8.Text = "Warning code:";
+            // 
+            // lblEncPar7
+            // 
+            this.lblEncPar7.AutoSize = true;
+            this.lblEncPar7.Location = new System.Drawing.Point(84, 92);
+            this.lblEncPar7.Name = "lblEncPar7";
+            this.lblEncPar7.Size = new System.Drawing.Size(63, 13);
+            this.lblEncPar7.TabIndex = 3;
+            this.lblEncPar7.Text = "Alarm code:";
+            // 
+            // lblEncPar6
+            // 
+            this.lblEncPar6.AutoSize = true;
+            this.lblEncPar6.Location = new System.Drawing.Point(38, 68);
+            this.lblEncPar6.Name = "lblEncPar6";
+            this.lblEncPar6.Size = new System.Drawing.Size(109, 13);
+            this.lblEncPar6.TabIndex = 2;
+            this.lblEncPar6.Text = "Encoder temperature:";
+            // 
+            // lblEncPar5
+            // 
+            this.lblEncPar5.AutoSize = true;
+            this.lblEncPar5.Location = new System.Drawing.Point(63, 44);
+            this.lblEncPar5.Name = "lblEncPar5";
+            this.lblEncPar5.Size = new System.Drawing.Size(84, 13);
+            this.lblEncPar5.TabIndex = 1;
+            this.lblEncPar5.Text = "Modulo position:";
+            // 
+            // lblEncPar4
+            // 
+            this.lblEncPar4.AutoSize = true;
+            this.lblEncPar4.Location = new System.Drawing.Point(76, 20);
+            this.lblEncPar4.Name = "lblEncPar4";
+            this.lblEncPar4.Size = new System.Drawing.Size(71, 13);
+            this.lblEncPar4.TabIndex = 0;
+            this.lblEncPar4.Text = "Raw position:";
+            // 
+            // grpParameter
+            // 
+            this.grpParameter.BackColor = System.Drawing.Color.DarkGray;
+            this.grpParameter.Controls.Add(this.lblEncVal24);
+            this.grpParameter.Controls.Add(this.lblEncVal23);
+            this.grpParameter.Controls.Add(this.lblEncPar24);
+            this.grpParameter.Controls.Add(this.lblEncPar23);
+            this.grpParameter.Controls.Add(this.lblEncVal22);
+            this.grpParameter.Controls.Add(this.lblEncVal21);
+            this.grpParameter.Controls.Add(this.lblEncVal20);
+            this.grpParameter.Controls.Add(this.lblEncVal19);
+            this.grpParameter.Controls.Add(this.lblEncVal18);
+            this.grpParameter.Controls.Add(this.lblEncVal17);
+            this.grpParameter.Controls.Add(this.lblEncVal16);
+            this.grpParameter.Controls.Add(this.lblEncVal15);
+            this.grpParameter.Controls.Add(this.lblEncVal14);
+            this.grpParameter.Controls.Add(this.lblEncVal13);
+            this.grpParameter.Controls.Add(this.lblEncPar22);
+            this.grpParameter.Controls.Add(this.lblEncPar21);
+            this.grpParameter.Controls.Add(this.lblEncPar20);
+            this.grpParameter.Controls.Add(this.lblEncPar19);
+            this.grpParameter.Controls.Add(this.lblEncPar18);
+            this.grpParameter.Controls.Add(this.lblEncPar17);
+            this.grpParameter.Controls.Add(this.lblEncPar16);
+            this.grpParameter.Controls.Add(this.lblEncPar15);
+            this.grpParameter.Controls.Add(this.lblEncPar14);
+            this.grpParameter.Controls.Add(this.lblEncPar13);
+            this.grpParameter.Location = new System.Drawing.Point(654, 16);
+            this.grpParameter.Name = "grpParameter";
+            this.grpParameter.Size = new System.Drawing.Size(345, 310);
+            this.grpParameter.TabIndex = 15;
+            this.grpParameter.TabStop = false;
+            this.grpParameter.Text = "Parameter";
+            this.grpParameter.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lblEncVal22
+            // 
+            this.lblEncVal22.AutoSize = true;
+            this.lblEncVal22.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal22.Location = new System.Drawing.Point(197, 236);
+            this.lblEncVal22.Name = "lblEncVal22";
+            this.lblEncVal22.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal22.TabIndex = 19;
+            this.lblEncVal22.Text = "-";
+            // 
+            // lblEncVal21
+            // 
+            this.lblEncVal21.AutoSize = true;
+            this.lblEncVal21.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal21.Location = new System.Drawing.Point(197, 212);
+            this.lblEncVal21.Name = "lblEncVal21";
+            this.lblEncVal21.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal21.TabIndex = 18;
+            this.lblEncVal21.Text = "-";
+            // 
+            // lblEncVal20
+            // 
+            this.lblEncVal20.AutoSize = true;
+            this.lblEncVal20.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal20.Location = new System.Drawing.Point(197, 188);
+            this.lblEncVal20.Name = "lblEncVal20";
+            this.lblEncVal20.Size = new System.Drawing.Size(81, 13);
+            this.lblEncVal20.TabIndex = 17;
+            this.lblEncVal20.Text = "TRUE / FALSE";
+            // 
+            // lblEncVal19
+            // 
+            this.lblEncVal19.AutoSize = true;
+            this.lblEncVal19.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal19.Location = new System.Drawing.Point(197, 164);
+            this.lblEncVal19.Name = "lblEncVal19";
+            this.lblEncVal19.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal19.TabIndex = 16;
+            this.lblEncVal19.Text = "-";
+            // 
+            // lblEncVal18
+            // 
+            this.lblEncVal18.AutoSize = true;
+            this.lblEncVal18.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal18.Location = new System.Drawing.Point(197, 140);
+            this.lblEncVal18.Name = "lblEncVal18";
+            this.lblEncVal18.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal18.TabIndex = 15;
+            this.lblEncVal18.Text = "-";
+            // 
+            // lblEncVal17
+            // 
+            this.lblEncVal17.AutoSize = true;
+            this.lblEncVal17.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal17.Location = new System.Drawing.Point(197, 116);
+            this.lblEncVal17.Name = "lblEncVal17";
+            this.lblEncVal17.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal17.TabIndex = 14;
+            this.lblEncVal17.Text = "-";
+            // 
+            // lblEncVal16
+            // 
+            this.lblEncVal16.AutoSize = true;
+            this.lblEncVal16.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal16.Location = new System.Drawing.Point(197, 92);
+            this.lblEncVal16.Name = "lblEncVal16";
+            this.lblEncVal16.Size = new System.Drawing.Size(46, 13);
+            this.lblEncVal16.TabIndex = 13;
+            this.lblEncVal16.Text = "ON-OFF";
+            // 
+            // lblEncVal15
+            // 
+            this.lblEncVal15.AutoSize = true;
+            this.lblEncVal15.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal15.Location = new System.Drawing.Point(197, 68);
+            this.lblEncVal15.Name = "lblEncVal15";
+            this.lblEncVal15.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal15.TabIndex = 12;
+            this.lblEncVal15.Text = "-";
+            // 
+            // lblEncVal14
+            // 
+            this.lblEncVal14.AutoSize = true;
+            this.lblEncVal14.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal14.Location = new System.Drawing.Point(197, 44);
+            this.lblEncVal14.Name = "lblEncVal14";
+            this.lblEncVal14.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal14.TabIndex = 11;
+            this.lblEncVal14.Text = "-";
+            // 
+            // lblEncVal13
+            // 
+            this.lblEncVal13.AutoSize = true;
+            this.lblEncVal13.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal13.Location = new System.Drawing.Point(197, 20);
+            this.lblEncVal13.Name = "lblEncVal13";
+            this.lblEncVal13.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal13.TabIndex = 10;
+            this.lblEncVal13.Text = "-";
+            // 
+            // lblEncPar22
+            // 
+            this.lblEncPar22.AutoSize = true;
+            this.lblEncPar22.Location = new System.Drawing.Point(103, 236);
+            this.lblEncPar22.Name = "lblEncPar22";
+            this.lblEncPar22.Size = new System.Drawing.Size(75, 13);
+            this.lblEncPar22.TabIndex = 9;
+            this.lblEncPar22.Text = "Modulo factor:";
+            // 
+            // lblEncPar21
+            // 
+            this.lblEncPar21.AutoSize = true;
+            this.lblEncPar21.Location = new System.Drawing.Point(108, 212);
+            this.lblEncPar21.Name = "lblEncPar21";
+            this.lblEncPar21.Size = new System.Drawing.Size(70, 13);
+            this.lblEncPar21.TabIndex = 8;
+            this.lblEncPar21.Text = "Position Bias:";
+            // 
+            // lblEncPar20
+            // 
+            this.lblEncPar20.AutoSize = true;
+            this.lblEncPar20.Location = new System.Drawing.Point(12, 188);
+            this.lblEncPar20.Name = "lblEncPar20";
+            this.lblEncPar20.Size = new System.Drawing.Size(166, 13);
+            this.lblEncPar20.TabIndex = 7;
+            this.lblEncPar20.Text = "Invert encoder counting direction:";
+            // 
+            // lblEncPar19
+            // 
+            this.lblEncPar19.AutoSize = true;
+            this.lblEncPar19.Location = new System.Drawing.Point(42, 164);
+            this.lblEncPar19.Name = "lblEncPar19";
+            this.lblEncPar19.Size = new System.Drawing.Size(136, 13);
+            this.lblEncPar19.TabIndex = 6;
+            this.lblEncPar19.Text = "Scaling factor denominator:";
+            // 
+            // lblEncPar18
+            // 
+            this.lblEncPar18.AutoSize = true;
+            this.lblEncPar18.Location = new System.Drawing.Point(53, 140);
+            this.lblEncPar18.Name = "lblEncPar18";
+            this.lblEncPar18.Size = new System.Drawing.Size(125, 13);
+            this.lblEncPar18.TabIndex = 5;
+            this.lblEncPar18.Text = "Scaling factor numerator:";
+            // 
+            // lblEncPar17
+            // 
+            this.lblEncPar17.AutoSize = true;
+            this.lblEncPar17.Location = new System.Drawing.Point(6, 116);
+            this.lblEncPar17.Name = "lblEncPar17";
+            this.lblEncPar17.Size = new System.Drawing.Size(172, 13);
+            this.lblEncPar17.TabIndex = 4;
+            this.lblEncPar17.Text = "Time compensation encoder delay:";
+            // 
+            // lblEncPar16
+            // 
+            this.lblEncPar16.AutoSize = true;
+            this.lblEncPar16.Location = new System.Drawing.Point(76, 92);
+            this.lblEncPar16.Name = "lblEncPar16";
+            this.lblEncPar16.Size = new System.Drawing.Size(102, 13);
+            this.lblEncPar16.TabIndex = 3;
+            this.lblEncPar16.Text = "Time compensation:";
+            // 
+            // lblEncPar15
+            // 
+            this.lblEncPar15.AutoSize = true;
+            this.lblEncPar15.Location = new System.Drawing.Point(16, 68);
+            this.lblEncPar15.Name = "lblEncPar15";
+            this.lblEncPar15.Size = new System.Drawing.Size(162, 13);
+            this.lblEncPar15.TabIndex = 2;
+            this.lblEncPar15.Text = "Filter time for actual acceleration:";
+            // 
+            // lblEncPar14
+            // 
+            this.lblEncPar14.AutoSize = true;
+            this.lblEncPar14.Location = new System.Drawing.Point(38, 44);
+            this.lblEncPar14.Name = "lblEncPar14";
+            this.lblEncPar14.Size = new System.Drawing.Size(140, 13);
+            this.lblEncPar14.TabIndex = 1;
+            this.lblEncPar14.Text = "Filter time for actual velocity:";
+            // 
+            // lblEncPar13
+            // 
+            this.lblEncPar13.AutoSize = true;
+            this.lblEncPar13.Location = new System.Drawing.Point(38, 20);
+            this.lblEncPar13.Name = "lblEncPar13";
+            this.lblEncPar13.Size = new System.Drawing.Size(140, 13);
+            this.lblEncPar13.TabIndex = 0;
+            this.lblEncPar13.Text = "Filter time for actual position:";
+            // 
+            // lblEncVal24
+            // 
+            this.lblEncVal24.AutoSize = true;
+            this.lblEncVal24.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal24.Location = new System.Drawing.Point(197, 286);
+            this.lblEncVal24.Name = "lblEncVal24";
+            this.lblEncVal24.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal24.TabIndex = 23;
+            this.lblEncVal24.Text = "-";
+            // 
+            // lblEncVal23
+            // 
+            this.lblEncVal23.AutoSize = true;
+            this.lblEncVal23.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblEncVal23.Location = new System.Drawing.Point(197, 262);
+            this.lblEncVal23.Name = "lblEncVal23";
+            this.lblEncVal23.Size = new System.Drawing.Size(10, 13);
+            this.lblEncVal23.TabIndex = 22;
+            this.lblEncVal23.Text = "-";
+            // 
+            // lblEncPar24
+            // 
+            this.lblEncPar24.AutoSize = true;
+            this.lblEncPar24.Location = new System.Drawing.Point(81, 286);
+            this.lblEncPar24.Name = "lblEncPar24";
+            this.lblEncPar24.Size = new System.Drawing.Size(97, 13);
+            this.lblEncPar24.TabIndex = 21;
+            this.lblEncPar24.Text = "Encoder Submask:";
+            // 
+            // lblEncPar23
+            // 
+            this.lblEncPar23.AutoSize = true;
+            this.lblEncPar23.Location = new System.Drawing.Point(99, 262);
+            this.lblEncPar23.Name = "lblEncPar23";
+            this.lblEncPar23.Size = new System.Drawing.Size(79, 13);
+            this.lblEncPar23.TabIndex = 20;
+            this.lblEncPar23.Text = "Encoder Mask:";
+            // 
             // DiagData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1562,6 +2178,13 @@ namespace MmmConfig.Forms
             this.grpOperationData.PerformLayout();
             this.grpIdentityCard.ResumeLayout(false);
             this.grpIdentityCard.PerformLayout();
+            this.tabEncoderData.ResumeLayout(false);
+            this.grpConnection.ResumeLayout(false);
+            this.grpConnection.PerformLayout();
+            this.grpValue.ResumeLayout(false);
+            this.grpValue.PerformLayout();
+            this.grpParameter.ResumeLayout(false);
+            this.grpParameter.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1570,7 +2193,7 @@ namespace MmmConfig.Forms
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabCpuData;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabEncoderData;
         private System.Windows.Forms.GroupBox grpUserManagement;
         private System.Windows.Forms.Label lblValue56;
         private System.Windows.Forms.Label lblParameter56;
@@ -1696,5 +2319,58 @@ namespace MmmConfig.Forms
         private System.Windows.Forms.Label lblValue0;
         private System.Windows.Forms.Label lblParameter1;
         private System.Windows.Forms.Label lblParameter0;
+        private System.Windows.Forms.GroupBox grpConnection;
+        private System.Windows.Forms.Label lblEncVal3;
+        private System.Windows.Forms.Label lblEncVal2;
+        private System.Windows.Forms.Label lblEncVal1;
+        private System.Windows.Forms.Label lblEncPar3;
+        private System.Windows.Forms.Label lblEncPar2;
+        private System.Windows.Forms.Label lblEncVal0;
+        private System.Windows.Forms.Label lblEncPar1;
+        private System.Windows.Forms.Label lblEncPar0;
+        private System.Windows.Forms.GroupBox grpValue;
+        private System.Windows.Forms.Label lblEncVal12;
+        private System.Windows.Forms.Label lblEncVal11;
+        private System.Windows.Forms.Label lblEncVal10;
+        private System.Windows.Forms.Label lblEncVal9;
+        private System.Windows.Forms.Label lblEncVal8;
+        private System.Windows.Forms.Label lblEncVal7;
+        private System.Windows.Forms.Label lblEncVal6;
+        private System.Windows.Forms.Label lblEncVal5;
+        private System.Windows.Forms.Label lblEncVal4;
+        private System.Windows.Forms.Label lblEncPar12;
+        private System.Windows.Forms.Label lblEncPar11;
+        private System.Windows.Forms.Label lblEncPar10;
+        private System.Windows.Forms.Label lblEncPar9;
+        private System.Windows.Forms.Label lblEncPar8;
+        private System.Windows.Forms.Label lblEncPar7;
+        private System.Windows.Forms.Label lblEncPar6;
+        private System.Windows.Forms.Label lblEncPar5;
+        private System.Windows.Forms.Label lblEncPar4;
+        private System.Windows.Forms.GroupBox grpParameter;
+        private System.Windows.Forms.Label lblEncVal24;
+        private System.Windows.Forms.Label lblEncVal23;
+        private System.Windows.Forms.Label lblEncPar24;
+        private System.Windows.Forms.Label lblEncPar23;
+        private System.Windows.Forms.Label lblEncVal22;
+        private System.Windows.Forms.Label lblEncVal21;
+        private System.Windows.Forms.Label lblEncVal20;
+        private System.Windows.Forms.Label lblEncVal19;
+        private System.Windows.Forms.Label lblEncVal18;
+        private System.Windows.Forms.Label lblEncVal17;
+        private System.Windows.Forms.Label lblEncVal16;
+        private System.Windows.Forms.Label lblEncVal15;
+        private System.Windows.Forms.Label lblEncVal14;
+        private System.Windows.Forms.Label lblEncVal13;
+        private System.Windows.Forms.Label lblEncPar22;
+        private System.Windows.Forms.Label lblEncPar21;
+        private System.Windows.Forms.Label lblEncPar20;
+        private System.Windows.Forms.Label lblEncPar19;
+        private System.Windows.Forms.Label lblEncPar18;
+        private System.Windows.Forms.Label lblEncPar17;
+        private System.Windows.Forms.Label lblEncPar16;
+        private System.Windows.Forms.Label lblEncPar15;
+        private System.Windows.Forms.Label lblEncPar14;
+        private System.Windows.Forms.Label lblEncPar13;
     }
 }
