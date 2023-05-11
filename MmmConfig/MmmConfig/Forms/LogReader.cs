@@ -89,8 +89,8 @@ namespace MmmConfig.Forms
                 motionEventLogger.events[_i].operationLog = new OperationLog();
             }
             cleanDataGridView();
-            int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
-            prgBarGetInfo.Maximum = iNumOfEventToRead;
+            int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastResPos", CpuConnection.tcClient);
+            prgBarGetInfo.Maximum = iNumOfEventToRead + 1;
             motionEventLogger.iLastWritePos = iNumOfEventToRead;
             btnRefresh.Enabled = false;
             btnStopRefresh.Enabled = true;
@@ -554,7 +554,7 @@ namespace MmmConfig.Forms
         {
             if (CpuConnection != null)
             {
-                int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastWritePos", CpuConnection.tcClient);
+                int iNumOfEventToRead = CpuConnection.readInt(c_strMotionEventLogPath + ".iLastResPos", CpuConnection.tcClient);
                 for (_i = 0; _i < iNumOfEventToRead; _i++)
                 {
                     if (CpuConnection != null) { CpuConnection.readEvent(c_strMotionEventLogPath, CpuConnection.tcClient, _i, motionEventLogger.events[_i]); }

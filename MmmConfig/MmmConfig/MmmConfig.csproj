@@ -244,6 +244,7 @@
     <Compile Include="Classi\AxisData.cs" />
     <Compile Include="Classi\CpuData.cs" />
     <Compile Include="Classi\CPU_Connection.cs" />
+    <Compile Include="Classi\DiagCommProt.cs" />
     <Compile Include="Classi\EcatNetwork.cs" />
     <Compile Include="Classi\Error.cs" />
     <Compile Include="Classi\Event.cs" />
