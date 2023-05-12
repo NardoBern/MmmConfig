@@ -118,12 +118,8 @@ namespace MmmConfig.Classi
 
             if (e.Handle == uiErrHandle)
             {//mettere qui il codice per gestire il errore
-
+                writeBool("GVL_Diag.ComProt.xCmdReq", false);
             }
-
-
-            Pippopiapppaopopodsa
-
         }
         private string[,] readAstrData(AdsClient adsClient, string strDataPath)
         {
