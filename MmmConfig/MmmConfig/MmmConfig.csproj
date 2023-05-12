@@ -268,6 +268,18 @@
     <Compile Include="Forms\Configurator.Designer.cs">
       <DependentUpon>Configurator.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CpuData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CpuData.Designer.cs">
+      <DependentUpon>CpuData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DiagData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DiagData.Designer.cs">
+      <DependentUpon>DiagData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LogReader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +299,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Configurator.resx">
       <DependentUpon>Configurator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CpuData.resx">
+      <DependentUpon>CpuData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DiagData.resx">
+      <DependentUpon>DiagData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LogReader.resx">
       <DependentUpon>LogReader.cs</DependentUpon>
