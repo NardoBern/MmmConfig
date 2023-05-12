@@ -612,7 +612,7 @@ namespace MmmConfig
             {//mettere qui il codice per gestire il acknowledge; }
                 ReadOnlyMemory<byte> memory = e.Data;
                 iSizeOf = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span);
-                astrData = readAstrData(tcClient, "GVL_Diag.ComProt.astrData");
+                astrData = readAstrData(tcClient, "GVL_Diag.ComProt");
                 writeBool("GVL_Diag.ComProt.xCmdReq", false);
             }
 

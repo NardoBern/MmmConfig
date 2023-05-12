@@ -233,7 +233,7 @@ namespace MmmConfig.Forms
             // 
             this.tabControl1.Controls.Add(this.tabCpuData);
             this.tabControl1.Controls.Add(this.tabEncoderData);
-            this.tabControl1.Location = new System.Drawing.Point(13, 13);
+            this.tabControl1.Location = new System.Drawing.Point(22, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1199, 681);

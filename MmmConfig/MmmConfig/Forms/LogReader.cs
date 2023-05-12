@@ -681,5 +681,9 @@ namespace MmmConfig.Forms
         }
         #endregion
 
+        private void tabCpuData_Click(object sender, EventArgs e)
+        {
+            CpuConnection.readData(400, CpuConnection, "GVL_Diag.ComProt.xCmdReq", "GVL_Diag.ComProt.xStsAck", "GVL_DIAG.ComProt.xStsErr", "GVL_Diag.ComProt.eInfoReq");
+        }
     }
 }
