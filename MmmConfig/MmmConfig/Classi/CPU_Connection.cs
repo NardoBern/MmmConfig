@@ -16,6 +16,7 @@ using System.Data;
 using TwinCAT.TypeSystem;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Buffers.Binary;
 
 namespace MmmConfig
 {
@@ -30,7 +31,19 @@ namespace MmmConfig
         public int iCommErr = 0;
         public Motor Motors;
         public MemoryStream datastream;
-        #endregion
+
+            #region Diag communication protocol variable declaration
+            public bool xCmdReq;
+            public uint uiInfoReq;
+            public bool xStsAck;
+            public bool xStsErr;
+            public int iSizeOf;
+            public string[,] astrData = new string[199, 3];
+            private uint uiAckHandle;
+            private uint uiErrHandle;
+            #endregion
+
+            #endregion
 
         #region Connection methods
         /* Connection function */
@@ -579,6 +592,70 @@ namespace MmmConfig
             byte[] pcAdressOctets = pcIpAddress.GetAddressBytes();
 
             return ((addressOctets[0] == pcAdressOctets[0]) && (addressOctets[1] == pcAdressOctets[1]) && (addressOctets[2] == pcAdressOctets[2]) && (addressOctets[3] == pcAdressOctets[3]));
+        }
+        #endregion
+
+        #region Diag data communication protocol
+        public bool readData(int dataSelector, CPU_Connection connection, string strCmdReqPath, string strStsAckPath, string strStsErrPath, string strInfoVarPath)
+        {
+            connection.writeInt(strInfoVarPath, dataSelector);
+            connection.writeBool(strCmdReqPath, true);
+            uiAckHandle = connection.AddNotification(connection.tcClient, strStsAckPath);
+            uiErrHandle = connection.AddNotification(connection.tcClient, strStsErrPath);
+            connection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(StatusNotification);
+            return true;
+        }
+
+        private void StatusNotification(object sender, AdsNotificationEventArgs e)
+        {
+            if (e.Handle == uiAckHandle)
+            {//mettere qui il codice per gestire il acknowledge; }
+                ReadOnlyMemory<byte> memory = e.Data;
+                iSizeOf = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span);
+                astrData = readAstrData(tcClient, "GVL_Diag.ComProt.astrData");
+                writeBool("GVL_Diag.ComProt.xCmdReq", false);
+            }
+
+            if (e.Handle == uiErrHandle)
+            {//mettere qui il codice per gestire il errore
+                writeBool("GVL_Diag.ComProt.xCmdReq", false);
+            }
+        }
+        private string[,] readAstrData(AdsClient adsClient, string strDataPath)
+        {
+            uint[,] uiHandle = new uint[199, 3];
+            for (int _i = 0; _i <= iSizeOf; _i++) { for (int _j = 0; _j <= 3; _j++) { uiHandle[_i, _j] = adsClient.CreateVariableHandle(strDataPath + ".astrData[" + _i.ToString() + "," + _j.ToString() + "]"); } }
+
+            byte[] buffer = new byte[81];
+            try
+            {
+                for (int _i = 0; _i <= iSizeOf; _i++)
+                {
+                    for (int _j = 0; _j <= 3; _j++)
+                    {
+                        adsClient.Read(uiHandle[_i, _j], buffer.AsMemory());
+                        astrData[_i, _j] = (Encoding.ASCII.GetString(buffer, 0, buffer.Length)).Replace("\0", string.Empty);
+                    }
+                }
+                return astrData;
+            }
+            catch (TwinCAT.Ads.AdsErrorException e)
+            {
+                if (e.ErrorCode == AdsErrorCode.ClientSyncTimeOut) {; }
+                Forms.MainSelector.appLogger.addLine("Error while reading a string: " + e.ToString(), AppLogger.eLogLevel.warning);
+                return null;
+            }
+            catch (System.ObjectDisposedException e)
+            {
+                ErrorManagement(e);
+                return null;
+            }
+            catch (System.NullReferenceException e)
+            {
+                ErrorManagement(e);
+                return null;
+            }
+
         }
         #endregion
 
