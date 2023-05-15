@@ -37,7 +37,7 @@ namespace MmmConfig
             public uint uiInfoReq;
             public bool xStsAck;
             public bool xStsErr;
-            public int iSizeOf;
+            //public int iSizeOf;
             public string[,] astrData = new string[199, 3];
             private uint uiAckHandle;
             private uint uiErrHandle;
@@ -596,40 +596,22 @@ namespace MmmConfig
         #endregion
 
         #region Diag data communication protocol
-        public bool readData(int dataSelector, CPU_Connection connection, string strCmdReqPath, string strStsAckPath, string strStsErrPath, string strInfoVarPath)
+        public bool readData(int dataSelector, CPU_Connection connection, string strCmdReqPath, string strInfoVarPath)
         {
             connection.writeInt(strInfoVarPath, dataSelector);
             connection.writeBool(strCmdReqPath, true);
-            uiAckHandle = connection.AddNotification(connection.tcClient, strStsAckPath);
-            uiErrHandle = connection.AddNotification(connection.tcClient, strStsErrPath);
-            connection.tcClient.AdsNotification += new EventHandler<AdsNotificationEventArgs>(StatusNotification);
             return true;
         }
 
-        private void StatusNotification(object sender, AdsNotificationEventArgs e)
-        {
-            if (e.Handle == uiAckHandle)
-            {//mettere qui il codice per gestire il acknowledge; }
-                ReadOnlyMemory<byte> memory = e.Data;
-                iSizeOf = BinaryPrimitives.ReadInt16BigEndian(e.Data.Span);
-                astrData = readAstrData(tcClient, "GVL_Diag.ComProt");
-                writeBool("GVL_Diag.ComProt.xCmdReq", false);
-            }
-
-            if (e.Handle == uiErrHandle)
-            {//mettere qui il codice per gestire il errore
-                writeBool("GVL_Diag.ComProt.xCmdReq", false);
-            }
-        }
-        private string[,] readAstrData(AdsClient adsClient, string strDataPath)
+        public string[,] readAstrData(AdsClient adsClient, string strDataPath, int iSizeToBeRead)
         {
             uint[,] uiHandle = new uint[199, 3];
-            for (int _i = 0; _i <= iSizeOf; _i++) { for (int _j = 0; _j <= 3; _j++) { uiHandle[_i, _j] = adsClient.CreateVariableHandle(strDataPath + ".astrData[" + _i.ToString() + "," + _j.ToString() + "]"); } }
+            for (int _i = 0; _i <= iSizeToBeRead; _i++) { for (int _j = 0; _j <= 3; _j++) { uiHandle[_i, _j] = adsClient.CreateVariableHandle(strDataPath + ".astrData[" + _i.ToString() + "," + _j.ToString() + "]"); } }
 
             byte[] buffer = new byte[81];
             try
             {
-                for (int _i = 0; _i <= iSizeOf; _i++)
+                for (int _i = 0; _i <= iSizeToBeRead; _i++)
                 {
                     for (int _j = 0; _j <= 3; _j++)
                     {

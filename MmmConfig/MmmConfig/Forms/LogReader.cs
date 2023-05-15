@@ -25,6 +25,8 @@ namespace MmmConfig.Forms
         private int _i;
         private string strNetId = MainSelector.appConfig.strDefaultNetId;
         private string strPort = MainSelector.appConfig.iDefaultPort.ToString();
+        private bool xCheckAckErr;
+        private int iDataToBeRead;
         
         #endregion
 
@@ -210,6 +212,7 @@ namespace MmmConfig.Forms
                 CpuConnection.iCommErr++;
                 if (CpuConnection.iCommErr > 5) { vUpdateDisconnectedStatus(); MessageBox.Show("Connection failed", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             }
+            if (xCheckAckErr) { checkAckErrStatus("GVL_Diag.ComProt.xStsAck", "GVL_DIAG.ComProt.xStsErr"); }
         }
         private void btnMain_Click(object sender, EventArgs e)
         {
@@ -683,7 +686,14 @@ namespace MmmConfig.Forms
 
         private void tabCpuData_Click(object sender, EventArgs e)
         {
-            CpuConnection.readData(400, CpuConnection, "GVL_Diag.ComProt.xCmdReq", "GVL_Diag.ComProt.xStsAck", "GVL_DIAG.ComProt.xStsErr", "GVL_Diag.ComProt.eInfoReq");
+            iDataToBeRead = 400;
+            CpuConnection.readData(iDataToBeRead, CpuConnection, "GVL_Diag.ComProt.xCmdReq", "GVL_Diag.ComProt.eInfoReq");
+            xCheckAckErr = true;
+        }
+        private void checkAckErrStatus(string strAckVarName, string strErrVarName)
+        {
+            if (CpuConnection.readBool(strAckVarName, CpuConnection.tcClient)) { inserire qui il codice per leggere i dati stringa}
+            if (CpuConnection.readBool(strErrVarName, CpuConnection.tcClient)) { inserire qui il codice per gestire l'errore di lettura'}
         }
     }
 }
